@@ -1,0 +1,4 @@
+(require 'helm)
+(helm-mode 1)
+
+(provide 'helm-config)
