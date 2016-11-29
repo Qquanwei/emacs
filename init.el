@@ -1,51 +1,73 @@
-;;; package --- Summary:
-;;; Commentary:
-;; Code:
-(add-to-list 'load-path
-	     (expand-file-name "lisp" user-emacs-directory))
-;; load elpa
-(require 'init-elpa)
-(require 'package)
 
-(defun require-package (package &optional min-version no-refresh)
+;; init elpa
+(setq package-archives '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
+			 ("melpa" . "http://elpa.zilongshanren.com/melpa/")
+			 ("org"   . "http://elpa.zilongshanren.com/org/")))
+
+(defun require-package (package &optional min-version no-fresh)
   (if (package-installed-p package min-version)
       t
-    (if (or (assoc package package-archive-contents) no-refresh)
+    (if (or (assoc package package-archive-contents) no-fresh)
 	(package-install package)
       (progn
 	(package-refresh-contents)
 	(require-package package min-version t)))))
 
-;; required plugin
+(package-initialize)
+
+;; package install
+(require-package 'smartparens)
+(require-package 'flx-ido)
+(require-package 'helm-dash)
+(require-package 'company)
+(require-package 'company-quickhelp)
+(require-package 'dumb-jump)
 (require-package 'web-mode)
-(require-package 'auto-complete)
-(require-package 'ac-js2)
-(require-package 'js2-mode)
-(require-package 'yasnippet)
-(require-package 'google-translate)
-(require-package 'highlight-symbol)
-(require-package 'helm)
+(require-package 'emmet-mode)
 
-;; config
-(require 'javascript-ide)
-(require 'translate-ch-en)
-(require 'highlight-config)
-(require 'emacs-helm)
+;; global config
+(require 'smartparens-config)
+(smartparens-strict-mode)
 
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
 
-(setq backup-directory-alist '(("." . "~/.save")))
-(put 'upcase-region 'disabled nil)
-(show-paren-mode t)
-(linum-mode t)
-(require 'electric)
-(electric-indent-mode t)
-(electric-pair-mode t)
-(electric-layout-mode t)
+(require 'helm-dash)
+(setq helm-dash-min-length 2)
+(setq helm-dash-browser-func 'browse-url)
+(setq helm-dash-common-docsets '("C++" "JavaScript"))
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
 
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
+(require 'company-quickhelp)
+(company-quickhelp-mode 1)
+
+(require 'web-mode)
+(require 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode-hook)
+
+(require 'dumb-jump)
+(dumb-jump-mode)
+
+;; web-mode
+(setq web-mode-content-types-alist
+      '(("json" . "\\.json")
+	("jsx" . ".\\.js[x]?\\'")))
+
+;;; react-mode
+(emmet-expand-jsx-className? t)
+
+;; file association
+(add-to-list 'auto-mode-alist '("\.jsx'" . web-mode))
+(add-to-list 'auto-mode-alist '("\.html" . web-mode))
+(add-to-list 'auto-mode-alist '("\.css" .web-mode))
+(add-to-list 'auto-mode-alist '("\.js" .web-mode))
+
+;; key binging
+(global-set-key (kbd "C-c C-v q") 'helm-dash-at-point)
+(global-set-key (kbd "C-j") 'emmet-expand-line)
