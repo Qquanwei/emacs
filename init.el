@@ -38,9 +38,11 @@
 (require-package 'company-tern)
 (require-package 'json-mode)
 (require-package 'js-doc)
+(require-package 'youdao-dictionary)
 
 ;; global config
 
+(require 'find-file-in-project)
 (require 'projectile)
 (setq projectile-enable-caching t)
 (setq projectile-require-project-root nil)
@@ -137,25 +139,34 @@
 (global-set-key (kbd "C-j") 'emmet-expand-line)
 (global-set-key (kbd "C-^") 'helm-ls-git-ls)
 (global-set-key (kbd "C-c g s") 'magit-status)
+(global-set-key (kbd "C-c g c") 'magit-checkout)
+(global-set-key (kbd "C-c g f c") 'magit-checkout-file)
 (global-set-key (kbd "C-c g p u") 'magit-push-current)
 (global-set-key (kbd "C-c g p l") 'magit-pull)
+(global-set-key (kbd "C-c g l") 'magit-log)
+(global-set-key (kbd "C-c g m") 'magit-merge)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-1") 'avy-goto-char)
 (global-set-key (kbd "M-2") 'avy-goto-char-2)
 (global-set-key (kbd "M-l") 'avy-goto-line)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "C-c C-f") 'find-file-in-project)
+(global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point+)
+(global-set-key (kbd "C-c C-y") 'youdao-dictionary-play-voice-at-point)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/org/life.org" "~/org/tasks.org")))
+ '(org-agenda-files (quote ("~/org/tasks.org" "~/org/life.org")))
  '(package-selected-packages
    (quote
-    (js-doc json-mode company-tern ag projectile avy js-auto-beautify find-file-in-project exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup js-refactor jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
- '(projectile-mode t nil (projectile)))
+    (youdao-dictionary youdao-directory js2-refactor js-doc json-mode company-tern ag projectile avy js-auto-beautify find-file-in-project exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup js-refactor jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
+ '(projectile-mode t nil (projectile))
+ '(web-mode-enable-current-column-highlight t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -192,3 +203,6 @@
 
 (setq interprogram-cut-function 'paste-to-osx)
 (setq interprogram-paste-function 'copy-from-osx)
+
+
+
