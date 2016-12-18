@@ -72,11 +72,9 @@
   (add-to-list 'company-backends 'company-tern))
 
 (require 'js2-mode)
-(require 'js2-refactor)
 (require 'web-mode)
 (require 'emmet-mode)
 (add-hook 'web-mode-hook 'emmet-mode)
-(add-hook 'web-mode-hook #'js2-refactor-mode)
 (add-hook 'web-mode-hook 'js-auto-beautify-mode)
 (add-hook 'web-mode-hook (lambda ()
                            (define-key web-mode-map "\C-c i" 'js-doc-insert-function-doc)))
@@ -164,7 +162,7 @@
  '(org-agenda-files (quote ("~/org/tasks.org" "~/org/life.org")))
  '(package-selected-packages
    (quote
-    (youdao-dictionary youdao-directory js2-refactor js-doc json-mode company-tern ag projectile avy js-auto-beautify find-file-in-project exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup js-refactor jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
+    (youdao-dictionary youdao-directory js-doc json-mode company-tern ag projectile avy js-auto-beautify find-file-in-project exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
  '(projectile-mode t nil (projectile))
  '(web-mode-enable-current-column-highlight t))
 (custom-set-faces
