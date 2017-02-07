@@ -31,7 +31,6 @@
 (require-package 'flycheck)
 (require-package 'exec-path-from-shell)
 (require-package 'find-file-in-project)
-(require-package 'js-auto-beautify)
 (require-package 'avy)
 (require-package 'ag)
 (require-package 'projectile)
@@ -39,6 +38,8 @@
 (require-package 'json-mode)
 (require-package 'js-doc)
 (require-package 'youdao-dictionary)
+(require-package 'jade-mode)
+(require-package 'vue-mode)
 
 ;; global config
 
@@ -132,6 +133,9 @@
 (add-to-list 'auto-mode-alist '("\.css" .web-mode))
 (add-to-list 'auto-mode-alist '("\.js" . web-mode))
 (add-to-list 'auto-mode-alist '("\.json" . json-mode))
+(add-to-list 'auto-mode-alist '("\.jade" . jade-mode))
+(add-to-list 'auto-mode-alist '("\.pug" . jade-mode))
+(add-to-list 'auto-mode-alist '("\.vue" . vue-mode))
 
 ;; key binging
 (global-set-key (kbd "C-c C-v q") 'helm-dash-at-point)
@@ -162,10 +166,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files (quote ("~/org/tasks.org" "~/org/life.org")))
+ '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
  '(package-selected-packages
    (quote
-    (youdao-dictionary youdao-directory js2-refactor js-doc json-mode company-tern ag projectile avy js-auto-beautify find-file-in-project exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup js-refactor jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
+    (vue-mode company-erlang jade-mode youdao-dictionary youdao-directory js2-refactor js-doc json-mode company-tern ag projectile avy find-file-in-project exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup js-refactor jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
  '(projectile-mode t nil (projectile))
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "smtp.126.com")
+ '(smtpmail-smtp-service 25)
  '(web-mode-enable-current-column-highlight t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
