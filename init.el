@@ -78,7 +78,6 @@
 (require 'emmet-mode)
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'web-mode-hook #'js2-refactor-mode)
-(add-hook 'web-mode-hook 'js-auto-beautify-mode)
 (add-hook 'web-mode-hook (lambda ()
                            (define-key web-mode-map "\C-c i" 'js-doc-insert-function-doc)))
 
