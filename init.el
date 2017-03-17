@@ -39,6 +39,7 @@
 (require-package 'json-mode)
 (require-package 'js-doc)
 (require-package 'youdao-dictionary)
+(require-package 'hackernews)
 
 ;; global config
 
@@ -153,6 +154,7 @@
 (global-set-key (kbd "C-c C-f") 'find-file-in-project)
 (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point+)
 (global-set-key (kbd "C-c C-y") 'youdao-dictionary-play-voice-at-point)
+(global-set-key (kbd "C-c C-h C-n") 'hackernews)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
