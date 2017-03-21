@@ -39,6 +39,7 @@
 (require-package 'json-mode)
 (require-package 'js-doc)
 (require-package 'youdao-dictionary)
+(require-package 'org-trello)
 (require-package 'hackernews)
 
 ;; global config
@@ -58,7 +59,6 @@
 (require 'helm-dash)
 (setq helm-dash-min-length 2)
 (setq helm-dash-browser-funnc 'browse-url)
-(setq helm-dash-common-docsets '("C++" "JavaScript" "HTML" "jQuery"))
 
 (require 'company)
 (require 'company-tern)
@@ -98,15 +98,18 @@
 (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 
+(setq hackernews-top-story-limit 50)
+
 ;;; web-mode
 (setq web-mode-content-types-alist
       '(("json" . "\\.json")
 	("jsx" . ".\\.js[x]?\\'")))
-(defun my-web-mode-hook ()
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-(add-hook 'web-mode-hook 'my-web-mode-hook)
+;; (defun my-web-mode-hook ()
+;;   (setq web-mode-indent-style 4)
+;;   (setq web-mode-markup-indent-offset 4)
+;;   (setq web-mode-css-indent-offset 4)
+;;   (setq web-mode-code-indent-offset 4))
+;; (add-hook 'web-mode-hook 'my-web-mode-hook)
 (add-hook 'web-mode-hook 'smartparens-mode)
 
 ;;; react-mode
@@ -131,6 +134,7 @@
 (add-to-list 'auto-mode-alist '("\.css" .web-mode))
 (add-to-list 'auto-mode-alist '("\.js" . web-mode))
 (add-to-list 'auto-mode-alist '("\.json" . json-mode))
+(add-to-list 'auto-mode-alist '("\.css" . css-mode))
 
 ;; key binging
 (global-set-key (kbd "C-c C-v q") 'helm-dash-at-point)
@@ -156,17 +160,23 @@
 (global-set-key (kbd "C-c C-y") 'youdao-dictionary-play-voice-at-point)
 (global-set-key (kbd "C-c C-h C-n") 'hackernews)
 
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/org/tasks.org" "~/org/life.org")))
+ '(org-agenda-files (quote ("~/org/trello.org" "~/org/task.org")))
+ '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
+ '(org-trello-files (quote ("~/org/trello.org")) nil (org-trello))
  '(package-selected-packages
    (quote
-    (youdao-dictionary youdao-directory js-doc json-mode company-tern ag projectile avy js-auto-beautify find-file-in-project exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
+    (hackernews hacknews mu4e org-trello youdao-dictionary youdao-directory js-doc json-mode company-tern ag projectile avy js-auto-beautify find-file-in-project exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
  '(projectile-mode t nil (projectile))
  '(web-mode-enable-current-column-highlight t))
+
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -188,9 +198,9 @@
 ;;; emacs custom
 (show-paren-mode 1)
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-(setq js-indent-level 2)
-(setq standard-indent 2)
+(setq-default tab-width 4)
+(setq js-indent-level 4)
+(setq standard-indent 4)
 
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
