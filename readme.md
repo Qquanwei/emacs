@@ -25,5 +25,5 @@
  项目内导航是以git项目作为一个项目基础，使用`projectile`这个插件可以自动识别这个项目。自动以git项目为搜索基准和自动匹配.gitignore的rule,使用起来很方便，例如搜索文件，全文搜搜(依赖ag命令,需要`brew install ag` or `sudo apt-get install ag`)等功能.
 
 * C-c p f  项目内搜索文件,模糊识别
-* C-c p s s 项目内全文搜索s
+* C-c p s s 项目内全文搜索,模糊识别
 
