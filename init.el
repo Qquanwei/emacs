@@ -154,8 +154,7 @@
 (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point+)
 (global-set-key (kbd "C-c C-y") 'youdao-dictionary-play-voice-at-point)
 (global-set-key (kbd "C-c C-h C-n") 'hackernews)
-
-
+(global-set-key (kbd "C-M-h") 'dumb-jump-go)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
