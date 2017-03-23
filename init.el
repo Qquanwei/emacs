@@ -25,7 +25,6 @@
 (require-package 'helm)
 (require-package 'helm-ls-git)
 (require-package 'magit)
-(require-package 'mmm-mode)
 (require-package 'js2-mode)
 (require-package 'whitespace-cleanup-mode)
 (require-package 'flycheck)
@@ -75,13 +74,12 @@
 (require 'emmet-mode)
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'web-mode-hook 'js-auto-beautify-mode)
-(add-hook 'web-mode-hook (lambda ()
-                           (define-key web-mode-map "\C-c i" 'js-doc-insert-function-doc)))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (define-key web-mode-map "\C-c i" 'js-doc-insert-function-doc)))
 
 (require 'json-mode)
 (add-hook 'json-mode-hook 'flycheck-mode)
-
-(require 'mmm-mode)
 
 (require 'dumb-jump)
 (dumb-jump-mode)
