@@ -30,7 +30,6 @@
 (require-package 'whitespace-cleanup-mode)
 (require-package 'flycheck)
 (require-package 'exec-path-from-shell)
-(require-package 'find-file-in-project)
 (require-package 'js-auto-beautify)
 (require-package 'avy)
 (require-package 'ag)
@@ -44,7 +43,6 @@
 
 ;; global config
 
-(require 'find-file-in-project)
 (require 'projectile)
 (setq projectile-enable-caching t)
 (setq projectile-require-project-root nil)
@@ -155,7 +153,6 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-(global-set-key (kbd "C-c C-f") 'find-file-in-project)
 (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point+)
 (global-set-key (kbd "C-c C-y") 'youdao-dictionary-play-voice-at-point)
 (global-set-key (kbd "C-c C-h C-n") 'hackernews)
@@ -171,7 +168,7 @@
  '(org-trello-files (quote ("~/org/trello.org")) nil (org-trello))
  '(package-selected-packages
    (quote
-    (hackernews hacknews mu4e org-trello youdao-dictionary youdao-directory js-doc json-mode company-tern ag projectile avy js-auto-beautify find-file-in-project exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
+    (hackernews hacknews mu4e org-trello youdao-dictionary youdao-directory js-doc json-mode company-tern ag projectile avy js-auto-beautify exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
  '(projectile-mode t nil (projectile))
  '(web-mode-enable-current-column-highlight t))
 
