@@ -165,7 +165,7 @@
  '(org-trello-files (quote ("~/org/trello.org")) nil (org-trello))
  '(package-selected-packages
    (quote
-    (hackernews hacknews mu4e org-trello youdao-dictionary youdao-directory js-doc json-mode company-tern ag projectile avy js-auto-beautify exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
+    (hackernews hacknews mu4e org-trello youdao-dictionary youdao-directory json-mode company-tern ag projectile avy js-auto-beautify exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
  '(projectile-mode t nil (projectile))
  '(web-mode-enable-current-column-highlight t))
 
