@@ -47,7 +47,7 @@
 (setq projectile-require-project-root nil)
 
 (require 'whitespace-cleanup-mode)
-(whitespace-cleanup-mode)
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (require 'smartparens-config)
 (smartparens-mode t)
