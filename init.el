@@ -74,9 +74,10 @@
 (require 'emmet-mode)
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'web-mode-hook 'js-auto-beautify-mode)
-(add-hook 'web-mode-hook
+
+(add-hook 'lisp-mode-hook
           (lambda ()
-            (define-key web-mode-map "\C-c i" 'js-doc-insert-function-doc)))
+            (define-key lisp-mode-map (kbd "C-c C-c") 'eval-buffer)))
 
 (require 'json-mode)
 (add-hook 'json-mode-hook 'flycheck-mode)
