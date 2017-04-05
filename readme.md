@@ -65,3 +65,11 @@
 ## lisp-mode
 
 * C-c C-c 执行当前buffer
+
+## Markdown Mode
+当然，对于markdown的基础支持也是要有的(其实很晚才加上)
+
+`markdown-mode`使用`markdown-preview-mode`作为实时preview的次模式,
+快捷键:
+
+* `C-c C-c` 启动`markdown-preview-mode`, 会在新浏览器中打开一个窗口，通过socket.io通信,能够实时看到结果。

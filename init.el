@@ -39,6 +39,8 @@
 (require-package 'youdao-dictionary)
 (require-package 'org-trello)
 (require-package 'hackernews)
+(require-package 'markdown-mode)
+(require-package 'markdown-preview-mode)
 
 ;; global config
 
@@ -56,6 +58,11 @@
 (require 'helm-dash)
 (setq helm-dash-min-length 2)
 (setq helm-dash-browser-funnc 'browse-url)
+
+
+(require 'markdown-mode)
+(require 'markdown-preview-mode)
+(define-key markdown-mode-map (kbd "C-c C-c") 'markdown-preview-mode)
 
 (require 'company)
 (require 'company-tern)
