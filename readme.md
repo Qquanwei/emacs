@@ -3,9 +3,15 @@
 
  安装本配置过程很简单
 
-`git clone https://github.com/Qquanwei/emacs.git ~/.emacs.d/`
+```
+git clone https://github.com/Qquanwei/emacs.git ~/.emacs.d/
+cd ~/.emacs.d/
+make install
+```
 
-然后启动emacs会自动安装所需要的插件。(有些命令依赖命令行，需要手动安装)
+然后启动emacs会自动安装所需要的插件。
+
+
 
 ## 基础快捷键
 
