@@ -11,8 +11,6 @@ make install
 
 然后启动emacs会自动安装所需要的插件。
 
-
-
 ## 基础快捷键
 
 * C-t 交换当前位置与前一个位置的字符
@@ -22,6 +20,7 @@ make install
 * M-2 当前window快速定位两个字符
 * M-l 当前window快速定位某一行
 * C-c C-h C-n 打开hacknews
+* C-x C-l 快速打开init.el
 
 ## 使用magit-git的工作方式
  magit可以和emacs非常好的结和，可以在编码过程中非常方便地add-commit-push, 也是一个重量级插件,需要一定的适应成本。
@@ -79,3 +78,15 @@ make install
 快捷键:
 
 * `C-c C-c` 启动`markdown-preview-mode`, 会在新浏览器中打开一个窗口，通过socket.io通信,能够实时看到结果。
+
+## Org-Mode
+
+这个重量级生活方式将非常影响一个人的思维方式，下面是我的一些个人体会。
+
+使用`org-refile` `org-capture`  [可以参考这个链接](http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/)
+
+* C-u C-c C-w 快速跳转到某个tag上
+* C-c C-w 将本tag插入到指定的headline上
+* C-c c 插入org-capture template. 在此可以使用org-refile移动到指定的headline上
+* C-c C-d 设置deadline
+* C-c C-s schedule
