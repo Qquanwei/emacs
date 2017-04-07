@@ -79,8 +79,16 @@
 (require 'js2-mode)
 (require 'web-mode)
 (require 'emmet-mode)
+;;; web-mode
+
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'web-mode-hook 'js-auto-beautify-mode)
+(add-hook 'web-mode-hook 'smartparens-mode)
+(add-to-list 'web-mode-content-types '("jsx" . "\\.vue\\'"))
+(add-to-list 'web-mode-content-types '("json" . "\\.json"))
+(add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\"))
+
+(define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
 
 (define-key lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
@@ -103,21 +111,12 @@
 
 (setq hackernews-top-story-limit 50)
 
-;;; web-mode
-(setq web-mode-content-types-alist
-      '(("json" . "\\.json")
-	("jsx" . ".\\.js[x]?\\'")))
 ;; (defun my-web-mode-hook ()
 ;;   (setq web-mode-indent-style 4)
 ;;   (setq web-mode-markup-indent-offset 4)
 ;;   (setq web-mode-css-indent-offset 4)
 ;;   (setq web-mode-code-indent-offset 4))
 ;; (add-hook 'web-mode-hook 'my-web-mode-hook)
-(add-hook 'web-mode-hook 'smartparens-mode)
-
-;;; react-mode
-(setq emmet-expand-jsx-className? t)
-
 ;;; lint tool
 (require 'flycheck)
 (require 'exec-path-from-shell)
@@ -133,16 +132,16 @@
 
 ;; file association
 (add-to-list 'auto-mode-alist '("\.jsx" . web-mode))
+(add-to-list 'auto-mode-alist '("\.vue" . web-mode))
 (add-to-list 'auto-mode-alist '("\.html" . web-mode))
 (add-to-list 'auto-mode-alist '("\.css" .web-mode))
 (add-to-list 'auto-mode-alist '("\.js" . web-mode))
 (add-to-list 'auto-mode-alist '("\.json" . json-mode))
-(add-to-list 'auto-mode-alist '("\.css" . css-mode))
+(add-to-list 'auto-mode-alist '("\.scss" . css-mode))
 
 ;; key binging
 (global-set-key (kbd "C-c C-v q") 'helm-dash-at-point)
 (global-set-key (kbd "C-c C-v a") 'helm-dash-activate-docset)
-(global-set-key (kbd "C-j") 'emmet-expand-line)
 (global-set-key (kbd "C-^") 'helm-ls-git-ls)
 (global-set-key (kbd "C-c g s") 'magit-status)
 (global-set-key (kbd "C-c g c") 'magit-checkout)
