@@ -37,12 +37,19 @@
 (require-package 'json-mode)
 (require-package 'js-doc)
 (require-package 'youdao-dictionary)
-(require-package 'org-trello)
 (require-package 'hackernews)
 (require-package 'markdown-mode)
 (require-package 'markdown-preview-mode)
+(require-package 'python-mode)
+(require-package 'company-jedi)
 
 ;; global config
+
+
+(require 'python-mode)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (add-to-list 'company-backends 'company-jedi)))
 
 (require 'projectile)
 (setq projectile-enable-caching t)
