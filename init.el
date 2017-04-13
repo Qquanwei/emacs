@@ -194,6 +194,10 @@
       kept-new-versions 6
       kept-old-versions 2
       version-control t)
+
+;;; 磁盘上文件变更自动更新buffer
+(global-auto-revert-mode)
+
 ;;; org-mode custom config
 (setq org-clock-into-drawer t)
 (setq org-agenda-include-diary t)

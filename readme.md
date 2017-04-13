@@ -11,6 +11,10 @@ make install
 
 然后启动emacs会自动安装所需要的插件。
 
+## 一些说明
+
+配置文件中开启了`global-auto-revert-mode`自动载入磁盘上发生变更的文件
+
 ## 基础快捷键
 
 * C-t 交换当前位置与前一个位置的字符
@@ -21,6 +25,8 @@ make install
 * M-l 当前window快速定位某一行
 * C-c C-h C-n 打开hacknews
 * C-x C-l 快速打开init.el
+
+
 
 ## 使用magit-git的工作方式
  magit可以和emacs非常好的结和，可以在编码过程中非常方便地add-commit-push, 也是一个重量级插件,需要一定的适应成本。
@@ -43,7 +49,7 @@ make install
 * C-c C-v q 从活动的docsets中查询一个api
 
 ## 项目内导航
- 项目内导航是以git项目作为一个项目基础，使用`projectile`这个插件可以自动识别这个项目。自动以git项目为搜索基准和自动匹配.gitignore的rule,使用起来很方便，例如搜索文件，全文搜搜(依赖ag命令,需要`brew install ag` or `sudo apt-get install ag`)等功能.
+ 项目内导航是以git项目作为一个项目基础，使用`projectile`这个插件可以自动识别这个项目。自动以git项目为搜索基准和自动匹配.gitignore的rule,使用起来很方便，例如搜索文件，全文搜搜(依赖ag命令)等功能.
 
 * C-c p f  项目内搜索文件,模糊识别
 * C-c p s s 项目内全文搜索,模糊识别
@@ -82,6 +88,20 @@ make install
 ## Org-Mode
 
 这个重量级生活方式将非常影响一个人的思维方式，下面是我的一些个人体会。
+
+首先设置全局快捷键
+
+```
+(define-key global-map
+  (kbd "C-c o")
+  (lambda
+    ()
+    (interactive)
+    (find-file "~/org/mytask.org")))
+```
+
+这样可以快速打开想要打开的文件.
+
 
 使用`org-refile` `org-capture`  [可以参考这个链接](http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/)
 
