@@ -107,10 +107,29 @@ make install
 
 * C-u C-c C-w 快速跳转到某个tag上
 * C-c C-w 将本tag插入到指定的headline上
-* C-c c 插入org-capture template. 在此可以使用org-refile移动到指定的headline上
+* C-c c t 快速创建任务使用`org-capture template`. 在此可以使用org-refile移动到指定的headline上
+* C-c c n 快速创建note,使用`org-capture template`
 * C-c C-d 设置deadline
 * C-c C-s schedule
 * C-c C-a 添加attachment
+* C-c C-x C-a 设置某个任务为完成态，将这个headline移出本文件放入完成态文件中.
+
+我的org-capture templates
+
+```
+ '(org-capture-templates
+   (quote
+    (("n" "Notes And Text" entry
+      (file+datetree "~/org/notes.org")
+      "* TODO %?
+%i  create:%T
+at: %a")
+     ("t" "New Task" entry
+      (file+headline "~/org/task.org" "工作表")
+      "* TODO %?
+%i  at: %a"))))
+
+```
 
 关于schedule和deadline, schedule为任务的开始时间，deadline为任务的结束时间. 在看每周安排时如果设置为deadline的任务没有设为`DONE`将会有一个警告显示. 设置为schedule的任务将会在当天进行提醒,并且显示在每周安排内.
 
