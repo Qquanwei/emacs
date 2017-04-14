@@ -42,9 +42,12 @@
 (require-package 'web-narrow-mode)
 (require-package 'python-mode)
 (require-package 'company-jedi)
+(require-package 'editorconfig)
 
 ;; global config
 
+(require 'editorconfig)
+(editorconfig-mode 1)
 
 (require 'python-mode)
 (add-hook 'python-mode-hook
@@ -120,12 +123,6 @@
 
 (setq hackernews-top-story-limit 50)
 
-;; (defun my-web-mode-hook ()
-;;   (setq web-mode-indent-style 4)
-;;   (setq web-mode-markup-indent-offset 4)
-;;   (setq web-mode-css-indent-offset 4)
-;;   (setq web-mode-code-indent-offset 4))
-;; (add-hook 'web-mode-hook 'my-web-mode-hook)
 ;;; lint tool
 (require 'flycheck)
 (require 'exec-path-from-shell)
@@ -198,9 +195,6 @@
 ;;; emacs custom
 (show-paren-mode 1)
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq js-indent-level 4)
-(setq standard-indent 4)
 
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
