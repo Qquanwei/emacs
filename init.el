@@ -41,6 +41,7 @@
 (require-package 'hackernews)
 (require-package 'markdown-mode)
 (require-package 'markdown-preview-mode)
+(require-package 'web-narrow-mode)
 
 ;; global config
 
@@ -79,8 +80,10 @@
 (require 'js2-mode)
 (require 'web-mode)
 (require 'emmet-mode)
+(require 'web-narrow-mode)
 ;;; web-mode
 
+(add-hook 'web-mode-hook 'web-narrow-mode)
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'web-mode-hook 'js-auto-beautify-mode)
 (add-hook 'web-mode-hook 'smartparens-mode)
