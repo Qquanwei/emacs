@@ -173,22 +173,6 @@
 (global-set-key (kbd "C-c C-y") 'youdao-dictionary-play-voice-at-point)
 (global-set-key (kbd "C-c C-h C-n") 'hackernews)
 (global-set-key (kbd "C-M-h") 'dumb-jump-go)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files nil)
- '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
- '(org-trello-files (quote ("~/org/trello.org")) nil (org-trello))
- '(package-selected-packages
-   (quote
-    (hackernews hacknews mu4e youdao-dictionary json-mode company-tern ag projectile avy js-auto-beautify exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
- '(projectile-mode t nil (projectile))
- '(web-mode-enable-current-column-highlight t))
-
-
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
