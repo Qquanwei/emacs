@@ -17,6 +17,8 @@ make install
 
 配置文件使用了`editorconfig`来控制不同mode下插入tab和缩进的问题,可以更加友好地在不同项目之间进行切换。
 
+如果需要一个默认的配置，可以参考我的editorconfig配置 https://drive.google.com/open?id=0B5HTbldQqN-KUUNlMGpyUkxQUkU
+
 
 ## 基础快捷键
 
