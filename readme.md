@@ -15,6 +15,9 @@ make install
 
 配置文件中开启了`global-auto-revert-mode`自动载入磁盘上发生变更的文件
 
+配置文件使用了`editorconfig`来控制不同mode下插入tab和缩进的问题,可以更加友好地在不同项目之间进行切换。
+
+
 ## 基础快捷键
 
 * C-t 交换当前位置与前一个位置的字符
