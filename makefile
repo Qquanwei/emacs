@@ -14,3 +14,6 @@ install:
 	@$(call require_installed,mpg123,mpg123)
 	@$(call require_installed,offlineimap,offline-imap)
 	@$(call require_installed,markdown,markdown)
+	@$(call require_installed,python,python)
+	@$(call require_installed,pip,pip)
+	if test "$(shell pip show virtualenv)" = ""; pip install virtualenv; fi

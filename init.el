@@ -1,17 +1,16 @@
-
 ;; init elpa
 (setq package-archives '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
-			 ("melpa" . "http://elpa.zilongshanren.com/melpa/")
-			 ("org"   . "http://elpa.zilongshanren.com/org/")))
+       ("melpa" . "http://elpa.zilongshanren.com/melpa/")
+       ("org"   . "http://elpa.zilongshanren.com/org/")))
 
 (defun require-package (package &optional min-version no-fresh)
   (if (package-installed-p package min-version)
       t
     (if (or (assoc package package-archive-contents) no-fresh)
-	(package-install package)
+  (package-install package)
       (progn
-	(package-refresh-contents)
-	(require-package package min-version t)))))
+  (package-refresh-contents)
+  (require-package package min-version t)))))
 (package-initialize)
 
 ;; package install
@@ -37,13 +36,20 @@
 (require-package 'json-mode)
 (require-package 'js-doc)
 (require-package 'youdao-dictionary)
-(require-package 'org-trello)
 (require-package 'hackernews)
 (require-package 'markdown-mode)
 (require-package 'markdown-preview-mode)
 (require-package 'web-narrow-mode)
+(require-package 'python-mode)
+(require-package 'company-jedi)
 
 ;; global config
+
+
+(require 'python-mode)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (add-to-list 'company-backends 'company-jedi)))
 
 (require 'projectile)
 (setq projectile-enable-caching t)
@@ -124,12 +130,12 @@
 (require 'flycheck)
 (require 'exec-path-from-shell)
 (setq-default flycheck-disabled-checkers
-	      (append flycheck-disabled-checkers '(javascript-jshint)))
+        (append flycheck-disabled-checkers '(javascript-jshint)))
 (add-hook 'web-mode-hook 'flycheck-mode)
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 (setq-default flycheck-temp-prefix ".flycheck")
 (setq-default flycheck-disable-checkers
-	      (append flycheck-disabled-checkers '(json-jsonlist)))
+        (append flycheck-disabled-checkers '(json-jsonlist)))
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
@@ -172,12 +178,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/org/trello.org" "~/org/task.org")))
+ '(org-agenda-files nil)
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(org-trello-files (quote ("~/org/trello.org")) nil (org-trello))
  '(package-selected-packages
    (quote
-    (hackernews hacknews mu4e org-trello youdao-dictionary youdao-directory json-mode company-tern ag projectile avy js-auto-beautify exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
+    (hackernews hacknews mu4e youdao-dictionary json-mode company-tern ag projectile avy js-auto-beautify exec-path-from-shell flycheck whitespace-cleanup-mode whitespace-cleanup jade symon web-mode smartparens moe-theme magit helm-ls-git helm-dash flx-ido emmet-mode dumb-jump)))
  '(projectile-mode t nil (projectile))
  '(web-mode-enable-current-column-highlight t))
 
@@ -223,6 +229,3 @@
 
 (setq interprogram-cut-function 'paste-to-osx)
 (setq interprogram-paste-function 'copy-from-osx)
-
-
-
