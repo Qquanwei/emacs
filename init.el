@@ -213,7 +213,7 @@
       (process-send-string proc text)
       (process-send-eof proc))))
 
-(if (= system-type "cygwin")
+(if (string-equal system-type "cygwin")
     (progn
       (setq interprogram-cut-function 'paste-to-osx)
       (setq interprogram-paste-function 'copy-from-osx)
