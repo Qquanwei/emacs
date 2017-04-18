@@ -67,7 +67,6 @@
 
 (require 'helm-dash)
 (setq helm-dash-min-length 2)
-(setq helm-dash-browser-funnc 'browse-url)
 
 
 (require 'markdown-mode)
