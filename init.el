@@ -43,6 +43,7 @@
 (require-package 'python-mode)
 (require-package 'company-jedi)
 (require-package 'editorconfig)
+(require-package 'graphviz-dot-mode)
 
 ;; global config
 
