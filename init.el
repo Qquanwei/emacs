@@ -211,6 +211,7 @@
    (emacs-lisp . t)
    (C . t)
    (js . t)
+   (calc . t)
    (octave . t)
    (python . t)))
 
