@@ -30,6 +30,7 @@ make install
 * M-l 当前window快速定位某一行
 * C-c C-h C-n 打开hacknews
 * C-x C-l 快速打开init.el
+* C-c . 快速打开eshell
 
 
 
