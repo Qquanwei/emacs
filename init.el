@@ -170,6 +170,15 @@
 (global-set-key (kbd "C-c C-y") 'youdao-dictionary-play-voice-at-point)
 (global-set-key (kbd "C-c C-h C-n") 'hackernews)
 (global-set-key (kbd "C-M-h") 'dumb-jump-go)
+;;; quick jump to eshell window
+(global-set-key (kbd "C-c .")
+  (lambda ()
+    (interactive)
+    (if (get-buffer-window "*eshell*")
+      (select-window (get-buffer-window "*eshell*"))
+      (eshell))))
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
