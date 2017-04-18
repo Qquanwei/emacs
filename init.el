@@ -199,6 +199,7 @@
 ;;; org-mode custom config
 (setq org-clock-into-drawer t)
 (setq org-agenda-include-diary t)
+(setq org-src-fontify-natively t)
 
 ;;; emacs custom
 (show-paren-mode 1)
