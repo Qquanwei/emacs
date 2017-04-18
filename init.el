@@ -200,6 +200,7 @@
 (setq org-clock-into-drawer t)
 (setq org-agenda-include-diary t)
 (setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate nil)
 
 ;;; emacs custom
 (show-paren-mode 1)
