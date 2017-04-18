@@ -204,6 +204,15 @@
 (setq org-image-actual-width 400)
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((dot . t)
+   (emacs-lisp . t)
+   (C . t)
+   (js . t)
+   (octave . t)
+   (python . t)))
+
 ;;; emacs custom
 (show-paren-mode 1)
 (setq-default indent-tabs-mode nil)
