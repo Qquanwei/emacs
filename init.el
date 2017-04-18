@@ -201,6 +201,8 @@
 (setq org-agenda-include-diary t)
 (setq org-src-fontify-natively t)
 (setq org-confirm-babel-evaluate nil)
+(setq org-image-actual-width 400)
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 
 ;;; emacs custom
 (show-paren-mode 1)
