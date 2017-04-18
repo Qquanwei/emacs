@@ -215,6 +215,7 @@
       (process-send-string proc text)
       (process-send-eof proc))))
 
+;;; 只在mac下启用复制粘贴到粘贴板功能
 (if (string-equal system-type "cygwin")
     (progn
       (setq interprogram-cut-function 'paste-to-osx)
