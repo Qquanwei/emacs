@@ -110,14 +110,15 @@ make install
 
 使用`org-refile` `org-capture`  [可以参考这个链接](http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/)
 
-* C-u C-c C-w 快速跳转到某个tag上
-* C-c C-w 将本tag插入到指定的headline上
-* C-c c t 快速创建任务使用`org-capture template`. 在此可以使用org-refile移动到指定的headline上
-* C-c c n 快速创建note,使用`org-capture template`
-* C-c C-d 设置deadline
-* C-c C-s schedule
-* C-c C-a 添加attachment
-* C-c C-x C-a 设置某个任务为完成态，将这个headline移出本文件放入完成态文件中.
+* C-c c t 快速创建任务使用`org-capture template`. 在此可以使用org-refile移动到指定的headline上 (全局)
+* C-c c n 快速创建note,使用`org-capture template` (全局)
+* C-u C-c C-w 快速跳转到某个tag上 (在org-mode内 下用inline代替)
+* C-c C-w 将本tag插入到指定的headline上 (inline)
+* C-c C-d 设置deadline (inline)
+* C-c C-s schedule (inline)
+* C-c C-a 添加attachment (nline)
+* C-c C-x C-a 设置某个任务为完成态，将这个headline移出本文件放入完成态文件中. (inline)
+* C-c a 打开org agenda命令界面
 
 我的org-capture templates
 
@@ -139,3 +140,11 @@ at: %a")
 关于schedule和deadline, schedule为任务的开始时间，deadline为任务的结束时间. 在看每周安排时如果设置为deadline的任务没有设为`DONE`将会有一个警告显示. 设置为schedule的任务将会在当天进行提醒,并且显示在每周安排内.
 
 如果一个schedule被delay了，可以设置delay日期延长该任务的起始时间。例如schedule时间设置为`<2017-04-13 五 -3d>`意味延长任务时长.
+
+### org-agenda
+
+org-agenda界面是org-mode统计结果展示页，可以快速查找/查看我们创建的任务。
+
+* C-c a a 打开周任务列表 (常用，添加了schedule或deadline的任务才会在这上面显示)   (全局)
+* C-c a s 搜索任务(全局)
+* C-c a t 显示所有的非DONE状态的标签
