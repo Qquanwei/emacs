@@ -150,7 +150,7 @@
 (global-set-key (kbd "C-^") 'helm-ls-git-ls)
 (global-set-key (kbd "C-c g s") 'magit-status)
 (global-set-key (kbd "C-c g c") 'magit-checkout)
-(global-set-key (kbd "C-c g f c") 'magit-checkout-file)
+(global-set-key (kbd "C-c g f c") 'magit-file-checkout)
 (global-set-key (kbd "C-c g p u") 'magit-push-current)
 (global-set-key (kbd "C-c g p l") 'magit-pull)
 (global-set-key (kbd "C-c g l") 'magit-log)
