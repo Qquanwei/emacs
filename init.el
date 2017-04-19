@@ -43,6 +43,7 @@
 (require-package 'python-mode)
 (require-package 'company-jedi)
 (require-package 'editorconfig)
+(require-package 'graphviz-dot-mode)
 
 ;; global config
 
@@ -199,6 +200,20 @@
 ;;; org-mode custom config
 (setq org-clock-into-drawer t)
 (setq org-agenda-include-diary t)
+(setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate nil)
+(setq org-image-actual-width 400)
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((dot . t)
+   (emacs-lisp . t)
+   (C . t)
+   (js . t)
+   (calc . t)
+   (octave . t)
+   (python . t)))
 
 ;;; emacs custom
 (show-paren-mode 1)
@@ -213,5 +228,9 @@
       (process-send-string proc text)
       (process-send-eof proc))))
 
-(setq interprogram-cut-function 'paste-to-osx)
-(setq interprogram-paste-function 'copy-from-osx)
+;;; 只在mac下启用复制粘贴到粘贴板功能
+(if (string-equal system-type "cygwin")
+    (progn
+      (setq interprogram-cut-function 'paste-to-osx)
+      (setq interprogram-paste-function 'copy-from-osx)
+      ))
