@@ -228,7 +228,7 @@
       (process-send-string proc text)
       (process-send-eof proc))))
 
-;;; Ö»ÔÚmacÏÂÆôÓÃ¸´ÖÆÕ³Ìùµ½Õ³Ìù°å¹¦ÄÜ
+;;; ä»…ä»…macä¸‹ä½¿ç”¨å¤åˆ¶ç²˜è´´
 (if (string-equal system-type "cygwin")
     (progn
       (setq interprogram-cut-function 'paste-to-osx)
