@@ -1,16 +1,16 @@
 ;; init elpa
 (setq package-archives '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
-       ("melpa" . "http://elpa.zilongshanren.com/melpa/")
-       ("org"   . "http://elpa.zilongshanren.com/org/")))
+     ("melpa" . "http://elpa.zilongshanren.com/melpa/")
+     ("org"   . "http://elpa.zilongshanren.com/org/")))
 
 (defun require-package (package &optional min-version no-fresh)
   (if (package-installed-p package min-version)
       t
     (if (or (assoc package package-archive-contents) no-fresh)
-  (package-install package)
+    (package-install package)
       (progn
-  (package-refresh-contents)
-  (require-package package min-version t)))))
+    (package-refresh-contents)
+    (require-package package min-version t)))))
 (package-initialize)
 
 ;; package install
