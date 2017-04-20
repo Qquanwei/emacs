@@ -150,8 +150,9 @@ make install
 %i  create:%T
 at: %a")
      ("t" "New Task" entry
-      (file+headline "~/org/task.org" "工作表")
+      (file+headline "~/org/task.org" "task")
       "* TODO %?
+%i  SCHEDULED: %(org-insert-time-stamp (org-read-date nil t))
 %i  at: %a"))))
 
 ```
