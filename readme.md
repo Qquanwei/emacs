@@ -24,15 +24,30 @@ make install
 
 * C-t 交换当前位置与前一个位置的字符
 * C-x C-t 交换当前行与上一行
-* M-g 跳转到行号
-* M-1 当前window快速定位一个字符
-* M-2 当前window快速定位两个字符
-* M-l 当前window快速定位某一行
 * C-c C-h C-n 打开hacknews
 * C-x C-l 快速打开init.el
 * C-c . 快速打开eshell
 
+## 高效的移动
 
+* M-1 当前window快速定位一个字符
+* M-2 当前window快速定位两个字符
+* M-l 当前window快速定位某一行
+* M-g g 跳转到行号
+
+### smartparens 工作方式:
+
+不得不说，smartparens 是需要我们不断使用用熟的一个插件， 带来的收益也是相当巨大，自从在youtube上看了某位大神的smartparens之后
+便开始重新认识了这个插件。
+
+关于实际效果和用法可以参考这篇文章: http://ebzzry.io/en/emacs-pairs/
+
+* `C-M-f` 跳转到表达式开始
+* `C-M-b` 跳转到表达式末尾
+* `C-M-n` 跳转到下一个表达式
+* `C-M-p` 跳转到前一个表达式 （与dump-jump冲突 :( ）
+* `C-M-k` 将表达式删除并加入到kill-ring中
+* `M-[` 删掉当前表达式的包裹符号， 也就是删除 " " , [ ], 而保留中间的内容.
 
 ## 使用magit-git的工作方式
  magit可以和emacs非常好的结和，可以在编码过程中非常方便地add-commit-push, 也是一个重量级插件,需要一定的适应成本。
