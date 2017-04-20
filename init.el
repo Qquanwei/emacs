@@ -44,6 +44,7 @@
 (require-package 'company-jedi)
 (require-package 'editorconfig)
 (require-package 'graphviz-dot-mode)
+(require-package 'helm-projectile)
 
 ;; global config
 
@@ -58,6 +59,15 @@
 (require 'projectile)
 (setq projectile-enable-caching t)
 (setq projectile-require-project-root nil)
+
+(require 'helm-config)
+(require 'helm-dash)
+(require 'helm-projectile)
+(setq helm-dash-min-length 2)
+(helm-projectile-on)
+(helm-mode 1)
+(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 
 (require 'whitespace-cleanup-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -77,8 +87,6 @@
 (define-key smartparens-mode-map (kbd "M-[") 'sp-unwrap-sexp)
 
 
-(require 'helm-dash)
-(setq helm-dash-min-length 2)
 
 
 (require 'markdown-mode)
@@ -126,11 +134,6 @@
 (setq moe-theme-highlight-buffer-id t)
 (moe-theme-set-color 'cyan)
 (moe-dark)
-
-(require 'helm-config)
-(helm-mode 1)
-(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 
 (setq hackernews-top-story-limit 50)
 
