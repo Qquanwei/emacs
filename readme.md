@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Qquanwei/emacs.svg?branch=master)](https://travis-ci.org/Qquanwei/emacs)
+
 # emacs 最佳实践
  很喜欢在cli中使用Emacs, 下面是使用过程中的一些实践记录下。
 
