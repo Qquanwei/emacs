@@ -203,6 +203,7 @@
 (setq org-src-fontify-natively t)
 (setq org-confirm-babel-evaluate nil)
 (setq org-image-actual-width 400)
+(setq org-log-done 'time)
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 
 (org-babel-do-load-languages

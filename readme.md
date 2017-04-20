@@ -149,3 +149,4 @@ org-agenda界面是org-mode统计结果展示页，可以快速查找/查看我�
 * C-c a a 打开周任务列表 (常用，添加了schedule或deadline的任务才会在这上面显示)   (全局)
 * C-c a s 搜索任务(全局)
 * C-c a t 显示所有的非DONE状态的标签
+* C-c a L 显示timeline
