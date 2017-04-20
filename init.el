@@ -62,9 +62,20 @@
 (require 'whitespace-cleanup-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
+;;; smartparens give me a powerful movement in editor
 (require 'smartparens-config)
-(smartparens-mode t)
-(smartparens-strict-mode)
+(smartparens-global-mode)
+(show-smartparens-global-mode)
+
+;;;; cover default keybinding
+
+(define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
+(define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
+(define-key smartparens-mode-map (kbd "C-M-n") 'sp-next-sexp)
+(define-key smartparens-mode-map (kbd "C-M-p") 'sp-previous-sexp)
+(define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
+(define-key smartparens-mode-map (kbd "M-[") 'sp-unwrap-sexp)
+
 
 (require 'helm-dash)
 (setq helm-dash-min-length 2)
