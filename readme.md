@@ -29,6 +29,10 @@ make install
 * C-c C-h C-n 打开hacknews
 * C-x C-l 快速打开init.el
 * C-c . 快速打开eshell
+* S-up 选择上面的窗口
+* S-down 选择下面的窗口
+* S-right 选择右边的窗口
+* S-left 选择左边的窗口
 
 ## 高效的移动
 

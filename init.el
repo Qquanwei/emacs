@@ -47,6 +47,12 @@
 (require-package 'helm-projectile)
 
 ;; global config
+;;; winmove
+
+(define-key global-map (kbd "S-<left>") 'windmove-left)
+(define-key global-map (kbd "S-<right>") 'windmove-right)
+(define-key global-map (kbd "S-<up>") 'windmove-up)
+(define-key global-map (kbd "S-<down>") 'windmove-down)
 
 (require 'editorconfig)
 (editorconfig-mode 1)
