@@ -13,6 +13,7 @@
     (require-package package min-version t)))))
 (package-initialize)
 
+(require-package 'use-package)
 ;; package install
 (require-package 'smartparens)
 (require-package 'helm-dash)
