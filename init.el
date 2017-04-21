@@ -15,139 +15,157 @@
 
 (require-package 'use-package)
 ;; package install
-(require-package 'smartparens)
-(require-package 'helm-dash)
-(require-package 'company)
-(require-package 'dumb-jump)
-(require-package 'web-mode)
-(require-package 'emmet-mode)
-(require-package 'moe-theme)
-(require-package 'helm)
-(require-package 'helm-ls-git)
-(require-package 'magit)
-(require-package 'js2-mode)
-(require-package 'whitespace-cleanup-mode)
-(require-package 'flycheck)
-(require-package 'exec-path-from-shell)
-(require-package 'js-auto-beautify)
-(require-package 'avy)
-(require-package 'ag)
-(require-package 'projectile)
-(require-package 'company-tern)
-(require-package 'json-mode)
-(require-package 'js-doc)
-(require-package 'youdao-dictionary)
-(require-package 'hackernews)
-(require-package 'markdown-mode)
-(require-package 'markdown-preview-mode)
-(require-package 'web-narrow-mode)
-(require-package 'python-mode)
-(require-package 'company-jedi)
-(require-package 'editorconfig)
-(require-package 'graphviz-dot-mode)
-(require-package 'helm-projectile)
+(use-package smartparens
+  :ensure t
+  :init
+  (smartparens-global-mode)
+  (show-smartparens-global-mode)
+  :bind (
+         ("C-M-f" . sp-forward-sexp)
+         ("C-M-b" . sp-backward-sexp)
+         ("C-M-n" . sp-next-sexp)
+         ("C-M-p" . sp-previous-sexp)
+         ("C-M-k" . sp-kill-sexp)
+         ("M-[" . sp-unwrap-sexp)))
+(use-package helm-dash
+  :ensure t
+  :config
+  (setq helm-dash-min-length 2)
+  :bind (("C-c C-v q" . helm-dash-at-point)
+         ("C-c C-v a" . helm-dash-activate-docset)))
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "<tab>") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
-;; global config
-;;; winmove
+(use-package dumb-jump
+  :ensure t
+  :init
+  (setq dumb-jump-selector 'helm)
+  :bind (("C-M-h" . dumb-jump-back)
+         ("C-M-g" . dumb-jump-go))
+  :config (dumb-jump-mode))
+
+(defun npm-install
+    (pname) (interactive "sEnter package name:") (compile (format "npm install %s" pname)))
+(defun npm-run-test
+    () (interactive) (compile "npm run test"))
+(defun npm-run-lint
+    () (interactive) (compile "npm run lint"))
+
+(use-package web-mode
+  :ensure t
+  :mode "\\.(jsx|json|js|vue|html|css|scss)\\'"
+  :bind (("C-c n t" . npm-run-test)
+         ("C-c n l" . npm-run-lint)
+         ("C-c n i" . npm-run-install))
+  :config
+  (add-hook 'web-mode-hook 'linum-mode)
+  (add-hook 'web-mode-hook 'emmet-mode)
+  (add-hook 'web-mode-hook 'web-narrow-mode)
+  (add-hook 'web-mode-hook 'smartparens-mode)
+  (add-hook 'web-mode-hook 'flycheck-mode)
+  (add-hook 'web-mode-hook (lambda ()
+                             (when (string= web-mode-content-type "jsx")
+                               (progn
+                                 (setq-local emmet-expand-jsx-className? t)))))
+  (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
+  (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
+  (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
+(use-package emmet-mode
+  :ensure t)
+(use-package moe-theme
+  :ensure t)
+(use-package helm
+  :ensure t
+  :config
+  (helm-mode 1)
+  (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+  (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+  :bind (("C-x C-b" . helm-buffers-list)
+         ("C-c b" . helm-buffers-list)
+         ("C-x C-f" . helm-find-files)))
+(use-package magit
+  :ensure t
+  :bind (("C-c g s" . magit-status)
+         ("C-c g c" . magit-checkout)
+         ("C-c g f c" . magit-file-checkout)))
+(use-package whitespace-cleanup-mode
+  :ensure t
+  :config
+  (add-hook 'before-save-hook 'whitespace-cleanup))
+(use-package flycheck
+  :ensure t)
+(use-package exec-path-from-shell
+  :ensure t)
+(use-package avy
+  :ensure t
+  :bind (("M-1" . avy-goto-char)
+         ("M-2" . avy-goto-char-2)
+         ("M-l" . avy-goto-line)))
+(use-package ag
+  :ensure t)
+(use-package projectile
+  :ensure t
+  :config
+  (setq projectile-enable-caching t)
+  (setq projectile-require-project-root nil))
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on))
+(use-package company-tern
+  :ensure t)
+(use-package js-doc
+  :ensure t)
+(use-package youdao-dictionary
+  :ensure t
+  :bind (("C-c y" . youdao-dictionary-search-at-point+)
+         ("C-c C-y" . youdao-dictionary-play-voice-at-point)))
+(use-package hackernews
+  :ensure t
+  :bind ("C-c C-h C-n" . hacknews))
+(use-package markdown-mode
+  :ensure t
+  :bind ("C-c C-c" . markdown-preview-mode))
+(use-package markdown-preview-mode
+  :ensure t
+  :defer t)
+(use-package web-narrow-mode
+  :ensure t)
+(use-package python-mode
+  :ensure t
+  :config
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (add-to-list 'company-backends 'company-jedi))))
+(use-package company-jedi
+  :ensure t)
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
 (define-key global-map (kbd "S-<left>") 'windmove-left)
 (define-key global-map (kbd "S-<right>") 'windmove-right)
 (define-key global-map (kbd "S-<up>") 'windmove-up)
 (define-key global-map (kbd "S-<down>") 'windmove-down)
 
-(require 'editorconfig)
-(editorconfig-mode 1)
 
-(require 'python-mode)
-(add-hook 'python-mode-hook
-          (lambda ()
-            (add-to-list 'company-backends 'company-jedi)))
-
-(require 'projectile)
-(setq projectile-enable-caching t)
-(setq projectile-require-project-root nil)
-
-(require 'helm-config)
-(require 'helm-dash)
-(require 'helm-projectile)
-(setq helm-dash-min-length 2)
-(helm-projectile-on)
-(helm-mode 1)
-(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
-
-(require 'whitespace-cleanup-mode)
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
-;;; smartparens give me a powerful movement in editor
-(require 'smartparens-config)
-(smartparens-global-mode)
-(show-smartparens-global-mode)
-
-;;;; cover default keybinding
-
-(define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
-(define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
-(define-key smartparens-mode-map (kbd "C-M-n") 'sp-next-sexp)
-(define-key smartparens-mode-map (kbd "C-M-p") 'sp-previous-sexp)
-(define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
-(define-key smartparens-mode-map (kbd "M-[") 'sp-unwrap-sexp)
-
-
-
-
-(require 'markdown-mode)
-(require 'markdown-preview-mode)
-(define-key markdown-mode-map (kbd "C-c C-c") 'markdown-preview-mode)
-
-(require 'company)
-(require 'company-tern)
-(add-hook 'after-init-hook 'global-company-mode)
 (with-eval-after-load 'company
-  (define-key company-active-map (kbd "M-n") nil)
-  (define-key company-active-map (kbd "M-p") nil)
-  (define-key company-active-map (kbd "C-n") #'company-select-next)
-  (define-key company-active-map (kbd "<tab>") #'company-select-next)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (setq company-dabbrev-downcase nil)
   (add-to-list 'company-backends 'company-tern))
 
-(require 'js2-mode)
-(require 'web-mode)
-(require 'emmet-mode)
-(require 'web-narrow-mode)
-;;; web-mode
-
-(add-hook 'web-mode-hook 'web-narrow-mode)
-(add-hook 'web-mode-hook 'emmet-mode)
-(add-hook 'web-mode-hook 'js-auto-beautify-mode)
-(add-hook 'web-mode-hook 'smartparens-mode)
-(add-to-list 'web-mode-content-types '("jsx" . "\\.vue\\'"))
-(add-to-list 'web-mode-content-types '("json" . "\\.json"))
-(add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\"))
-(defun npm-install
-  (pname) (interactive "sEnter package name:") (compile (format "npm install %s" pname)))
-(defun npm-run-test
-  () (interactive) (compile "npm run test"))
-(defun npm-run-lint
-  () (interactive) (compile "npm run lint"))
 
 (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
-(define-key web-mode-map (kbd "C-c n i") 'npm-install)
-(define-key web-mode-map (kbd "C-c n t") 'npm-run-test)
-(define-key web-mode-map (kbd "C-c n l") 'npm-run-lint)
 
 (define-key lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
-
-(require 'json-mode)
-(add-hook 'json-mode-hook 'flycheck-mode)
-
-(require 'dumb-jump)
-(dumb-jump-mode)
-(setq dumb-jump-selector 'helm)
-(define-key global-map (kbd "C-M-p") nil)
-(define-key global-map (kbd "C-M-h") 'dumb-jump-back)
 
 (require 'moe-theme)
 (setq moe-theme-highlight-buffer-id t)
@@ -169,36 +187,13 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
-;; file association
-(add-to-list 'auto-mode-alist '("\.jsx" . web-mode))
-(add-to-list 'auto-mode-alist '("\.vue" . web-mode))
-(add-to-list 'auto-mode-alist '("\.html" . web-mode))
-(add-to-list 'auto-mode-alist '("\.css" .web-mode))
-(add-to-list 'auto-mode-alist '("\.js" . web-mode))
-(add-to-list 'auto-mode-alist '("\.json" . json-mode))
-(add-to-list 'auto-mode-alist '("\.scss" . css-mode))
-
 ;; key binging
-(global-set-key (kbd "C-c C-v q") 'helm-dash-at-point)
-(global-set-key (kbd "C-c C-v a") 'helm-dash-activate-docset)
-(global-set-key (kbd "C-^") 'helm-ls-git-ls)
-(global-set-key (kbd "C-c g s") 'magit-status)
-(global-set-key (kbd "C-c g c") 'magit-checkout)
-(global-set-key (kbd "C-c g f c") 'magit-file-checkout)
-(global-set-key (kbd "C-c g m") 'magit-merge)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-1") 'avy-goto-char)
-(global-set-key (kbd "M-2") 'avy-goto-char-2)
-(global-set-key (kbd "M-l") 'avy-goto-line)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-l")
         (lambda ()
           (interactive) (find-file (expand-file-name "~/.emacs.d/init.el"))))
-(global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point+)
-(global-set-key (kbd "C-c C-y") 'youdao-dictionary-play-voice-at-point)
-(global-set-key (kbd "C-c C-h C-n") 'hackernews)
+
 ;;; quick jump to eshell window
 (global-set-key (kbd "C-c .")
   (lambda ()
