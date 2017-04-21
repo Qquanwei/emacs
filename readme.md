@@ -60,8 +60,13 @@ make install
  本配置文件中配置了几个快捷键
 
 *  C-c g s  :相当于在当前git项目里 git status。实际上执行后会打开一个新的buffer进入magit-mode , 在此mode中可以进行各种action，详情看magit-popup文档. 一般我都会在此进行add-commit,reset操作
-*  C-c g p u: 当前分支: git push
-*  C-c g p l: 当前分支: git pull
+*  C-c g c  :执行magit-checkout , 快速切换分支
+*  C-c g f c:执行magit-file-checkout 快速从一个分支检出文件
+
+一般情况下，写完代码之后我会`C-c g s`一下看一下项目的状态，对个别相关的修改分别提交。 在magit里你可以`C-<space>`来选择一块代码，以行为单位，
+在有选中的情况下下按下`s`会将当前选中的几行代码加入到暂存区内，当所有本次提交相关的代码提交完后按两下`c`开始提交。当提交后按下`P p`进行`push`
+操作。拉取代码用`F p`. 整个过程可以很流畅地快速完成，提高编码的快感。
+
 
 ## helm-dash
   遇到问题时需要查询标准文档，我们需要一个能够快速离线查询文档的工具。helm-dash就是看文档用的
