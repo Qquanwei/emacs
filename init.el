@@ -70,6 +70,7 @@
   (add-hook 'web-mode-hook 'web-narrow-mode)
   (add-hook 'web-mode-hook 'smartparens-mode)
   (add-hook 'web-mode-hook 'flycheck-mode)
+  (add-hook 'web-mode-hook 'editorconfig-mode)
   (add-hook 'web-mode-hook (lambda ()
                              (when (string= web-mode-content-type "jsx")
                                (progn
@@ -147,9 +148,7 @@
 (use-package company-jedi
   :ensure t)
 (use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode 1))
+  :ensure t)
 
 (define-key global-map (kbd "S-<left>") 'windmove-left)
 (define-key global-map (kbd "S-<right>") 'windmove-right)
