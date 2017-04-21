@@ -263,3 +263,9 @@
       (setq interprogram-cut-function 'paste-to-osx)
       (setq interprogram-paste-function 'copy-from-osx)
       ))
+
+;; compile beautify
+(eval-after-load
+  'compile
+  '(add-hook 'compilation-filter-hook
+     (lambda () (ansi-color-process-output nil))))
