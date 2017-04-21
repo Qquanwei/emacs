@@ -96,6 +96,12 @@ make install
 * C-M p 跳回原来的位置
 * C-M q 显示定义的上下文
 
+## web-mode
+
+* `C-c n i` 安装一个npm包 可以加上--save, --save-dev参数
+* `C-c n t` 执行 npm run test
+* `C-c n l` 执行 npm run lint
+
 
 ## lisp-mode
 

@@ -118,8 +118,17 @@
 (add-to-list 'web-mode-content-types '("jsx" . "\\.vue\\'"))
 (add-to-list 'web-mode-content-types '("json" . "\\.json"))
 (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\"))
+(defun npm-install
+  (pname) (interactive "sEnter package name:") (compile (format "npm install %s" pname)))
+(defun npm-run-test
+  () (interactive) (compile "npm run test"))
+(defun npm-run-lint
+  () (interactive) (compile "npm run lint"))
 
 (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
+(define-key web-mode-map (kbd "C-c n i") 'npm-install)
+(define-key web-mode-map (kbd "C-c n t") 'npm-run-test)
+(define-key web-mode-map (kbd "C-c n l") 'npm-run-lint)
 
 (define-key lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
