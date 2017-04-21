@@ -144,6 +144,9 @@
 
 (require 'dumb-jump)
 (dumb-jump-mode)
+(setq dumb-jump-selector 'helm)
+(define-key global-map (kbd "C-M-p") nil)
+(define-key global-map (kbd "C-M-h") 'dumb-jump-back)
 
 (require 'moe-theme)
 (setq moe-theme-highlight-buffer-id t)
@@ -195,7 +198,6 @@
 (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point+)
 (global-set-key (kbd "C-c C-y") 'youdao-dictionary-play-voice-at-point)
 (global-set-key (kbd "C-c C-h C-n") 'hackernews)
-(global-set-key (kbd "C-M-h") 'dumb-jump-go)
 ;;; quick jump to eshell window
 (global-set-key (kbd "C-c .")
   (lambda ()
