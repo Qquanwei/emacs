@@ -37,6 +37,7 @@
   :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-dabbrev-downcase nil)
   (define-key company-active-map (kbd "M-n") nil)
   (define-key company-active-map (kbd "M-p") nil)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
@@ -155,10 +156,6 @@
 (define-key global-map (kbd "S-<up>") 'windmove-up)
 (define-key global-map (kbd "S-<down>") 'windmove-down)
 
-
-(with-eval-after-load 'company
-  (setq company-dabbrev-downcase nil)
-  (add-to-list 'company-backends 'company-tern))
 
 
 (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
