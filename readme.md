@@ -126,7 +126,7 @@ C-M g 在iterm2下发现C-M g总是被判定为C-g, 所以如果在iterm2中使�
 
 ## web-mode
 
-下面三个快捷键绑定在web-mode上方便开发使用，有个前提条件是emacs的环境中能找到`npm`, 可以使用`nvm.el`来在emacs中指定`node`版本，不过`nvm.el`项目目前存在一些缺陷所以我本地用的是修改后的版本，原作者还没修复孤儿没有将`nvm.el`加入到本配置中.
+下面三个快捷键绑定在web-mode上方便开发使用，有个前提条件是emacs的环境中能找到`npm`, 可以使用`nvm.el`来在emacs中指定`node`版本，不过`nvm.el`项目目前存在一些缺陷所以我本地用的是修改后的版本，原作者还没修复故而没有将`nvm.el`加入到本配置中.
 
 * `C-c n i` 安装一个npm包 可以加上--save, --save-dev参数， 如果没有任何输入直接回车执行则`npm install`
 * `C-c n t` 执行 npm run test
