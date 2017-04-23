@@ -62,10 +62,10 @@
 (use-package web-mode
   :ensure t
   :mode "\\.(jsx|json|js|vue|html|css|scss)\\'"
-  :bind (("C-c n t" . npm-run-test)
-         ("C-c n l" . npm-run-lint)
-         ("C-c n i" . npm-run-install))
   :config
+  (define-key web-mode-map (kbd "C-c n t") 'npm-run-test)
+  (define-key web-mode-map (kbd "C-c n l") 'npm-run-lint)
+  (define-key web-mode-map (kbd "C-c n i") 'npm-run-install)
   (add-hook 'web-mode-hook 'linum-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'web-narrow-mode)
