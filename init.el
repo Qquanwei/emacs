@@ -52,12 +52,12 @@
          ("C-M-g" . dumb-jump-go))
   :config (dumb-jump-mode))
 
-(defun npm-install
-    (pname) (interactive "sEnter package name:") (compile (format "npm install %s" pname)))
+(defun npm-run-install
+  (pname) (interactive "MEnter package name:") (compile (format "npm install %s" pname)))
 (defun npm-run-test
-    () (interactive) (compile "npm run test"))
+  () (interactive) (compile "npm run test"))
 (defun npm-run-lint
-    () (interactive) (compile "npm run lint"))
+  () (interactive) (compile "npm run lint"))
 
 (use-package web-mode
   :ensure t
@@ -134,7 +134,8 @@
   :bind ("C-c C-h C-n" . hacknews))
 (use-package markdown-mode
   :ensure t
-  :bind ("C-c C-c" . markdown-preview-mode))
+  :config
+  (define-key markdown-mode-map (kbd "C-c C-c") 'markdown-preview-mode))
 (use-package markdown-preview-mode
   :ensure t
   :defer t)
