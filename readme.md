@@ -81,6 +81,10 @@ make install
 * C-c ^ a 保留两份(keep-all)
 * C-c ^ n 跳转到下一个冲突
 * C-c ^ p 跳转到上一个冲突
+* C-c ^ m 保留我的本地版本(keep-mine)
+* C-c ^ o 保留非我的本地的另外一个版本(keep-other)
+
+当修改完后`smerge-mode`会自动取消绑定到当前buffer
 
 ## helm-dash
   遇到问题时需要查询标准文档，我们需要一个能够快速离线查询文档的工具。helm-dash就是看文档用的
