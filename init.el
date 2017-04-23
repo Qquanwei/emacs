@@ -149,6 +149,10 @@
   :ensure t)
 (use-package editorconfig
   :ensure t)
+(use-package powerline
+  :ensure t
+  :init
+  (powerline-default-theme))
 
 (define-key global-map (kbd "S-<left>") 'windmove-left)
 (define-key global-map (kbd "S-<right>") 'windmove-right)
@@ -243,6 +247,9 @@
 (show-paren-mode 1)
 (setq-default indent-tabs-mode nil)
 
+(custom-set-faces
+ '(mode-line ((t (:foreground "#00ff00" :background "#bdbdbd" :box nil))))
+ '(mode-line-inactive ((t (:foreground "#5f5f5f" :background "#666666" :box nil)))))
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
 
