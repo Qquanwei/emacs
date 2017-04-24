@@ -27,6 +27,10 @@
          ("C-M-p" . sp-previous-sexp)
          ("C-M-k" . sp-kill-sexp)
          ("M-[" . sp-unwrap-sexp)))
+(use-package nvm
+  :load-path "./lisp/nvm.el"
+  :config
+  (nvm-use "default"))
 (use-package helm-dash
   :ensure t
   :config
@@ -52,20 +56,11 @@
          ("C-M-g" . dumb-jump-go))
   :config (dumb-jump-mode))
 
-(defun npm-run-install
-  (pname) (interactive "MEnter package name:") (compile (format "npm install %s" pname)))
-(defun npm-run-test
-  () (interactive) (compile "npm run test"))
-(defun npm-run-lint
-  () (interactive) (compile "npm run lint"))
 
 (use-package web-mode
   :ensure t
   :mode "\\.(jsx|json|js|vue|html|css|scss)\\'"
   :config
-  (define-key web-mode-map (kbd "C-c n t") 'npm-run-test)
-  (define-key web-mode-map (kbd "C-c n l") 'npm-run-lint)
-  (define-key web-mode-map (kbd "C-c n i") 'npm-run-install)
   (add-hook 'web-mode-hook 'linum-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'web-narrow-mode)
@@ -76,6 +71,7 @@
                              (when (string= web-mode-content-type "jsx")
                                (progn
                                  (setq-local emmet-expand-jsx-className? t)))))
+  (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
   (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
   (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
   (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
@@ -94,8 +90,7 @@
          ("C-x C-f" . helm-find-files)))
 (use-package magit
   :ensure t
-  :bind (("C-c g s" . magit-status)
-         ("C-c g c" . magit-checkout)
+  :bind (("C-c g c" . magit-checkout)
          ("C-c g f c" . magit-file-checkout)))
 (use-package whitespace-cleanup-mode
   :ensure t
@@ -162,8 +157,6 @@
 (define-key global-map (kbd "S-<down>") 'windmove-down)
 
 
-
-(define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
 
 (define-key lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
