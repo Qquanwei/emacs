@@ -235,7 +235,6 @@
    (python . t)))
 
 ;;; emacs custom
-(show-paren-mode 1)
 (setq-default indent-tabs-mode nil)
 
 (custom-set-faces
