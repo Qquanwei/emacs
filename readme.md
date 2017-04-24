@@ -21,6 +21,7 @@ make install
 
 如果需要一个默认的配置，可以参考我的editorconfig配置 https://drive.google.com/open?id=0B5HTbldQqN-KUUNlMGpyUkxQUkU
 
+快捷键: 一般情况下`C-c`开头的快捷键都是用户态的快捷键，意味让使用者自己绑定，其他的类似`C-x`或`M-`可由外部插件自己定义。ref: https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 
 ## 基础快捷键
 
