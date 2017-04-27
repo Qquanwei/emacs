@@ -127,7 +127,7 @@
          ("C-c C-y" . youdao-dictionary-play-voice-at-point)))
 (use-package hackernews
   :ensure t
-  :bind ("C-c C-h C-n" . hacknews))
+  :bind ("C-c C-h C-n" . hackernews))
 (use-package markdown-mode
   :ensure t
   :config
