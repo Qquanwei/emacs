@@ -87,7 +87,8 @@
   (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
   :bind (("C-x C-b" . helm-buffers-list)
          ("C-c b" . helm-buffers-list)
-         ("C-x C-f" . helm-find-files)))
+         ("C-x C-f" . helm-find-files)
+         ("M-x" . helm-M-x)))
 (use-package magit
   :ensure t
   :bind (("C-c g c" . magit-checkout)
