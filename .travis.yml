@@ -19,7 +19,9 @@ matrix:
     - env: EVM_EMACS=emacs-24.1-travis
     - env: EVM_EMACS=emacs-24.2-travis
     - env: EVM_EMACS=emacs-git-snapshot-travis
-
+notifications:
+  email:
+    - quanwei9958@126.com
 script:
   lsb_release -a && ./test-startup.sh
 
