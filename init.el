@@ -226,6 +226,9 @@
 ;;; 磁盘上文件变更自动更新buffer
 (global-auto-revert-mode)
 
+;;; 显示时间在状态栏上
+(display-time-mode)
+
 ;;; org-mode custom config
 (setq org-clock-into-drawer t)
 (setq org-agenda-include-diary t)
