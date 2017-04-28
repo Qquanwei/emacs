@@ -144,13 +144,19 @@
             (lambda ()
               (add-to-list 'company-backends 'company-jedi))))
 (use-package company-jedi
-  :ensure t)
+  :ensure)
 (use-package editorconfig
-  :ensure t)
+  :ensure)
 (use-package powerline
-  :ensure t
+  :ensure
   :init
   (powerline-default-theme))
+(use-package mode-icons
+  :ensure
+  :config
+  (mode-icons-mode))
+
+
 
 (define-key global-map (kbd "S-<left>") 'windmove-left)
 (define-key global-map (kbd "S-<right>") 'windmove-right)
