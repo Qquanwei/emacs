@@ -155,6 +155,10 @@
   :ensure
   :config
   (mode-icons-mode))
+(use-package org-bullets
+  :ensure
+  :init
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 
 
