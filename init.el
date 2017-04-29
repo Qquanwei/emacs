@@ -111,6 +111,7 @@
 (use-package projectile
   :ensure t
   :config
+  (projectile-mode 1)
   (setq projectile-enable-caching t)
   (setq projectile-require-project-root nil))
 (use-package helm-projectile
