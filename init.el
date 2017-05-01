@@ -251,6 +251,7 @@
 
 ;;; emacs custom
 (setq-default indent-tabs-mode nil)
+(tool-bar-mode 0)
 
 (custom-set-faces
  '(mode-line ((t (:foreground "#00ff00" :background "#bdbdbd" :box nil))))
