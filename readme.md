@@ -169,20 +169,6 @@ C-M g 在iterm2下发现C-M g总是被判定为C-g, 所以如果在iterm2中使�
 
 这个重量级生活方式将非常影响一个人的思维方式，下面是我的一些个人体会。
 
-首先设置全局快捷键
-
-```
-(define-key global-map
-  (kbd "C-c o")
-  (lambda
-    ()
-    (interactive)
-    (find-file "~/org/mytask.org")))
-```
-
-这样可以快速打开想要打开的文件.
-
-
 使用`org-refile` `org-capture`  [可以参考这个链接](http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/)
 
 * C-c c t 快速创建任务使用`org-capture template`. 在此可以使用org-refile移动到指定的headline上 (全局)
