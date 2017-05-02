@@ -59,7 +59,12 @@
 
 (use-package web-mode
   :ensure t
-  :mode "\\.(jsx|json|js|vue|html|css|scss)\\'"
+  :mode (("\\.jsx\\'" . web-mode)
+         ("\\.vue\\'" . web-mode)
+         ("\\.js\\'" . web-mode)
+         ("\\.css\\'" . web-mode)
+         ("\\.json\\'" . web-mode)
+         ("\\.html\\'" . web-mode))
   :config
   (add-hook 'web-mode-hook 'linum-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
