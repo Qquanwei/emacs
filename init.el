@@ -59,7 +59,12 @@
 
 (use-package web-mode
   :ensure t
-  :mode "\\.(jsx|json|js|vue|html|css|scss)\\'"
+  :mode (("\\.jsx\\'" . web-mode)
+         ("\\.vue\\'" . web-mode)
+         ("\\.js\\'" . web-mode)
+         ("\\.css\\'" . web-mode)
+         ("\\.json\\'" . web-mode)
+         ("\\.html\\'" . web-mode))
   :config
   (add-hook 'web-mode-hook 'linum-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
@@ -145,13 +150,23 @@
             (lambda ()
               (add-to-list 'company-backends 'company-jedi))))
 (use-package company-jedi
-  :ensure t)
+  :ensure)
 (use-package editorconfig
-  :ensure t)
+  :ensure)
 (use-package powerline
-  :ensure t
+  :ensure
   :init
   (powerline-default-theme))
+(use-package mode-icons
+  :ensure
+  :config
+  (mode-icons-mode))
+(use-package org-bullets
+  :ensure
+  :init
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+
 
 (define-key global-map (kbd "S-<left>") 'windmove-left)
 (define-key global-map (kbd "S-<right>") 'windmove-right)
@@ -217,6 +232,9 @@
 ;;; 磁盘上文件变更自动更新buffer
 (global-auto-revert-mode)
 
+;;; 显示时间在状态栏上
+(display-time-mode)
+
 ;;; org-mode custom config
 (setq org-clock-into-drawer t)
 (setq org-agenda-include-diary t)
@@ -238,6 +256,7 @@
 
 ;;; emacs custom
 (setq-default indent-tabs-mode nil)
+(tool-bar-mode 0)
 
 (custom-set-faces
  '(mode-line ((t (:foreground "#00ff00" :background "#bdbdbd" :box nil))))
@@ -263,3 +282,6 @@
   'compile
   '(add-hook 'compilation-filter-hook
      (lambda () (ansi-color-process-output nil))))
+;;; env setting
+
+(set-env "NODE_NO_READLINE" "1")

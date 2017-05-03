@@ -211,3 +211,7 @@ org-agenda界面是org-mode统计结果展示页，可以快速查找/查看我�
 * C-c a s 搜索任务(全局)
 * C-c a t 显示所有的非DONE状态的标签
 * C-c a L 显示timeline
+### org-babel
+
+这个功能真的是我最喜欢的org特性了，录了一段视频放在B站:
+https://www.bilibili.com/video/av9936508/index_1.html
