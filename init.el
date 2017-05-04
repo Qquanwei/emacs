@@ -117,6 +117,12 @@
   :ensure t
   :config
   (projectile-mode 1)
+  (projectile-register-project-type 'npm '("package.json")
+            :compile "npm run build"
+            :test "npm test"
+            :run "npm start"
+            :test-suffix ".spec")
+  (setq projectile-create-missing-test-files t)
   (setq projectile-enable-caching t)
   (setq projectile-require-project-root nil))
 (use-package helm-projectile
@@ -256,7 +262,10 @@
 
 ;;; emacs custom
 (setq-default indent-tabs-mode nil)
+(menu-bar-mode 0)
 (tool-bar-mode 0)
+(scroll-bar-mode 0)
+
 
 (custom-set-faces
  '(mode-line ((t (:foreground "#00ff00" :background "#bdbdbd" :box nil))))
