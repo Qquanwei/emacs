@@ -23,6 +23,7 @@ make install
 
 快捷键: 一般情况下`C-c`开头的快捷键都是用户态的快捷键，意味让使用者自己绑定，其他的类似`C-x`或`M-`可由外部插件自己定义。ref: https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 
+
 ## 基础快捷键
 
 * C-t 交换当前位置与前一个位置的字符
@@ -225,7 +226,31 @@ org-agenda界面是org-mode统计结果展示页，可以快速查找/查看我�
 * C-c a s 搜索任务(全局)
 * C-c a t 显示所有的非DONE状态的标签
 * C-c a L 显示timeline
+
 ### org-babel
 
 这个功能真的是我最喜欢的org特性了，录了一段视频放在B站:
 https://www.bilibili.com/video/av9936508/index_1.html
+
+
+## 密码管理
+
+经常会有各种网站需要不同的用户名&密码，人脑记起来真的很烦，所以给emacs
+加上了密码管理功能。使用的是`pass.el`这个包，后台命令是gnu的`gpg`与
+`pass`两个命令。
+
+首先在命令行中初始化gpg公钥 `gpg --gen-key` , 然后按照提示设置基础信息以及主密
+码。
+
+上述命令执行成功之后复制输出的公钥，或者(`gpg --list-key`)查看
+
+然后执行`pass init ${公钥}`, 基于此我们的钥匙仓库初始化便完成了。
+
+在emacs中执行`M-x pass`进入pass管理, 进入`pass-store`模式后，快捷键如
+下
+
+* i  插入一个钥匙项, 可以使用分隔符`/`来归档不同的项, 例如`web/google`
+* I  (大写的i) 插入一个自动生成密码的钥匙项，输入名称后会自动生成一个
+  hash密码
+* w 拷贝一个钥匙的密码到emacs的剪贴板中(without system)，会保留30秒，
+  之后会清除。

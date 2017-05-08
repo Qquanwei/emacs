@@ -163,6 +163,8 @@
   :ensure
   :init
   (powerline-default-theme))
+(use-package pass
+  :ensure)
 (use-package mode-icons
   :ensure
   :config
