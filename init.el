@@ -294,4 +294,3 @@
      (lambda () (ansi-color-process-output nil))))
 ;;; env setting
 
-(set-env "NODE_NO_READLINE" "1")
