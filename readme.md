@@ -54,6 +54,13 @@ make install
 
 * C-x d 打开dired
 
+### dired
+
+* d 标记一个项以待删除
+* x 执行标记 action
+* + 创建一个目录
+* R 移动一个文件(或重命名)
+
 ## 高效的移动
 
 * M-1 当前window快速定位一个字符
