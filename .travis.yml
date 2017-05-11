@@ -8,20 +8,20 @@ before_install:
   - evm install $EVM_EMACS --use --skip
 
 env:
-  - EVM_EMACS=emacs-24.1-travis
-  - EVM_EMACS=emacs-24.2-travis
   - EVM_EMACS=emacs-24.4-travis
   - EVM_EMACS=emacs-24.5-travis
+  - EVM_EMACS=emacs-25.1-travis
   - EVM_EMACS=emacs-git-snapshot-travis
 
 matrix:
   allow_failures:
-    - env: EVM_EMACS=emacs-24.1-travis
     - env: EVM_EMACS=emacs-24.2-travis
     - env: EVM_EMACS=emacs-git-snapshot-travis
 notifications:
   email:
-    - quanwei9958@126.com
+    recipients:
+      - quanwei9958@126.com
+    on_failure: always
 script:
   lsb_release -a && ./test-startup.sh
 
