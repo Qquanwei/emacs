@@ -266,7 +266,6 @@
 (setq-default indent-tabs-mode nil)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
-(scroll-bar-mode 0)
 
 
 (custom-set-faces
