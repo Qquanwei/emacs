@@ -79,7 +79,7 @@
   (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
   (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
   (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
-  (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp')
+  (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp)
   (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
   (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
   (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
