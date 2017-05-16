@@ -77,6 +77,9 @@
                                (progn
                                  (setq-local emmet-expand-jsx-className? t)))))
   (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
+  (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
+  (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
+  (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp')
   (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
   (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
   (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
@@ -221,13 +224,6 @@
       (select-window (get-buffer-window "*eshell*"))
       (eshell))))
 
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (setq backup-by-copying t
       backup-directory-alist
