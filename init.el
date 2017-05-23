@@ -57,6 +57,13 @@
   :config (dumb-jump-mode))
 
 
+(use-package tide
+  :ensure
+  :config
+  (flycheck-mode t)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode t)
+  (add-hook 'before-save-hook 'tide-format-before-save))
 (use-package web-mode
   :ensure t
   :mode (("\\.jsx\\'" . web-mode)
@@ -72,6 +79,10 @@
   (add-hook 'web-mode-hook 'smartparens-mode)
   (add-hook 'web-mode-hook 'flycheck-mode)
   (add-hook 'web-mode-hook 'editorconfig-mode)
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (when (string-equal "tsx" (file-name-extension buffer-file-name)
+                                  (tide-setup)))))
   (add-hook 'web-mode-hook (lambda ()
                              (when (string= web-mode-content-type "jsx")
                                (progn
