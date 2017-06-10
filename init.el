@@ -224,14 +224,6 @@
         (lambda ()
           (interactive) (find-file (expand-file-name "~/.emacs.d/init.el"))))
 
-;;; quick jump to eshell window
-(global-set-key (kbd "C-c .")
-  (lambda ()
-    (interactive)
-    (if (get-buffer-window "*eshell*")
-      (select-window (get-buffer-window "*eshell*"))
-      (eshell))))
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
