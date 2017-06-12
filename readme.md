@@ -30,7 +30,6 @@ make install
 * C-x C-t 交换当前行与上一行
 * C-c C-h C-n 打开hacknews
 * C-x C-l 快速打开init.el
-* C-c . 快速打开eshell
 * S-up 选择上面的窗口
 * S-down 选择下面的窗口
 * S-right 选择右边的窗口
@@ -133,6 +132,7 @@ make install
 
 * C-c p c  对当前项目执行标准编译命令，不同项目有不同配置
 * C-c p P  对当前项目执行标准测试命令，依赖项目类型执行不同命令
+* C-c p x s 在当前目录打开shell
 
 下面是的Projectile项目相关配置， 例如对于识别根目录下有`package.json`,就会将当前项目类型设置为`npm`型，名字只是个标识无实际意义。然后该项目的标准编译为`npm build`，标准测试为`npm test`. 在该项目下面`C-c p c RET`就可以快速执行`npm build`.
 
