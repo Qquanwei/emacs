@@ -173,6 +173,9 @@
   :ensure)
 (use-package editorconfig
   :ensure)
+(use-package helpful
+  :ensure
+  :bind (("C-h f" . helpful-function)))
 (use-package powerline
   :ensure
   :init
