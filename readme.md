@@ -108,12 +108,12 @@ make install
 
 当修改完后`smerge-mode`会自动取消绑定到当前buffer
 
-## helm-dash
-  遇到问题时需要查询标准文档，我们需要一个能够快速离线查询文档的工具。helm-dash就是看文档用的
+## counsel-dash
+  遇到问题时需要查询标准文档，我们需要一个能够快速离线查询文档的工具。counsel-dash就是看文档用的
 
-  文档流地址到这个项目中去找: https://github.com/Kapeli/feeds
+  文档流地址到这个项目中去找: https://github.com/Kapeli/feeds, 也可以自动在线安装`counsel-dash-install-docset` 不过速度略慢，推荐用迅雷手动下载安装。
 
-  下载好后，使用`M-x helm-dash-install-docset-from-file`安装docset到~/.docsets中
+  下载好后，使用`M-x counsel-dash-install-docset-from-file`安装docset到~/.docsets中
 
   在本配置文件中配置了下面两个快捷键
 
@@ -126,6 +126,8 @@ make install
 * C-c p v  执行projectile-vc, 即是打开项目的版本管理, 对于git项目会优先使用magit-status-internal (git status)
 * C-c p k  杀掉所有当前project的buffer
 * C-c p D  打开项目的root目录，使用`dired`
+* C-c p i  清除当前项目缓存，如果外部修改了项目内文件名时可以刷新当前
+  项目文件结构
 * C-c p f  项目内搜索文件,模糊识别
 * C-c p p  切换项目
 * C-c p s s 项目内全文搜索,模糊识别

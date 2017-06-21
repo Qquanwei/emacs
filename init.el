@@ -30,12 +30,7 @@
   :load-path "./lisp/nvm.el"
   :config
   (nvm-use "default"))
-(use-package helm-dash
-  :ensure t
-  :config
-  (setq helm-dash-min-length 2)
-  :bind (("C-c C-v q" . helm-dash-at-point)
-         ("C-c C-v a" . helm-dash-activate-docset)))
+
 (use-package company
   :ensure t
   :config
@@ -50,10 +45,11 @@
 (use-package dumb-jump
   :ensure t
   :init
-  (setq dumb-jump-selector 'helm)
+  (setq dumb-jump-selector 'ivy)
   :bind (("C-M-h" . dumb-jump-back)
          ("C-M-g" . dumb-jump-go))
-  :config (dumb-jump-mode))
+  :config
+  (setq dumb-jump-selector 'ivy))
 
 
 (use-package tide
@@ -95,16 +91,23 @@
   (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
 (use-package emmet-mode
   :ensure t)
-(use-package helm
-  :ensure t
+(use-package counsel-dash
+  :ensure
   :config
-  (helm-mode 1)
-  (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-  (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
-  :bind (("C-x C-b" . helm-buffers-list)
-         ("C-c b" . helm-buffers-list)
-         ("C-x C-f" . helm-find-files)
-         ("M-x" . helm-M-x)))
+  (setq counsel-dash-browser-func 'browse-web)
+  :bind (("C-c C-v a" . counsel-dash-activate-docset)
+         ("C-c C-v q" . counsel-dash)))
+(use-package ivy
+  :ensure
+  :init
+  (ivy-mode t)
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (define-key global-map (kbd "C-s") 'swiper)
+  (define-key global-map (kbd "C-x C-f") 'counsel-find-file)
+  (define-key global-map (kbd "M-x") 'counsel-M-x))
+
 (use-package magit
   :ensure t
   :bind (("C-c g c" . magit-checkout)
@@ -136,10 +139,6 @@
   (setq projectile-create-missing-test-files t)
   (setq projectile-enable-caching t)
   (setq projectile-require-project-root nil))
-(use-package helm-projectile
-  :ensure t
-  :config
-  (helm-projectile-on))
 (use-package company-tern
   :ensure t)
 (use-package youdao-dictionary
