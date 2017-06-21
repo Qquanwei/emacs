@@ -142,8 +142,6 @@
   (helm-projectile-on))
 (use-package company-tern
   :ensure t)
-(use-package js-doc
-  :ensure t)
 (use-package youdao-dictionary
   :ensure t
   :bind (("C-c y" . youdao-dictionary-search-at-point+)
