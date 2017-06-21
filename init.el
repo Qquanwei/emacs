@@ -96,8 +96,6 @@
   (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
 (use-package emmet-mode
   :ensure t)
-(use-package moe-theme
-  :ensure t)
 (use-package helm
   :ensure t
   :config
@@ -203,11 +201,6 @@
 (define-key lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 
-(require 'moe-theme)
-(setq moe-theme-highlight-buffer-id t)
-(moe-theme-set-color 'cyan)
-(moe-dark)
-
 (setq hackernews-top-story-limit 50)
 
 ;;; lint tool
@@ -270,9 +263,6 @@
 (tool-bar-mode 0)
 
 
-(custom-set-faces
- '(mode-line ((t (:foreground "#00ff00" :background "#bdbdbd" :box nil))))
- '(mode-line-inactive ((t (:foreground "#5f5f5f" :background "#666666" :box nil)))))
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
 
@@ -294,5 +284,3 @@
   'compile
   '(add-hook 'compilation-filter-hook
      (lambda () (ansi-color-process-output nil))))
-;;; env setting
-
