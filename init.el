@@ -104,6 +104,7 @@
   :config
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
+  (define-key global-map (kbd "C-x C-b") 'ivy-switch-buffer)
   (define-key global-map (kbd "C-s") 'swiper)
   (define-key global-map (kbd "C-x C-f") 'counsel-find-file)
   (define-key global-map (kbd "M-x") 'counsel-M-x))
@@ -125,12 +126,13 @@
   :bind (("M-1" . avy-goto-char)
          ("M-2" . avy-goto-char-2)
          ("M-l" . avy-goto-line)))
-(use-package ag
-  :ensure t)
+(use-package grizzl
+  :ensure)
 (use-package projectile
   :ensure t
   :config
   (projectile-mode 1)
+  (setq projectile-completion-system 'grizzl)
   (projectile-register-project-type 'npm '("package.json")
             :compile "npm run build"
             :test "npm test"
@@ -139,8 +141,10 @@
   (setq projectile-create-missing-test-files t)
   (setq projectile-enable-caching t)
   (setq projectile-require-project-root nil))
-(use-package company-tern
-  :ensure t)
+(use-package counsel-projectile
+  :ensure
+  :init
+  (counsel-projectile-on))
 (use-package youdao-dictionary
   :ensure t
   :bind (("C-c y" . youdao-dictionary-search-at-point+)
@@ -169,21 +173,27 @@
   :ensure)
 (use-package helpful
   :ensure
-  :bind (("C-h f" . helpful-function)))
-(use-package powerline
-  :ensure
-  :init
-  (powerline-default-theme))
+  :bind
+  (
+   ("C-h f" . helpful-function)
+   ("C-h g" . helpful-macro)))
 (use-package pass
   :ensure)
 (use-package mode-icons
   :ensure
   :config
   (mode-icons-mode))
+(use-package org-download
+  :ensure)
 (use-package org-bullets
   :ensure
   :init
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+(use-package guide-key
+  :ensure
+  :init
+  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
+  (guide-key-mode 1))
 
 
 
@@ -258,6 +268,9 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 
+(setq frame-title-format
+  (list (format "%s %%S: %%j" (system-name))
+    '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
