@@ -195,7 +195,14 @@
   (setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
   (guide-key-mode 1))
 
-
+(use-package diminish
+  :ensure
+  :init
+  (diminish 'projectile-mode)
+  (diminish 'flycheck-mode)
+  (diminish 'company-mode)
+  (diminish 'guide-key-mode)
+  (diminish 'ivy-mode))
 
 (define-key global-map (kbd "S-<left>") 'windmove-left)
 (define-key global-map (kbd "S-<right>") 'windmove-right)
