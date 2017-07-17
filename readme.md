@@ -13,6 +13,8 @@ make install
 
 然后启动emacs会自动安装所需要的插件。
 
+* if startup failed, using `M-x package-install ret use-package`
+
 ## 一些说明
 
 配置文件中开启了`global-auto-revert-mode`自动载入磁盘上发生变更的文件
