@@ -97,6 +97,8 @@
   (setq counsel-dash-browser-func 'browse-web)
   :bind (("C-c C-v a" . counsel-dash-activate-docset)
          ("C-c C-v q" . counsel-dash)))
+(use-package fish-mode
+  :ensure)
 (use-package ivy
   :ensure
   :init
