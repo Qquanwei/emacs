@@ -42,6 +42,8 @@
   (define-key company-active-map (kbd "<tab>") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
+(use-package dockerfile-mode
+  :ensure)
 (use-package dumb-jump
   :ensure t
   :init
