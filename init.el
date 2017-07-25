@@ -211,6 +211,8 @@
   (diminish 'guide-key-mode)
   (diminish 'ivy-mode))
 
+(set-language-environment "UTF-8")
+
 (define-key global-map (kbd "S-<left>") 'windmove-left)
 (define-key global-map (kbd "S-<right>") 'windmove-right)
 (define-key global-map (kbd "S-<up>") 'windmove-up)
