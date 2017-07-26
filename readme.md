@@ -265,3 +265,9 @@ https://www.bilibili.com/video/av9936508/index_1.html
   hash密码
 * w 拷贝一个钥匙的密码到emacs的剪贴板中(without system)，会保留30秒，
   之后会清除。
+
+
+## 代码 guideline
+
+`fci-mode` 打开80字符的guideline
+默认是处于关闭状态，因为打开时发现会影响正常的缩进~

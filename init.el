@@ -64,6 +64,10 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode t)
   (add-hook 'before-save-hook 'tide-format-before-save))
+
+(use-package fill-column-indicator
+  :ensure)
+
 (use-package web-mode
   :ensure t
   :mode (("\\.jsx\\'" . web-mode)
