@@ -68,6 +68,8 @@
 (use-package fill-column-indicator
   :ensure)
 
+(use-package nodejs-repl
+  :ensure)
 (use-package web-mode
   :ensure t
   :mode (("\\.jsx\\'" . web-mode)
