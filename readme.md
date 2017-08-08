@@ -211,6 +211,8 @@ C-M g 在iterm2下发现C-M g总是被判定为C-g, 所以如果在iterm2中使�
 * C-c C-a 添加attachment (nline)
 * C-c C-x C-a 设置某个任务为完成态，将这个headline移出本文件放入完成态文件中. (inline)
 * C-c a 打开org agenda命令界面
+* C-x n s narrow subtree
+* C-x n w widen subtree
 
 我的org-capture templates
 
