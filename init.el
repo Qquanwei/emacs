@@ -23,12 +23,12 @@
   (smartparens-global-mode)
   (show-smartparens-global-mode)
   :bind (
-         ("C-M-f" . sp-forward-sexp)
-         ("C-M-b" . sp-backward-sexp)
-         ("C-M-n" . sp-next-sexp)
-         ("C-M-p" . sp-previous-sexp)
-         ("C-M-k" . sp-kill-sexp)
-         ("M-[" . sp-unwrap-sexp)))
+   ("C-M-f" . sp-forward-sexp)
+   ("C-M-b" . sp-backward-sexp)
+   ("C-M-n" . sp-next-sexp)
+   ("C-M-p" . sp-previous-sexp)
+   ("C-M-k" . sp-kill-sexp)
+   ("M-[" . sp-unwrap-sexp)))
 (use-package nvm
   :load-path "./lisp/nvm.el"
   :config
@@ -207,7 +207,10 @@
   :init
   (setq guide-key/guide-key-sequence '("C-x r" "C-x 4"))
   (guide-key-mode 1))
-
+(use-package haskell-mode
+  :ensure
+  :config
+  (define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
 (use-package diminish
   :ensure
   :init
