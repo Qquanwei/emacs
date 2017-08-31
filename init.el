@@ -306,7 +306,8 @@
       (process-send-string proc text)
       (process-send-eof proc))))
 
-(scroll-bar-mode -1)
+;; 仅在gui模式下开启
+;; (scroll-bar-mode -1)
 
 ;;; 仅仅mac下使用复制粘贴
 (if (string-equal system-type "cygwin")
