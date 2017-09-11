@@ -223,6 +223,16 @@
   :ensure)
 (use-package snazzy-theme
   :ensure)
+(use-package dashboard
+  :ensure
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-banner-logo-title "Happy Emacs")
+  (setq dashboard-startup-banner "~/.emacs.d/logo.png")
+  (setq dashboard-items '((recents . 5)
+                          (bookmarks . 5)
+                          (projects . 3)
+                          (agenda . 5))))
 
 (set-language-environment "UTF-8")
 
