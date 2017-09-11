@@ -219,6 +219,10 @@
   (diminish 'company-mode)
   (diminish 'guide-key-mode)
   (diminish 'ivy-mode))
+(use-package base16-theme
+  :ensure)
+(use-package snazzy-theme
+  :ensure)
 
 (set-language-environment "UTF-8")
 
