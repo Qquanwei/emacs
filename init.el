@@ -163,10 +163,12 @@
   :bind (("C-c y" . youdao-dictionary-search-at-point+)
          ("C-c C-y" . youdao-dictionary-play-voice-at-point)))
 (use-package hackernews
-  :ensure t
+  :ensure
   :bind ("C-c C-h C-n" . hackernews))
+(use-package dante
+  :ensure)
 (use-package markdown-mode
-  :ensure t
+  :ensure
   :config
   (define-key markdown-mode-map (kbd "C-c C-c") 'markdown-preview-mode))
 (use-package markdown-preview-mode
@@ -265,8 +267,8 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-x C-l")
-        (lambda ()
-          (interactive) (find-file (expand-file-name "~/.emacs.d/init.el"))))
+  (lambda ()
+    (interactive) (find-file (expand-file-name "~/.emacs.d/init.el"))))
 
 
 (setq backup-by-copying t
