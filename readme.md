@@ -30,6 +30,8 @@ make install
 
 ## 基础快捷键
 
+* C-x C-n 下一个window
+* C-x C-p 前一个window
 * C-t 交换当前位置与前一个位置的字符
 * C-x C-t 交换当前行与上一行
 * C-c C-h C-n 打开hacknews
