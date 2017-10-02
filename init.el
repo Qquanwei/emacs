@@ -16,7 +16,13 @@
     (package-installed-p 'use-package)
   (package-install 'use-package))
 
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
 ;; package install
+
+;; custom package
+(use-package custom-key-binding)
+
 (use-package smartparens
   :ensure t
   :init
@@ -180,9 +186,12 @@
   :ensure t
   :config
   (add-hook 'python-mode-hook
+            'jedi:setup)
+  (add-hook 'python-mode-hook
             (lambda ()
-              (add-to-list 'company-backends 'company-jedi))))
-(use-package company-jedi
+              (company-mode 0)))
+  )
+(use-package jedi
   :ensure)
 (use-package editorconfig
   :ensure)
