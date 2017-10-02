@@ -146,11 +146,6 @@
   :config
   (projectile-mode 1)
   (setq projectile-completion-system 'grizzl)
-  (projectile-register-project-type 'npm '("package.json")
-            :compile "npm run build"
-            :test "npm test"
-            :run "npm start"
-            :test-suffix ".spec")
   (setq projectile-create-missing-test-files t)
   (setq projectile-enable-caching t)
   (setq projectile-require-project-root nil))
@@ -176,14 +171,15 @@
   :defer t)
 (use-package web-narrow-mode
   :ensure t)
+(use-package jedi
+  :ensure
+  :config
+  (setq jedi:complete-on-dot t))
 (use-package python-mode
   :ensure t
   :config
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (add-to-list 'company-backends 'company-jedi))))
-(use-package company-jedi
-  :ensure)
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (add-hook 'python-mode-hook (lambda () (company-mode nil))))
 (use-package editorconfig
   :ensure)
 (use-package helpful
