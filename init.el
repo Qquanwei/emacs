@@ -17,11 +17,12 @@
   (package-install 'use-package))
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
-
+(add-to-list 'load-path "~/.emacs.d/lisp/markdown-dnd-images")
 ;; package install
 
 ;; custom package
 (use-package custom-key-binding)
+(use-package markdown-dnd-images)
 
 (use-package smartparens
   :ensure t
