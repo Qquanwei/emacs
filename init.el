@@ -240,6 +240,8 @@
                           (agenda . 5))))
 
 (set-language-environment "UTF-8")
+;; well be slowly
+;; (setq compilation-scroll-output 'first-error)
 
 (define-key global-map (kbd "S-<left>") 'windmove-left)
 (define-key global-map (kbd "S-<right>") 'windmove-right)
