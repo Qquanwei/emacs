@@ -283,3 +283,13 @@ https://www.bilibili.com/video/av9936508/index_1.html
 
 `fci-mode` 打开80字符的guideline
 默认是处于关闭状态，因为打开时发现会影响正常的缩进~
+
+## Docker
+
+docker在osx/linux 下可以支持的非常好，在windows下修复了一些坑。
+
+win用户新增eshell函数drun,wpwd
+
+* drun 在当前目录下执行docker命令，会自动将本目录挂载到docker /app目录中，并移至工作目录到该目录。 可以手动添加docker flags。 例如 `> drun node npm install ramda --save`意思为在当前目录加载node镜像，执行`npm install ramda --save`。`> drun node -p 8080 npm start`意思同理。
+
+* wpwd 类似于pwd,但是结果是将winstyle的目录转换成linux path 可供docker识别。
