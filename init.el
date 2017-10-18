@@ -21,8 +21,10 @@
 ;; package install
 
 ;; custom package
-(use-package custom-key-binding)
-(use-package markdown-dnd-images)
+(use-package eshell-functions)
+(use-package docker-machine-setup)
+
+(setup-docker-machine-env)
 
 (use-package smartparens
   :ensure t
