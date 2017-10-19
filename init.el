@@ -24,8 +24,6 @@
 (use-package eshell-functions)
 (use-package docker-machine-setup)
 
-(setup-docker-machine-env)
-
 (use-package smartparens
   :ensure t
   :init
