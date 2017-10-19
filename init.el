@@ -82,6 +82,7 @@
   :mode (("\\.jsx\\'" . web-mode)
          ("\\.vue\\'" . web-mode)
          ("\\.js\\'" . web-mode)
+         ("\\.ts\\'" . web-mode)
          ("\\.css\\'" . web-mode)
          ("\\.json\\'" . web-mode)
          ("\\.html\\'" . web-mode))
