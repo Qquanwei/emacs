@@ -87,16 +87,17 @@
          ("\\.json\\'" . web-mode)
          ("\\.html\\'" . web-mode))
   :config
+  (add-hook 'web-mode-hook 'auto-complete-mode)
   (add-hook 'web-mode-hook 'linum-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'web-narrow-mode)
   (add-hook 'web-mode-hook 'smartparens-mode)
   (add-hook 'web-mode-hook 'flycheck-mode)
   (add-hook 'web-mode-hook 'editorconfig-mode)
   (add-hook 'web-mode-hook
-            (lambda ()
-              (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                                  (tide-setup))))
+    (lambda ()
+      (progn
+        (setq web-mode-script-padding 0)
+        )))
   (add-hook 'web-mode-hook (lambda ()
                              (when (string= web-mode-content-type "jsx")
                                (progn
@@ -177,8 +178,6 @@
 (use-package markdown-preview-mode
   :ensure t
   :defer t)
-(use-package web-narrow-mode
-  :ensure t)
 (use-package jedi
   :ensure
   :config
