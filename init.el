@@ -36,11 +36,14 @@
    ("C-M-p" . sp-previous-sexp)
    ("C-M-k" . sp-kill-sexp)
    ("M-[" . sp-unwrap-sexp)))
+(use-package eshell-git-prompt
+  :ensure
+  :config
+  (eshell-git-prompt-use-theme 'robbyrussell))
 
 (use-package pyim
   :ensure
   :config
-  (setq default-input-method "pyim")
   (pyim-basedict-enable))
 
 (use-package nvm
