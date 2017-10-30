@@ -294,6 +294,13 @@ win用户新增eshell函数drun,wpwd
 
 * wpwd 类似于pwd,但是结果是将winstyle的目录转换成linux path 可供docker识别。
 
+## 输入法
+
+使用pyim作为输入法
+
+* C-\ 切换输入法
+* C-x ret C-\ 设置输入法
+
 
 # Support
 

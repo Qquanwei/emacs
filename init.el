@@ -40,6 +40,7 @@
 (use-package pyim
   :ensure
   :config
+  (setq default-input-method "pyim")
   (pyim-basedict-enable))
 
 (use-package nvm
