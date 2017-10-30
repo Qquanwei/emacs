@@ -38,7 +38,10 @@
    ("M-[" . sp-unwrap-sexp)))
 
 (use-package pyim
-  :ensure)
+  :ensure
+  :config
+  (pyim-basedict-enable))
+
 (use-package nvm
   :load-path "./lisp/nvm.el"
   :config
@@ -345,3 +348,17 @@
   'compile
   '(add-hook 'compilation-filter-hook
      (lambda () (ansi-color-process-output nil))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (pyim dashboard snazzy-theme base16-theme guide-key org-bullets org-download mode-icons pass helpful editorconfig python-mode jedi markdown-preview-mode markdown-mode dante hackernews youdao-dictionary counsel-projectile projectile grizzl avy exec-path-from-shell whitespace-cleanup-mode magit fish-mode counsel-dash emmet-mode web-mode nodejs-repl fill-column-indicator tide dumb-jump dockerfile-mode company smartparens s use-package))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
