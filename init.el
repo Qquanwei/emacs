@@ -36,6 +36,9 @@
    ("C-M-p" . sp-previous-sexp)
    ("C-M-k" . sp-kill-sexp)
    ("M-[" . sp-unwrap-sexp)))
+
+(use-package pyim
+  :ensure)
 (use-package nvm
   :load-path "./lisp/nvm.el"
   :config
