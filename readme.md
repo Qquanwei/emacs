@@ -137,8 +137,8 @@ make install
 * C-c p v  执行projectile-vc, 即是打开项目的版本管理, 对于git项目会优先使用magit-status-internal (git status)
 * C-c p k  杀掉所有当前project的buffer
 * C-c p D  打开项目的root目录，使用`dired`
-* C-c p i  清除当前项目缓存，如果外部修改了项目内文件名时可以刷新当前
-  项目文件结构
+* C-c p i  清除当前项目缓存，如果外部修改了项目内文件名时可以刷新当前项目文件结构
+* C-c p b  选择项目内的buffer，这样就可以将本项目与其他项目的文件隔离开了
 * C-c p f  项目内搜索文件,模糊识别
 * C-c p p  切换项目
 * C-c p s s 项目内全文搜索,模糊识别
