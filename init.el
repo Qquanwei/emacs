@@ -50,6 +50,8 @@
   :load-path "./lisp/nvm.el"
   :config
   (nvm-use "default"))
+(use-package company-jedi
+  :ensure)
 
 (use-package company
   :ensure t
@@ -188,15 +190,13 @@
 (use-package markdown-preview-mode
   :ensure t
   :defer t)
-(use-package jedi
-  :ensure
-  :config
-  (setq jedi:complete-on-dot t))
+
 (use-package python-mode
   :ensure t
   :config
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (add-hook 'python-mode-hook (lambda () (company-mode nil))))
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq-local company-backends '(company-jedi)))))
 (use-package editorconfig
   :ensure)
 (use-package helpful
