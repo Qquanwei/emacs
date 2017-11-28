@@ -204,6 +204,14 @@
   :ensure
   :config
   (mode-icons-mode))
+(use-package org
+  :ensure
+  :config
+  (require 'org-crypt)
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+  (setq org-crypt-key "quanwei")
+  (define-key org-mode-map (kbd "C-c u d") 'org-decrypt-entry))
 (use-package org-download
   :ensure)
 (use-package org-bullets

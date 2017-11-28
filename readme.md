@@ -301,6 +301,9 @@ win用户新增eshell函数drun,wpwd
 * C-\ 切换输入法
 * C-x ret C-\ 设置输入法
 
+## 加密(org-mode)
+
+加密的重要性不言而谕，本配置使用org-crypt(gnupg1)对`crypt`的tag进行加密. 可生成对应的key－pair然后修改`org-crypt-key`指定对应的key进行加密。
 
 # Support
 
