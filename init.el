@@ -354,9 +354,25 @@
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; gIf you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(markdown-code-face ((t (:inherit fixed-pitch :background "gray20" :foreground "dark orange"))))
  '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 2.0))))
  '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.8)))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+  '(org-agenda-files
+     (quote
+       ("/sync/org/record.org" "/sync/org/oh-my-life.org" "/sync/org/work.org")))
+  '(org-capture-templates
+     (quote
+       (("l" "oh-my-life" entry
+          (file "/sync/org/oh-my-life.org")
+          "* TODO %?")
+         ("w" "for work" entry
+           (file+datetree+prompt "/sync/org/work.org")
+           "* TODO %? [%]")))))
