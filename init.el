@@ -37,19 +37,13 @@
    ("C-M-k" . sp-kill-sexp)
    ("M-[" . sp-unwrap-sexp)))
 (use-package eshell-git-prompt
-  :ensure
-  :config
-  (eshell-git-prompt-use-theme 'robbyrussell))
+  :ensure)
 
 (use-package pyim
   :ensure
   :config
   (pyim-basedict-enable))
 
-(use-package nvm
-  :load-path "./lisp/nvm.el"
-  :config
-  (nvm-use "default"))
 (use-package company-jedi
   :ensure)
 
@@ -100,7 +94,6 @@
          ("\\.html\\'" . web-mode))
   :config
   (add-hook 'web-mode-hook 'auto-complete-mode)
-  (add-hook 'web-mode-hook 'linum-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'smartparens-mode)
   (add-hook 'web-mode-hook 'flycheck-mode)
@@ -250,6 +243,9 @@
                           (agenda . 5))))
 
 (set-language-environment "UTF-8")
+
+;; without linum-mode
+(global-linum-mode t)
 ;; well be slowly
 ;; (setq compilation-scroll-output 'first-error)
 
@@ -352,6 +348,10 @@
   'compile
   '(add-hook 'compilation-filter-hook
      (lambda () (ansi-color-process-output nil))))
+
+
+(setq default-input-method "pyim")
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
