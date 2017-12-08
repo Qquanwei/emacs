@@ -1,13 +1,14 @@
-'':PROPERTIES:
+:PROPERTIES:
 :END:
 * my org config
 
 ** set sources
   #+BEGIN_SRC emacs-lisp
     (setq package-archives
-    '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
-       ("melpa" . "http://elpa.zilongshanren.com/melpa/")
-       ("org"   . "http://elpa.zilongshanren.com/org/")))
+          '(
+            ("gnu"   . "http://elpa.zilongshanren.com/gnu/")
+            ("melpa" . "http://elpa.zilongshanren.com/melpa/")
+            ("org"   . "http://elpa.zilongshanren.com/org/")))
 
     (package-initialize)
 
@@ -46,6 +47,18 @@
      (define-key global-map (kbd "S-<up>") 'windmove-up)
      (define-key global-map (kbd "S-<down>") 'windmove-down)
 
+     ;; select current line
+     (defun highlight-current-line ()
+       (interactive)
+       (set-mark (line-beginning-position))
+       (end-of-line))
+
+     (define-key global-map (kbd "C-M-l") 'highlight-current-line)
+     (define-key global-map (kbd "C-c ,") 'rename-buffer)
+
+
+     ;; open truncate lines
+     (toggle-truncate-lines 1)
 
    #+END_SRC
 ** org-mode
@@ -199,7 +212,6 @@
               ("\\.json\\'" . web-mode)
               ("\\.html\\'" . web-mode))
        :config
-       (add-hook 'web-mode-hook 'auto-complete-mode)
        (add-hook 'web-mode-hook 'emmet-mode)
        (add-hook 'web-mode-hook 'smartparens-mode)
        (add-hook 'web-mode-hook 'flycheck-mode)
@@ -399,6 +411,9 @@
                   (lambda () (ansi-color-process-output nil))))
 
      (display-time-mode)
+     (when (display-graphic-p)
+       (scroll-bar-mode -1))
+
    #+END_SRC
 ** helpful
    #+BEGIN_SRC emacs-lisp
@@ -433,4 +448,9 @@
      (use-package markdown-preview-mode
        :ensure t
        :defer t)
+   #+END_SRC
+** layout
+   #+BEGIN_SRC emacs-lisp
+     (use-package window-purpose
+       :ensure)
    #+END_SRC
