@@ -454,3 +454,14 @@
      (use-package window-purpose
        :ensure)
    #+END_SRC
+
+** ace-window
+   #+BEGIN_SRC emacs-lisp
+     (use-package ace-window
+       :ensure
+       :bind
+       ("M-p" . 'ace-window))
+   #+END_SRC
+
+   #+RESULTS:
+   : ace-window
