@@ -465,3 +465,13 @@
 
    #+RESULTS:
    : ace-window
+
+   window move
+   #+BEGIN_SRC emacs-lisp
+     (define-key global-map (kbd "C-x C-n") '(lambda () (interactive) (other-window 1)))
+     (define-key global-map (kbd "C-x C-p") '(lambda () (interactive) (other-window -1)))
+
+   #+END_SRC
+
+   #+RESULTS:
+   | lambda | nil | (interactive) | (other-window -1) |
