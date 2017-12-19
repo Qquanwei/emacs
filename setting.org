@@ -163,20 +163,30 @@
 
 ** company
    #+BEGIN_SRC emacs-lisp
+     (use-package company-jedi
+       :ensure)
+     (use-package company-tern
+       :ensure)
+     (use-package company-quickhelp
+       :ensure)
      (use-package company
        :ensure t
        :config
-       (add-hook 'after-init-hook 'global-company-mode)
+       (setq company-minimum-prefix-length 1)
        (setq company-dabbrev-downcase nil)
+       (add-to-list company-backends 'company-tern)
+       (add-hook 'company-mode-hook 'company-quickhelp-mode)
        (define-key company-active-map (kbd "M-n") nil)
        (define-key company-active-map (kbd "M-p") nil)
        (define-key company-active-map (kbd "C-n") 'company-select-next)
        (define-key company-active-map (kbd "<tab>") 'company-select-next)
        (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
-     (use-package company-jedi
-       :ensure)
    #+END_SRC
+
+   #+RESULTS:
+   : t
+
 ** docker
    #+BEGIN_SRC emacs-lisp
      (use-package dockerfile-mode
@@ -216,15 +226,14 @@
        (add-hook 'web-mode-hook 'smartparens-mode)
        (add-hook 'web-mode-hook 'flycheck-mode)
        (add-hook 'web-mode-hook 'editorconfig-mode)
+       (add-hook 'web-mode-hook 'company-mode)
        (add-hook 'web-mode-hook
          (lambda ()
            (progn
              (setq web-mode-script-padding 0)
-             )))
-       (add-hook 'web-mode-hook (lambda ()
-                                  (when (string= web-mode-content-type "jsx")
+             (when (string= web-mode-content-type "jsx")
                                     (progn
-                                      (setq-local emmet-expand-jsx-className? t)))))
+                                      (setq-local emmet-expand-jsx-className? t))))))
        (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
        (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
        (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
@@ -235,9 +244,15 @@
    #+END_SRC
 ** emacs-lisp-mode
    #+BEGIN_SRC emacs-lisp
+     (add-hook 'emacs-lisp-mode-hook 'company-mode)
      (define-key lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
      (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
+
    #+END_SRC
+
+   #+RESULTS:
+   : eval-buffer
+
 ** haskell-mode
    #+BEGIN_SRC emacs-lisp
      (use-package haskell-mode
@@ -475,3 +490,12 @@
 
    #+RESULTS:
    | lambda | nil | (interactive) | (other-window -1) |
+** comint
+   #+BEGIN_SRC emacs-lisp
+     (use-package comint
+       :config
+       (add-hook 'comint-mode-hook 'company-mode))
+   #+END_SRC
+
+   #+RESULTS:
+   : t
