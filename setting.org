@@ -140,15 +140,38 @@
         ("M-[" . sp-unwrap-sexp)))
    #+END_SRC
 
+** nvm
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package exec-path-from-shell
+       :ensure)
+     (use-package nvm
+       :ensure)
+
+
+
+   #+END_SRC
+
+   #+RESULTS:
 ** eshell
 
    #+BEGIN_SRC emacs-lisp
+     (use-package eshell
+       :config
+       (add-hook 'eshell-mode-hook 'company-mode)
+       (let ((versions (nvm--installed-versions)))
+         (when versions
+           (nvm-use (car (car versions)))
+           (when (memq window-system '(mac ns x))
+             (exec-path-from-shell-copy-env "NVM_BIN")))))
 
      (use-package eshell-git-prompt
        :ensure)
 
 
    #+END_SRC
+
+   #+RESULTS:
 
 ** input method
    #+BEGIN_SRC emacs-lisp
@@ -222,6 +245,7 @@
               ("\\.json\\'" . web-mode)
               ("\\.html\\'" . web-mode))
        :config
+       (add-hook 'web-mode-hook 'tern-mode)
        (add-hook 'web-mode-hook 'emmet-mode)
        (add-hook 'web-mode-hook 'smartparens-mode)
        (add-hook 'web-mode-hook 'flycheck-mode)
@@ -242,6 +266,9 @@
        (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
        (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
    #+END_SRC
+
+   #+RESULTS:
+
 ** emacs-lisp-mode
    #+BEGIN_SRC emacs-lisp
      (add-hook 'emacs-lisp-mode-hook 'company-mode)
@@ -454,6 +481,7 @@
      (use-package python-mode
        :ensure t
        :config
+       (add-hook 'python-mode-hook 'company-mode)
        (add-hook 'python-mode-hook
                  (lambda ()
                    (setq-local company-backends '(company-jedi)))))
