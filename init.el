@@ -14,8 +14,9 @@
 (org-babel-load-file
  (expand-file-name "setting.org" user-emacs-directory))
 
-(when (file-exists-p "./setting.el")
-  (delete-file "./setting.el"))
+(let ((tempname (expand-file-name "setting.el" user-emacs-directory)))
+  (when (file-exists-p tempname)
+    (delete-file tempname)))
 
 
 

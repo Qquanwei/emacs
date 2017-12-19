@@ -307,20 +307,25 @@
    #+END_SRC
 ** projectile
    #+BEGIN_SRC emacs-lisp
+     (use-package counsel-projectile
+       :ensure
+       :init
+       (counsel-projectile-mode))
+
      (use-package projectile
        :ensure t
        :config
-       (projectile-mode 1)
        (setq projectile-completion-system 'grizzl)
        (setq projectile-create-missing-test-files t)
        (setq projectile-enable-caching t)
        (setq projectile-require-project-root nil))
 
-     (use-package counsel-projectile
-       :ensure
-       :init
-       (counsel-projectile-on))
+
    #+END_SRC
+
+   #+RESULTS:
+   : t
+
 ** youdao
    #+BEGIN_SRC emacs-lisp
      (use-package youdao-dictionary
