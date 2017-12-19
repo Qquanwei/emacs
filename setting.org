@@ -174,7 +174,7 @@
        :config
        (setq company-minimum-prefix-length 1)
        (setq company-dabbrev-downcase nil)
-       (add-to-list company-backends 'company-tern)
+       (add-to-list 'company-backends 'company-tern)
        (add-hook 'company-mode-hook 'company-quickhelp-mode)
        (define-key company-active-map (kbd "M-n") nil)
        (define-key company-active-map (kbd "M-p") nil)
