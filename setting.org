@@ -149,21 +149,22 @@
        :ensure)
 
 
-
-   #+END_SRC
-
-   #+RESULTS:
-** eshell
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package eshell
-       :config
-       (add-hook 'eshell-mode-hook 'company-mode)
+     ;; if install [nvm](https://github.com/creationix/nvm)
+     (when (file-exists-p "~/.nvm")
        (let ((versions (nvm--installed-versions)))
          (when versions
            (nvm-use (car (car versions)))
            (when (memq window-system '(mac ns x))
              (exec-path-from-shell-copy-env "NVM_BIN")))))
+   #+END_SRC
+
+   #+RESULTS:
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package eshell
+       :config
+       (add-hook 'eshell-mode-hook 'company-mode)
+       )
 
      (use-package eshell-git-prompt
        :ensure)
