@@ -163,8 +163,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package eshell
        :config
-       (add-hook 'eshell-mode-hook 'company-mode)
-       )
+       (add-hook 'eshell-mode-hook 'company-mode))
 
      (use-package eshell-git-prompt
        :ensure)
@@ -230,45 +229,57 @@
    #+END_SRC
 ** web-mode
    #+BEGIN_SRC emacs-lisp
-     (use-package emmet-mode
-       :ensure t)
+          (use-package emmet-mode
+            :ensure t)
 
-     (use-package nodejs-repl
-       :ensure)
+          (use-package nodejs-repl
+            :ensure)
 
-     (use-package web-mode
-       :ensure t
-       :mode (("\\.jsx\\'" . web-mode)
-              ("\\.vue\\'" . web-mode)
-              ("\\.js\\'" . web-mode)
-              ("\\.ts\\'" . web-mode)
-              ("\\.css\\'" . web-mode)
-              ("\\.json\\'" . web-mode)
-              ("\\.html\\'" . web-mode))
-       :config
-       (add-hook 'web-mode-hook 'tern-mode)
-       (add-hook 'web-mode-hook 'emmet-mode)
-       (add-hook 'web-mode-hook 'smartparens-mode)
-       (add-hook 'web-mode-hook 'flycheck-mode)
-       (add-hook 'web-mode-hook 'editorconfig-mode)
-       (add-hook 'web-mode-hook 'company-mode)
-       (add-hook 'web-mode-hook
-         (lambda ()
-           (progn
-             (setq web-mode-script-padding 0)
-             (when (string= web-mode-content-type "jsx")
-                                    (progn
-                                      (setq-local emmet-expand-jsx-className? t))))))
-       (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
-       (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
-       (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
-       (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp)
-       (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
-       (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
-       (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
+          (use-package web-mode
+            :ensure t
+            :mode (("\\.jsx\\'" . web-mode)
+                   ("\\.vue\\'" . web-mode)
+                   ("\\.js\\'" . web-mode)
+                   ("\\.ts\\'" . web-mode)
+                   ("\\.css\\'" . web-mode)
+                   ("\\.json\\'" . web-mode)
+                   ("\\.html\\'" . web-mode))
+            :config
+            (add-hook 'web-mode-hook 'tern-mode)
+            (add-hook 'web-mode-hook 'emmet-mode)
+            (add-hook 'web-mode-hook 'smartparens-mode)
+            (add-hook 'web-mode-hook 'flycheck-mode)
+            (add-hook 'web-mode-hook 'editorconfig-mode)
+            (add-hook 'web-mode-hook 'company-mode)
+            (add-hook 'web-mode-hook
+              (lambda ()
+                (progn
+                  (setq web-mode-script-padding 0)
+                  (when (string= web-mode-content-type "jsx")
+                                         (progn
+                                           (setq-local emmet-expand-jsx-className? t))))))
+            (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
+            (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
+            (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
+            (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp)
+            (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
+            (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
+            (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
+
+          (eval-after-load 'flycheck
+            '(progn
+               (flycheck-add-mode 'html-tidy 'web-mode)
+               (flycheck-add-mode 'css-csslint 'web-mode)))
+
+     ;;; tern-mode projectile-project-root
+
+     (setq tern-project-dir 'projectile-project-root)
+
+
    #+END_SRC
 
    #+RESULTS:
+   : projectile-project-root
 
 ** emacs-lisp-mode
    #+BEGIN_SRC emacs-lisp
@@ -424,8 +435,13 @@
 ** pass
    #+BEGIN_SRC emacs-lisp
      (use-package pass
-       :ensure)
+       :ensure
+       :config
+       (setq password-store-executable "pass"))
    #+END_SRC
+
+   #+RESULTS:
+   : t
 
 ** MacOs
    #+BEGIN_SRC emacs-lisp
@@ -501,8 +517,17 @@
 ** layout
    #+BEGIN_SRC emacs-lisp
      (use-package window-purpose
-       :ensure)
+       :ensure
+       :config
+       ;;; layout
+       (add-to-list 'purpose-user-mode-purposes '(web-mode . web))
+       (add-to-list 'purpose-user-mode-purposes '(magit-mode . git))
+       (add-to-list 'purpose-user-mode-purposes '(org-mode . org))
+       (purpose-compile-user-configuration))
    #+END_SRC
+
+   #+RESULTS:
+   : t
 
 ** ace-window
    #+BEGIN_SRC emacs-lisp
@@ -533,3 +558,29 @@
 
    #+RESULTS:
    : t
+** dimmer
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dimmer
+    :ensure
+    :init
+    (dimmer-activate))
+#+END_SRC
+
+#+RESULTS:
+
+** yasnippet
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+       :ensure
+       :config
+       (yas-reload-all)
+       :init
+       (add-hook 'web-mode-hook #'yas-minor-mode))
+
+     (use-package yasnippet-snippets
+       :ensure)
+   #+END_SRC
+
+   #+RESULTS:
