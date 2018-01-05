@@ -571,12 +571,16 @@
 
 ** yasnippet
 
+   文字模板, see also: https://github.com/joaotavora/yasnippet
+
    #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
        :ensure
        :config
        (yas-reload-all)
        :init
+       (add-hook 'lisp-mode-hook #'yas-minor-mode)
+       (add-hook 'python-mode-hook #'yas-minor-mode)
        (add-hook 'web-mode-hook #'yas-minor-mode))
 
      (use-package yasnippet-snippets
