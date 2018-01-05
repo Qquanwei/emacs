@@ -18,6 +18,8 @@
     (unless
         (package-installed-p 'use-package)
       (package-install 'use-package))
+
+    (require 'use-package)
   #+END_SRC
 
 ** load local code
@@ -127,10 +129,14 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package smartparens
-       :ensure t
+       :ensure
        :init
-       (smartparens-global-mode)
-       (show-smartparens-global-mode)
+       (use-package smartparens-config)
+       (use-package smartparens-html)
+       (use-package smartparens-org)
+       (use-package smartparens-python)
+       (smartparens-global-mode 1)
+       (show-smartparens-global-mode 1)
        :bind (
         ("C-M-f" . sp-forward-sexp)
         ("C-M-b" . sp-backward-sexp)
@@ -175,11 +181,14 @@
 
 ** input method
    #+BEGIN_SRC emacs-lisp
-
-     (use-package pyim
+     (use-package pyim-basedict
        :ensure
        :config
        (pyim-basedict-enable))
+     (use-package pyim
+       :ensure
+       :config
+       (setq pyim-page-tooltip 'minibuffer))
 
      (setq default-input-method "pyim")
    #+END_SRC
@@ -310,11 +319,10 @@
    #+END_SRC
 ** ivy
    #+BEGIN_SRC emacs-lisp
-        (use-package ivy
+     (use-package ivy
        :ensure
-       :init
-       (ivy-mode t)
        :config
+       (ivy-mode t)
        (setq ivy-use-virtual-buffers t)
        (setq enable-recursive-minibuffers t)
        (define-key global-map (kbd "C-x C-b") 'ivy-switch-buffer)
@@ -332,7 +340,9 @@
 ** magit
    #+BEGIN_SRC emacs-lisp
      (use-package magit
-       :ensure t
+       :ensure
+       :init
+       (use-package magit-blame)
        :bind (("C-c g c" . magit-checkout)
               ("C-c g f c" . magit-file-checkout)))
    #+END_SRC
@@ -348,7 +358,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package counsel-projectile
        :ensure
-       :init
+       :config
        (counsel-projectile-mode))
 
      (use-package projectile
