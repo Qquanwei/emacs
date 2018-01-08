@@ -304,7 +304,7 @@
      (use-package counsel-projectile
        :ensure
        :init
-       (counsel-projectile-on))
+       (counsel-projectile-mode 1))
    #+END_SRC
 ** youdao
    #+BEGIN_SRC emacs-lisp
