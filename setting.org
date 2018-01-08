@@ -62,6 +62,12 @@
      ;; open truncate lines
      (toggle-truncate-lines 1)
 
+
+     (use-package exec-path-from-shell
+       :ensure)
+
+     (exec-path-from-shell-copy-env "PATH")
+
    #+END_SRC
 ** org-mode
    #+BEGIN_SRC emacs-lisp
@@ -149,8 +155,7 @@
 ** nvm
 
    #+BEGIN_SRC emacs-lisp
-     (use-package exec-path-from-shell
-       :ensure)
+
      (use-package nvm
        :ensure)
 
