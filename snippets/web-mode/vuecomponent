@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: vuecomponent
+# key: vuecom
+# contributor: quanwei.li
+# --
+<template>
+  ${1:<div></div>}
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
+
+@Component
+export default class ${2:`(s-upper-camel-case (file-name-nondirectory (file-name-sans-extension (buffer-name))))`} extends Vue {
+  $0
+}
+</script>

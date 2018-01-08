@@ -18,6 +18,8 @@
     (unless
         (package-installed-p 'use-package)
       (package-install 'use-package))
+
+    (require 'use-package)
   #+END_SRC
 
 ** load local code
@@ -59,6 +61,12 @@
 
      ;; open truncate lines
      (toggle-truncate-lines 1)
+
+
+     (use-package exec-path-from-shell
+       :ensure)
+
+     (exec-path-from-shell-copy-env "PATH")
 
    #+END_SRC
 ** org-mode
@@ -127,10 +135,14 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package smartparens
-       :ensure t
+       :ensure
        :init
-       (smartparens-global-mode)
-       (show-smartparens-global-mode)
+       (use-package smartparens-config)
+       (use-package smartparens-html)
+       (use-package smartparens-org)
+       (use-package smartparens-python)
+       (smartparens-global-mode 1)
+       (show-smartparens-global-mode 1)
        :bind (
         ("C-M-f" . sp-forward-sexp)
         ("C-M-b" . sp-backward-sexp)
@@ -140,9 +152,29 @@
         ("M-[" . sp-unwrap-sexp)))
    #+END_SRC
 
-** eshell
+** nvm
 
    #+BEGIN_SRC emacs-lisp
+
+     (use-package nvm
+       :ensure)
+
+
+     ;; if install [nvm](https://github.com/creationix/nvm)
+     (when (file-exists-p "~/.nvm")
+       (let ((versions (nvm--installed-versions)))
+         (when versions
+           (nvm-use (car (car versions)))
+           (when (memq window-system '(mac ns x))
+             (exec-path-from-shell-copy-env "NVM_BIN")))))
+   #+END_SRC
+
+   #+RESULTS:
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package eshell
+       :config
+       (add-hook 'eshell-mode-hook 'company-mode))
 
      (use-package eshell-git-prompt
        :ensure)
@@ -150,33 +182,48 @@
 
    #+END_SRC
 
+   #+RESULTS:
+
 ** input method
    #+BEGIN_SRC emacs-lisp
-
-     (use-package pyim
+     (use-package pyim-basedict
        :ensure
        :config
        (pyim-basedict-enable))
+     (use-package pyim
+       :ensure
+       :config
+       (setq pyim-page-tooltip 'minibuffer))
 
      (setq default-input-method "pyim")
    #+END_SRC
 
 ** company
    #+BEGIN_SRC emacs-lisp
+     (use-package company-jedi
+       :ensure)
+     (use-package company-tern
+       :ensure)
+     (use-package company-quickhelp
+       :ensure)
      (use-package company
        :ensure t
        :config
-       (add-hook 'after-init-hook 'global-company-mode)
+       (setq company-minimum-prefix-length 1)
        (setq company-dabbrev-downcase nil)
+       (add-to-list 'company-backends 'company-tern)
+       (add-hook 'company-mode-hook 'company-quickhelp-mode)
        (define-key company-active-map (kbd "M-n") nil)
        (define-key company-active-map (kbd "M-p") nil)
        (define-key company-active-map (kbd "C-n") 'company-select-next)
        (define-key company-active-map (kbd "<tab>") 'company-select-next)
        (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
-     (use-package company-jedi
-       :ensure)
    #+END_SRC
+
+   #+RESULTS:
+   : t
+
 ** docker
    #+BEGIN_SRC emacs-lisp
      (use-package dockerfile-mode
@@ -196,48 +243,69 @@
    #+END_SRC
 ** web-mode
    #+BEGIN_SRC emacs-lisp
-     (use-package emmet-mode
-       :ensure t)
+          (use-package emmet-mode
+            :ensure t)
 
-     (use-package nodejs-repl
-       :ensure)
+          (use-package nodejs-repl
+            :ensure)
 
-     (use-package web-mode
-       :ensure t
-       :mode (("\\.jsx\\'" . web-mode)
-              ("\\.vue\\'" . web-mode)
-              ("\\.js\\'" . web-mode)
-              ("\\.ts\\'" . web-mode)
-              ("\\.css\\'" . web-mode)
-              ("\\.json\\'" . web-mode)
-              ("\\.html\\'" . web-mode))
-       :config
-       (add-hook 'web-mode-hook 'emmet-mode)
-       (add-hook 'web-mode-hook 'smartparens-mode)
-       (add-hook 'web-mode-hook 'flycheck-mode)
-       (add-hook 'web-mode-hook 'editorconfig-mode)
-       (add-hook 'web-mode-hook
-         (lambda ()
-           (progn
-             (setq web-mode-script-padding 0)
-             )))
-       (add-hook 'web-mode-hook (lambda ()
-                                  (when (string= web-mode-content-type "jsx")
-                                    (progn
-                                      (setq-local emmet-expand-jsx-className? t)))))
-       (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
-       (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
-       (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
-       (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp)
-       (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
-       (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
-       (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
+          (use-package web-mode
+            :ensure t
+            :mode (("\\.jsx\\'" . web-mode)
+                   ("\\.vue\\'" . web-mode)
+                   ("\\.js\\'" . web-mode)
+                   ("\\.ts\\'" . web-mode)
+                   ("\\.css\\'" . web-mode)
+                   ("\\.json\\'" . web-mode)
+                   ("\\.html\\'" . web-mode))
+            :config
+            (add-hook 'web-mode-hook 'tern-mode)
+            (add-hook 'web-mode-hook 'emmet-mode)
+            (add-hook 'web-mode-hook 'smartparens-mode)
+            (add-hook 'web-mode-hook 'flycheck-mode)
+            (add-hook 'web-mode-hook 'editorconfig-mode)
+            (add-hook 'web-mode-hook 'company-mode)
+            (add-hook 'web-mode-hook
+              (lambda ()
+                (progn
+                  (setq web-mode-script-padding 0)
+                  (when (string= web-mode-content-type "jsx")
+                                         (progn
+                                           (setq-local emmet-expand-jsx-className? t))))))
+            (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
+            (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
+            (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
+            (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp)
+            (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
+            (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
+            (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
+
+          (eval-after-load 'flycheck
+            '(progn
+               (flycheck-add-mode 'html-tidy 'web-mode)
+               (flycheck-add-mode 'css-csslint 'web-mode)))
+
+     ;;; tern-mode projectile-project-root
+
+     (setq tern-project-dir 'projectile-project-root)
+
+
    #+END_SRC
+
+   #+RESULTS:
+   : projectile-project-root
+
 ** emacs-lisp-mode
    #+BEGIN_SRC emacs-lisp
+     (add-hook 'emacs-lisp-mode-hook 'company-mode)
      (define-key lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
      (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
+
    #+END_SRC
+
+   #+RESULTS:
+   : eval-buffer
+
 ** haskell-mode
    #+BEGIN_SRC emacs-lisp
      (use-package haskell-mode
@@ -256,11 +324,10 @@
    #+END_SRC
 ** ivy
    #+BEGIN_SRC emacs-lisp
-        (use-package ivy
+     (use-package ivy
        :ensure
-       :init
-       (ivy-mode t)
        :config
+       (ivy-mode t)
        (setq ivy-use-virtual-buffers t)
        (setq enable-recursive-minibuffers t)
        (define-key global-map (kbd "C-x C-b") 'ivy-switch-buffer)
@@ -278,7 +345,9 @@
 ** magit
    #+BEGIN_SRC emacs-lisp
      (use-package magit
-       :ensure t
+       :ensure
+       :init
+       (use-package magit-blame)
        :bind (("C-c g c" . magit-checkout)
               ("C-c g f c" . magit-file-checkout)))
    #+END_SRC
@@ -292,20 +361,25 @@
    #+END_SRC
 ** projectile
    #+BEGIN_SRC emacs-lisp
+     (use-package counsel-projectile
+       :ensure
+       :config
+       (counsel-projectile-mode))
+
      (use-package projectile
        :ensure t
        :config
-       (projectile-mode 1)
        (setq projectile-completion-system 'grizzl)
        (setq projectile-create-missing-test-files t)
        (setq projectile-enable-caching t)
        (setq projectile-require-project-root nil))
 
-     (use-package counsel-projectile
-       :ensure
-       :init
-       (counsel-projectile-mode 1))
+
    #+END_SRC
+
+   #+RESULTS:
+   : t
+
 ** youdao
    #+BEGIN_SRC emacs-lisp
      (use-package youdao-dictionary
@@ -376,8 +450,13 @@
 ** pass
    #+BEGIN_SRC emacs-lisp
      (use-package pass
-       :ensure)
+       :ensure
+       :config
+       (setq password-store-executable "pass"))
    #+END_SRC
+
+   #+RESULTS:
+   : t
 
 ** MacOs
    #+BEGIN_SRC emacs-lisp
@@ -434,6 +513,7 @@
      (use-package python-mode
        :ensure t
        :config
+       (add-hook 'python-mode-hook 'company-mode)
        (add-hook 'python-mode-hook
                  (lambda ()
                    (setq-local company-backends '(company-jedi)))))
@@ -452,5 +532,74 @@
 ** layout
    #+BEGIN_SRC emacs-lisp
      (use-package window-purpose
+       :ensure
+       :config
+       ;;; layout
+       (add-to-list 'purpose-user-mode-purposes '(web-mode . web))
+       (add-to-list 'purpose-user-mode-purposes '(magit-mode . git))
+       (add-to-list 'purpose-user-mode-purposes '(org-mode . org))
+       (purpose-compile-user-configuration))
+   #+END_SRC
+
+   #+RESULTS:
+   : t
+
+** ace-window
+   #+BEGIN_SRC emacs-lisp
+     (use-package ace-window
+       :ensure
+       :bind
+       ("M-p" . 'ace-window))
+   #+END_SRC
+
+   #+RESULTS:
+   : ace-window
+
+   window move
+   #+BEGIN_SRC emacs-lisp
+     (define-key global-map (kbd "C-x C-n") '(lambda () (interactive) (other-window 1)))
+     (define-key global-map (kbd "C-x C-p") '(lambda () (interactive) (other-window -1)))
+
+   #+END_SRC
+
+   #+RESULTS:
+   | lambda | nil | (interactive) | (other-window -1) |
+** comint
+   #+BEGIN_SRC emacs-lisp
+     (use-package comint
+       :config
+       (add-hook 'comint-mode-hook 'company-mode))
+   #+END_SRC
+
+   #+RESULTS:
+   : t
+** dimmer
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dimmer
+    :ensure
+    :init
+    (dimmer-activate))
+#+END_SRC
+
+#+RESULTS:
+
+** yasnippet
+
+   文字模板, see also: https://github.com/joaotavora/yasnippet
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+       :ensure
+       :config
+       (yas-reload-all)
+       :init
+       (add-hook 'lisp-mode-hook #'yas-minor-mode)
+       (add-hook 'python-mode-hook #'yas-minor-mode)
+       (add-hook 'web-mode-hook #'yas-minor-mode))
+
+     (use-package yasnippet-snippets
        :ensure)
    #+END_SRC
+
+   #+RESULTS:
