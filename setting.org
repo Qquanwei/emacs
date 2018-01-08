@@ -211,6 +211,9 @@
        :config
        (setq company-minimum-prefix-length 1)
        (setq company-dabbrev-downcase nil)
+       (setq company-idle-delay 0.5)
+       (setq company-echo-delay 0.5)
+
        (add-to-list 'company-backends 'company-tern)
        (add-hook 'company-mode-hook 'company-quickhelp-mode)
        (define-key company-active-map (kbd "M-n") nil)
@@ -516,9 +519,15 @@
        (add-hook 'python-mode-hook 'company-mode)
        (add-hook 'python-mode-hook
                  (lambda ()
-                   (setq-local company-backends '(company-jedi)))))
+                   (setq jedi:complete-on-dot t)
+                   (setq company-backends (list 'company-jedi))
+                   (jedi:setup))))
 
    #+END_SRC
+
+   #+RESULTS:
+   : t
+
 ** markdown
    #+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
