@@ -244,6 +244,11 @@
        (setq dumb-jump-selector 'ivy))
 
    #+END_SRC
+** flycheck
+   #+BEGIN_SRC emacs-lisp
+     (use-package flycheck
+       :ensure)
+   #+END_SRC
 ** web-mode
    #+BEGIN_SRC emacs-lisp
           (use-package emmet-mode
@@ -517,6 +522,10 @@
        :ensure t
        :config
        (add-hook 'python-mode-hook 'company-mode)
+       ;; 开启flycheck当安装了pylint且正确配置了pylintrc
+       (when (and (executable-find "pylint")
+                  (file-exists-p (expand-file-name "~/.pylintrc")))
+         (add-hook 'python-mode-hook 'flycheck-mode))
        (add-hook 'python-mode-hook
                  (lambda ()
                    (setq jedi:complete-on-dot t)

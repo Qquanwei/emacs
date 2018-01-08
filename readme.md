@@ -309,6 +309,18 @@ win用户新增eshell函数drun,wpwd
 
 ace-window绑定了全局的`M-p`
 
+## Flycheck
+
+自带了flycheck进行静态语法检查，目前仅对python-mode使用.
+
+使用前预配置:
+
+```
+ brew  install  pylint 或者 apt  install  -y  pylint
+ touch  ~/.pylintrc
+ pylint --generate-rcfile  >  ~/.pylintrc
+```
+
 # Support
 
 emacs25+
