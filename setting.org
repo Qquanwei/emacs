@@ -206,12 +206,14 @@
 ** input method
    #+BEGIN_SRC emacs-lisp
      (use-package pyim-basedict
-       :ensure
-       :config
-       (pyim-basedict-enable))
+       :ensure)
+     (use-package pyim-greatdict
+       :ensure)
      (use-package pyim
        :ensure
        :config
+       (pyim-basedict-enable)
+       (pyim-greatdict-enable)
        (setq pyim-page-tooltip 'minibuffer))
 
      (setq default-input-method "pyim")
