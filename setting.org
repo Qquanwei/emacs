@@ -89,6 +89,7 @@
         '((dot . t)
           (emacs-lisp . t)
           (C . t)
+          (sh . t)
           (js . t)
           (calc . t)
           (octave . t)
@@ -106,6 +107,9 @@
      (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 
    #+END_SRC
+
+   #+RESULTS:
+   | org-display-inline-images |
 
 *** OrgCapture
     #+BEGIN_SRC emacs-lisp
