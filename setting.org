@@ -219,8 +219,6 @@
 
 ** company
    #+BEGIN_SRC emacs-lisp
-     (use-package company-jedi
-       :ensure)
      (use-package company-tern
        :ensure)
      (use-package company-quickhelp
@@ -537,19 +535,22 @@
    #+END_SRC
 ** python-mode
    #+BEGIN_SRC emacs-lisp
+     (use-package jedi
+       :ensure
+       :config
+       (setq ac-use-menu-map t))
      (use-package python-mode
        :ensure t
        :config
-       (add-hook 'python-mode-hook 'company-mode)
        ;; 开启flycheck当安装了pylint且正确配置了pylintrc
        (when (and (executable-find "pylint")
                   (file-exists-p (expand-file-name "~/.pylintrc")))
          (add-hook 'python-mode-hook 'flycheck-mode))
-       (add-hook 'python-mode-hook
-                 (lambda ()
-                   (setq jedi:complete-on-dot t)
-                   (setq company-backends (list 'company-jedi))
-                   (jedi:setup))))
+       (add-hook
+        'python-mode-hook
+        (lambda ()
+          (setq jedi:complete-on-dot t)
+          (jedi:setup))))
 
    #+END_SRC
 
