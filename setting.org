@@ -69,6 +69,21 @@
      (exec-path-from-shell-copy-env "PATH")
 
    #+END_SRC
+
+   自动更新本配置, 按下f2后需要重新加载init.el
+
+   #+BEGIN_SRC emacs-lisp
+     (defun MyConfigAutoUpdate ()
+       "autoupdate local git repository .emacs.d"
+       (interactive)
+       (compilation-start "cd ~/.emacs.d && git pull origin master"))
+
+     (define-key global-map (kbd "<f2>") 'MyConfigAutoUpdate)
+   #+END_SRC
+
+   #+RESULTS:
+   : MyConfigAutoUpdate
+
 ** org-mode
    #+BEGIN_SRC emacs-lisp
      (use-package org
