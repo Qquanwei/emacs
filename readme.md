@@ -306,9 +306,9 @@ win用户新增eshell函数drun,wpwd
 
 加密的重要性不言而谕，本配置使用org-crypt(gnupg1)对`crypt`的tag进行加密. 可生成对应的key－pair然后修改`org-crypt-key`指定对应的key进行加密。
 
-## 窗口跳转(ace-window)
+## 窗口跳转(window-numbering)
 
-ace-window绑定了全局的`M-p`
+每个窗口左下都会有一个数字，使用M-<number>可以快速跳转到指定的window
 
 ## Flycheck
 
