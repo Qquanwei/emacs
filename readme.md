@@ -317,7 +317,7 @@ win用户新增eshell函数drun,wpwd
 使用前预配置:
 
 ```
- pip  install  pylint
+ pip  install  pylint 或者 apt install -y pylint
  touch  ~/.pylintrc
  pylint --generate-rcfile  >  ~/.pylintrc
 ```
