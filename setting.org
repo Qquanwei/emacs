@@ -70,6 +70,9 @@
 
    #+END_SRC
 
+   #+RESULTS:
+   : /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
    自动更新本配置, 按下f2后需要重新加载init.el
 
    #+BEGIN_SRC emacs-lisp
@@ -171,6 +174,9 @@
         ("M-[" . sp-unwrap-sexp)))
    #+END_SRC
 
+   #+RESULTS:
+   : sp-unwrap-sexp
+
 ** nvm
 
    #+BEGIN_SRC emacs-lisp
@@ -216,10 +222,15 @@
      (setq default-input-method "pyim")
    #+END_SRC
 
+   #+RESULTS:
+   : pyim
+
 ** company
    #+BEGIN_SRC emacs-lisp
      (use-package company-tern
-       :ensure)
+       :ensure
+       :config
+       (setq tern-command (append tern-command '("--no-port-file"))))
      (use-package company-quickhelp
        :ensure)
      (use-package company
@@ -266,52 +277,47 @@
    #+END_SRC
 ** web-mode
    #+BEGIN_SRC emacs-lisp
-          (use-package emmet-mode
-            :ensure t)
+     (use-package emmet-mode
+       :ensure t)
 
-          (use-package nodejs-repl
-            :ensure)
+     (use-package nodejs-repl
+       :ensure)
 
-          (use-package web-mode
-            :ensure t
-            :mode (("\\.jsx\\'" . web-mode)
-                   ("\\.vue\\'" . web-mode)
-                   ("\\.js\\'" . web-mode)
-                   ("\\.ts\\'" . web-mode)
-                   ("\\.css\\'" . web-mode)
-                   ("\\.json\\'" . web-mode)
-                   ("\\.html\\'" . web-mode))
-            :config
-            (add-hook 'web-mode-hook 'tern-mode)
-            (add-hook 'web-mode-hook 'emmet-mode)
-            (add-hook 'web-mode-hook 'smartparens-mode)
-            (add-hook 'web-mode-hook 'flycheck-mode)
-            (add-hook 'web-mode-hook 'editorconfig-mode)
-            (add-hook 'web-mode-hook 'company-mode)
-            (add-hook 'web-mode-hook
-              (lambda ()
-                (progn
-                  (setq web-mode-script-padding 0)
-                  (when (string= web-mode-content-type "jsx")
-                                         (progn
-                                           (setq-local emmet-expand-jsx-className? t))))))
-            (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
-            (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
-            (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
-            (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp)
-            (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
-            (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
-            (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
+     (use-package web-mode
+       :ensure t
+       :mode (("\\.jsx\\'" . web-mode)
+              ("\\.vue\\'" . web-mode)
+              ("\\.js\\'" . web-mode)
+              ("\\.ts\\'" . web-mode)
+              ("\\.css\\'" . web-mode)
+              ("\\.json\\'" . web-mode)
+              ("\\.html\\'" . web-mode))
+       :config
+       (add-hook 'web-mode-hook 'tern-mode)
+       (add-hook 'web-mode-hook 'emmet-mode)
+       (add-hook 'web-mode-hook 'smartparens-mode)
+       (add-hook 'web-mode-hook 'flycheck-mode)
+       (add-hook 'web-mode-hook 'editorconfig-mode)
+       (add-hook 'web-mode-hook 'company-mode)
+       (add-hook 'web-mode-hook
+         (lambda ()
+           (progn
+             (setq web-mode-script-padding 0)
+             (when (string= web-mode-content-type "jsx")
+                                    (progn
+                                      (setq-local emmet-expand-jsx-className? t))))))
+       (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
+       (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
+       (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
+       (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp)
+       (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
+       (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
+       (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
 
-          (eval-after-load 'flycheck
-            '(progn
-               (flycheck-add-mode 'html-tidy 'web-mode)
-               (flycheck-add-mode 'css-csslint 'web-mode)))
-
-     ;;; tern-mode projectile-project-root
-
-     (setq tern-project-dir 'projectile-project-root)
-
+     (eval-after-load 'flycheck
+       '(progn
+          (flycheck-add-mode 'html-tidy 'web-mode)
+          (flycheck-add-mode 'css-csslint 'web-mode)))
 
    #+END_SRC
 
@@ -537,6 +543,12 @@
        :ensure
        :config
        (setq ac-use-menu-map t))
+
+     (use-package virtualenvwrapper
+       :ensure
+       :init
+       (venv-initialize-interactive-shells)
+       (venv-initialize-eshell))
      (use-package python-mode
        :ensure t
        :config
