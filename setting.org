@@ -207,13 +207,10 @@
    #+BEGIN_SRC emacs-lisp
      (use-package pyim-basedict
        :ensure)
-     (use-package pyim-greatdict
-       :ensure)
      (use-package pyim
        :ensure
        :config
        (pyim-basedict-enable)
-       (pyim-greatdict-enable)
        (setq pyim-page-tooltip 'minibuffer))
 
      (setq default-input-method "pyim")
@@ -232,7 +229,6 @@
        (setq company-dabbrev-downcase nil)
        (setq company-idle-delay 0.5)
        (setq company-echo-delay 0.5)
-
        (add-to-list 'company-backends 'company-tern)
        (add-hook 'company-mode-hook 'company-quickhelp-mode)
        (define-key company-active-map (kbd "M-n") nil)
@@ -584,16 +580,8 @@
    #+RESULTS:
    : t
 
-** ace-window
-   #+BEGIN_SRC emacs-lisp
-     (use-package ace-window
-       :ensure
-       :bind
-       ("M-p" . 'ace-window))
-   #+END_SRC
-
-   #+RESULTS:
-   : ace-window
+** window jump
+   快速跳转不同的window
 
    window move
    #+BEGIN_SRC emacs-lisp
@@ -604,6 +592,15 @@
 
    #+RESULTS:
    | lambda | nil | (interactive) | (other-window -1) |
+
+   直接给window标记数字，使用M-1,M-2快速跳转
+   #+BEGIN_SRC emacs-lisp
+   (use-package window-numbering
+     :ensure)
+   #+END_SRC
+
+   #+RESULTS:
+
 ** comint
    #+BEGIN_SRC emacs-lisp
      (use-package comint
