@@ -539,33 +539,9 @@
    #+END_SRC
 ** python-mode
    #+BEGIN_SRC emacs-lisp
-     (use-package jedi
-       :ensure
-       :config
-       (setq ac-use-menu-map t))
-
-     (use-package virtualenvwrapper
-       :ensure
-       :init
-       (venv-initialize-interactive-shells)
-       (venv-initialize-eshell))
-     (use-package python-mode
-       :ensure t
-       :config
-       ;; 开启flycheck当安装了pylint且正确配置了pylintrc
-       (when (and (executable-find "pylint")
-                  (file-exists-p (expand-file-name "~/.pylintrc")))
-         (add-hook 'python-mode-hook 'flycheck-mode))
-       (add-hook
-        'python-mode-hook
-        (lambda ()
-          (setq jedi:complete-on-dot t)
-          (jedi:setup))))
 
    #+END_SRC
 
-   #+RESULTS:
-   : t
 
 ** markdown
    #+BEGIN_SRC emacs-lisp
@@ -641,14 +617,11 @@
      (use-package yasnippet
        :ensure
        :config
-       (yas-reload-all)
-       :init
-       (add-hook 'lisp-mode-hook #'yas-minor-mode)
-       (add-hook 'python-mode-hook #'yas-minor-mode)
-       (add-hook 'web-mode-hook #'yas-minor-mode))
+       (yas-reload-all))
 
      (use-package yasnippet-snippets
        :ensure)
+
    #+END_SRC
 
    #+RESULTS:
