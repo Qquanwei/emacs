@@ -539,6 +539,15 @@
    #+END_SRC
 ** python-mode
    #+BEGIN_SRC emacs-lisp
+     (use-package elpy
+       :ensure
+       :config
+       (setq elpy-rpc-backend "jedi"))
+
+     (use-package python-mode
+       :ensure
+       :config
+       (add-hook 'python-mode-hook 'elpy-enable))
 
    #+END_SRC
 
@@ -621,6 +630,10 @@
 
      (use-package yasnippet-snippets
        :ensure)
+
+     ;;; 开启 snippet-company
+     (add-to-list 'company-backends 'company-yasnippet)
+     (add-to-list 'company-backends 'company-files)
 
    #+END_SRC
 
