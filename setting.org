@@ -652,3 +652,12 @@
    #+END_SRC
 
    #+RESULTS:
+
+** common lisp
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package slime
+       :ensure
+       :config
+       (setq inferior-lisp-program "sbcl"))
+   #+END_SRC
