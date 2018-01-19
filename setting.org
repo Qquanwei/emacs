@@ -124,10 +124,15 @@
      (setq org-log-done 'time)
      (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 
+     (global-set-key "\C-cl" 'org-store-link)
+     (global-set-key "\C-ca" 'org-agenda)
+     (global-set-key "\C-cc" 'org-capture)
+     (global-set-key "\C-cb" 'org-iswitchb)
+
    #+END_SRC
 
    #+RESULTS:
-   | org-display-inline-images |
+   : org-iswitchb
 
 *** OrgCapture
     #+BEGIN_SRC emacs-lisp
@@ -139,12 +144,6 @@
                ("w" "for work" entry
                  (file+datetree+prompt "/sync/org/work.org")
                  "* TODO %? [%]"))))
-    #+END_SRC
-*** org-agenda
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key (kbd "C-c a") 'org-agenda)
-      (global-set-key (kbd "C-c c") 'org-capture)
-
     #+END_SRC
 ** mode-icon
    #+BEGIN_SRC emacs-lisp
