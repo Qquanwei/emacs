@@ -648,3 +648,10 @@
        :config
        (setq inferior-lisp-program "sbcl"))
    #+END_SRC
+** typescript
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package tide
+       :ensure)
+   #+END_SRC
+
