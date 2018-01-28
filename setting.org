@@ -199,6 +199,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package eshell
        :config
+       (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t)
        (add-hook 'eshell-mode-hook 'company-mode))
 
      (use-package eshell-git-prompt
