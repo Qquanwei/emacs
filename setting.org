@@ -195,7 +195,31 @@
 
    #+RESULTS:
 
+
    #+BEGIN_SRC emacs-lisp
+     (use-package dash
+       :ensure)
+
+     ;; 在 eshell-mode 中快速切换不同的eshell
+     (defun switch-next-eshell-buffer ()
+       (interactive)
+       (let* ((eshell-buffer-list
+               (-filter
+                (lambda (buf)
+                  (with-current-buffer buf
+                  (equal major-mode 'eshell-mode)))
+                (buffer-list)))
+              (current-buffer-index
+               (or (-find-index (lambda (buf) (equal buf (current-buffer))) eshell-buffer-list)
+                   -1)))
+         (switch-to-buffer (nth (+ current-buffer-index 1) eshell-buffer-list))))
+   #+END_SRC
+
+
+   #+BEGIN_SRC emacs-lisp
+
+     (define-key global-map (kbd "C-c e n") 'switch-next-eshell-buffer)
+
      (use-package eshell
        :config
        (add-hook 'eshell-mode-hook 'company-mode))
@@ -544,9 +568,7 @@
        (setq elpy-rpc-backend "jedi"))
 
      (use-package python-mode
-       :ensure
-       :config
-       (add-hook 'python-mode-hook 'elpy-enable))
+       :ensure)
 
    #+END_SRC
 
@@ -646,3 +668,14 @@
        :config
        (setq inferior-lisp-program "sbcl"))
    #+END_SRC
+** multi-term
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package multi-term
+       :ensure
+       :config
+       (setq multi-term-program "/bin/bash"))
+   #+END_SRC
+
+
+** eshell assistant
