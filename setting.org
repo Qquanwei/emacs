@@ -222,6 +222,7 @@
 
      (use-package eshell
        :config
+       (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t)
        (add-hook 'eshell-mode-hook 'company-mode))
 
      (use-package eshell-git-prompt
@@ -281,18 +282,7 @@
      (use-package dockerfile-mode
        :ensure)
    #+END_SRC
-** dumb-jump
-   #+BEGIN_SRC emacs-lisp
-     (use-package dumb-jump
-       :ensure t
-       :init
-       (setq dumb-jump-selector 'ivy)
-       :bind (("C-M-h" . dumb-jump-back)
-              ("C-M-g" . dumb-jump-go))
-       :config
-       (setq dumb-jump-selector 'ivy))
 
-   #+END_SRC
 ** flycheck
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck
@@ -668,14 +658,9 @@
        :config
        (setq inferior-lisp-program "sbcl"))
    #+END_SRC
-** multi-term
+** typescript
 
    #+BEGIN_SRC emacs-lisp
-     (use-package multi-term
-       :ensure
-       :config
-       (setq multi-term-program "/bin/bash"))
+     (use-package tide
+       :ensure)
    #+END_SRC
-
-
-** eshell assistant

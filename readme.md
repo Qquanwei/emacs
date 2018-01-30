@@ -170,17 +170,6 @@ make install
 
 注:  发音依赖外部命令`mplayer` or `mpg123`
 
-## 代码阅读
-  使用的是`dumb-jump`这个插件，支持多种语言的跳转功能。
-  默认配置如下
-
-* C-M g 跳转到函数定义
-* C-M h 跳回选来的位置
-* C-M q 查看函数的定义位置而不跳转
-
-C-M g 在iterm2下发现C-M g总是被判定为C-g, 所以如果在iterm2中使用emacs-cli的话会发现存在问题。
-
-
 ## web-mode
 
 下面两个快捷键绑定在web-mode上方便开发使用，有个前提条件是emacs的环境中能找到`npm`, 可以使用`nvm.el`来在emacs中指定`node`版本，不过`nvm.el`项目目前存在一些缺陷所以我本地用的是修改后的版本。
