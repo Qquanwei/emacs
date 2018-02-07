@@ -251,10 +251,6 @@
 
 ** company
    #+BEGIN_SRC emacs-lisp
-     (use-package company-tern
-       :ensure
-       :config
-       (setq tern-command (append tern-command '("--no-port-file"))))
      (use-package company-quickhelp
        :ensure)
      (use-package company
@@ -264,7 +260,6 @@
        (setq company-dabbrev-downcase nil)
        (setq company-idle-delay 0.5)
        (setq company-echo-delay 0.5)
-       (add-to-list 'company-backends 'company-tern)
        (add-hook 'company-mode-hook 'company-quickhelp-mode)
        (define-key company-active-map (kbd "M-n") nil)
        (define-key company-active-map (kbd "M-p") nil)
@@ -277,15 +272,47 @@
    #+RESULTS:
    : t
 
+** company and lsp
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-lsp :ensure
+       :config (setq company-lsp-enable-snippet t)
+       :init (add-to-list 'company-backends 'company-lsp))
+
+     (use-package lsp-mode
+       :ensure
+       :config
+       (setq lsp-highlight-symbol-at-point nil))
+   #+END_SRC
+
+*** flycheck
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck
+        :ensure
+        ;; :init (add-hook 'after-init-hook #'global-flycheck-mode)
+        :config
+        ;; (flycheck-add-mode 'typescript-tslint 'web-mode))
+        )
+    #+END_SRC
+
+
+*** vue-language-server
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package lsp-vue
+        :ensure
+        :init
+        (eval-after-load 'web-mode
+          (add-hook 'web-mode-hook #'lsp-vue-enable)))
+    #+END_SRC
+
+
+
+
 ** docker
    #+BEGIN_SRC emacs-lisp
      (use-package dockerfile-mode
-       :ensure)
-   #+END_SRC
-
-** flycheck
-   #+BEGIN_SRC emacs-lisp
-     (use-package flycheck
        :ensure)
    #+END_SRC
 ** web-mode
@@ -306,7 +333,6 @@
               ("\\.json\\'" . web-mode)
               ("\\.html\\'" . web-mode))
        :config
-       (add-hook 'web-mode-hook 'tern-mode)
        (add-hook 'web-mode-hook 'emmet-mode)
        (add-hook 'web-mode-hook 'smartparens-mode)
        (add-hook 'web-mode-hook 'flycheck-mode)
@@ -643,6 +669,7 @@
        :ensure)
 
      ;;; 开启 snippet-company
+     (yas-global-mode t)
      (add-to-list 'company-backends 'company-yasnippet)
      (add-to-list 'company-backends 'company-files)
 
@@ -661,6 +688,15 @@
 ** typescript
 
    #+BEGIN_SRC emacs-lisp
-     (use-package tide
-       :ensure)
+     (use-package tide :ensure)
+
+     (defun my-ts-mode-configuration ()
+       (interactive)
+       (tide-setup)
+       (define-key typescript-mode-map (kbd "M-/") 'tide-jump-to-implementation)
+       (define-key typescript-mode-map (kbd "M-?") 'tide-references))
+
+     (add-hook 'typescript-mode 'my-ts-mode-configuration)
+     (add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
+     (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
    #+END_SRC
