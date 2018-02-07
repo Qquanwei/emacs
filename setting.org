@@ -301,10 +301,10 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package lsp-vue
-        :ensure
-        :init
-        (eval-after-load 'web-mode
-          (add-hook 'web-mode-hook #'lsp-vue-enable)))
+        :ensure)
+
+      (require 'lsp-vue)
+      (add-hook 'web-mode-hook 'lsp-vue-enable)
     #+END_SRC
 
 
