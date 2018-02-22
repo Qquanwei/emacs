@@ -1,6 +1,5 @@
 :PROPERTIES:
 :END:
-* my org config
 
 ** set sources
   #+BEGIN_SRC emacs-lisp
