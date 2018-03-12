@@ -696,7 +696,7 @@
        (define-key typescript-mode-map (kbd "M-/") 'tide-jump-to-implementation)
        (define-key typescript-mode-map (kbd "M-?") 'tide-references))
 
-     (add-hook 'typescript-mode 'my-ts-mode-configuration)
+     (add-hook 'typescript-mode-hook #'my-ts-mode-configuration)
      (add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
      (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
    #+END_SRC
