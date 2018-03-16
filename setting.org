@@ -270,6 +270,26 @@
 
    #+RESULTS:
    : t
+** yasnippet
+
+   文字模板, see also: https://github.com/joaotavora/yasnippet
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+       :ensure
+       :config
+       (yas-reload-all))
+
+     (use-package yasnippet-snippets
+       :ensure)
+
+     ;;; 开启 snippet-company
+     (yas-global-mode t)
+     (add-to-list 'company-backends 'company-files)
+
+   #+END_SRC
+
+   #+RESULTS:
 
 ** company and lsp
 
@@ -654,27 +674,6 @@
 
 #+RESULTS:
 
-** yasnippet
-
-   文字模板, see also: https://github.com/joaotavora/yasnippet
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package yasnippet
-       :ensure
-       :config
-       (yas-reload-all))
-
-     (use-package yasnippet-snippets
-       :ensure)
-
-     ;;; 开启 snippet-company
-     (yas-global-mode t)
-     (add-to-list 'company-backends 'company-yasnippet)
-     (add-to-list 'company-backends 'company-files)
-
-   #+END_SRC
-
-   #+RESULTS:
 
 ** common lisp
 
