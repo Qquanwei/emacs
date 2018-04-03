@@ -448,11 +448,6 @@
    #+END_SRC
 ** projectile
    #+BEGIN_SRC emacs-lisp
-     (use-package counsel-projectile
-       :ensure
-       :config
-       (counsel-projectile-mode))
-
      (use-package projectile
        :ensure t
        :config
