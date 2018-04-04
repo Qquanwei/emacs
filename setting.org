@@ -692,3 +692,15 @@
      (add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
      (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
    #+END_SRC
+
+   #+RESULTS:
+** which-key
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package which-key
+       :ensure
+       :init
+       (which-key-mode))
+   #+END_SRC
+
+   #+RESULTS:
