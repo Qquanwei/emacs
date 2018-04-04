@@ -221,8 +221,7 @@
 
      (use-package eshell
        :config
-       (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t)
-       (add-hook 'eshell-mode-hook 'company-mode))
+       (remove-hook 'completion-at-point-functions 'pcomplete-completions-at-point t))
 
      (use-package eshell-git-prompt
        :ensure)
