@@ -256,6 +256,7 @@
        :config
        (setq company-minimum-prefix-length 1)
        (setq company-dabbrev-downcase nil)
+       (setq company-dabbrev-ignore-case nil)
        (setq company-idle-delay 0.5)
        (setq company-echo-delay 0.5)
        (add-hook 'company-mode-hook 'company-quickhelp-mode)
@@ -294,8 +295,9 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package company-lsp :ensure
-       :config (setq company-lsp-enable-snippet t)
-       :init (add-to-list 'company-backends 'company-lsp))
+       :config
+       (setq company-lsp-cache-candidates t)
+       (setq company-lsp-enable-snippet t))
 
      (use-package lsp-mode
        :ensure
@@ -367,6 +369,7 @@
        (define-key web-mode-map (kbd "C-c z z") 'nodejs-repl)
        (define-key web-mode-map (kbd "C-c z r") 'nodejs-repl-send-region)
        (define-key web-mode-map (kbd "C-c z l") 'nodejs-repl-send-last-sexp)
+       (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
        (add-to-list 'web-mode-content-types '("html" . "\\.vue\\'"))
        (add-to-list 'web-mode-content-types '("json" . "\\.json\\'"))
        (add-to-list 'web-mode-content-types '("jsx" . ".\\.js[x]?\\'")))
