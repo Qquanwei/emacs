@@ -144,7 +144,6 @@
         '((dot . t)
           (emacs-lisp . t)
           (C . t)
-          (sh . t)
           (js . t)
           (calc . t)
           (octave . t)

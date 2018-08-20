@@ -255,9 +255,7 @@ https://www.bilibili.com/video/av9936508/index_1.html
 首先在命令行中初始化gpg公钥 `gpg --gen-key` , 然后按照提示设置基础信息以及主密
 码。
 
-上述命令执行成功之后复制输出的公钥，或者(`gpg --list-key`)查看
-
-然后执行`pass init ${公钥}`, 基于此我们的钥匙仓库初始化便完成了。
+然后执行`pass init ${公钥/你的用户名}`, 基于此我们的钥匙仓库初始化便完成了。
 
 在emacs中执行`M-x pass`进入pass管理, 进入`pass-store`模式后，快捷键如
 下
@@ -294,10 +292,6 @@ win用户新增eshell函数drun,wpwd
 ## 加密(org-mode)
 
 加密的重要性不言而谕，本配置使用org-crypt(gnupg1)对`crypt`的tag进行加密. 可生成对应的key－pair然后修改`org-crypt-key`指定对应的key进行加密。
-
-## 窗口跳转(window-numbering)
-
-每个窗口左下都会有一个数字，使用M-<number>可以快速跳转到指定的window
 
 ## Flycheck
 
