@@ -31,7 +31,20 @@
 
 ** global config
    #+BEGIN_SRC emacs-lisp
+     (custom-set-variables
+      '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/" t)))
+      '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
+   #+END_SRC
+
+   #+RESULTS:
+
+   #+BEGIN_SRC emacs-lisp
      (global-auto-revert-mode)
+
+     (define-key global-map (kbd "C-x C-n") '(lambda () (interactive) (other-window 1)))
+     (define-key global-map (kbd "C-x C-p") '(lambda () (interactive) (other-window -1)))
+
+     (setq truncate-lines t)
 
      (setq backup-by-copying t
            backup-directory-alist
@@ -40,6 +53,7 @@
            kept-new-versions 6
            kept-old-versions 2
            version-control t)
+
      (set-language-environment "UTF-8")
 
 
@@ -66,11 +80,19 @@
        :ensure)
 
      (exec-path-from-shell-copy-env "PATH")
+     (setenv "TZ" "Asia/Shanghai")
 
+
+     (if (display-graphic-p)
+         (progn
+           (setq initial-frame-alist
+                 '(
+                   (width . 106)
+                   (height . 50)
+                   ))))
    #+END_SRC
 
    #+RESULTS:
-   : /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
    自动更新本配置, 按下f2后需要重新加载init.el
 
@@ -85,6 +107,22 @@
 
    #+RESULTS:
    : MyConfigAutoUpdate
+
+
+   因为 . 这个键太容易按错了，所以映射alt-, alt-. alt-/ 统一为按下point键位
+
+   #+BEGIN_SRC emacs-lisp
+     (defun insert-my-favorite-point ()
+       (interactive)
+       (insert "."))
+
+     (global-set-key (kbd "M-,") #'insert-my-favorite-point)
+     (global-set-key (kbd "M-.") #'insert-my-favorite-point)
+     (global-set-key (kbd "M-/") #'insert-my-favorite-point)
+   #+END_SRC
+   #+RESULTS:
+   : insert-my-favorite-point
+
 
 ** org-mode
    #+BEGIN_SRC emacs-lisp
@@ -111,8 +149,7 @@
           (calc . t)
           (octave . t)
           (python . t))))
-     (use-package org-download
-       :ensure)
+
 
      ;;; org-mode custom config
      (setq org-clock-into-drawer t)
@@ -123,7 +160,6 @@
      (setq org-log-done 'time)
      (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 
-     (global-set-key "\C-cl" 'org-store-link)
      (global-set-key "\C-ca" 'org-agenda)
      (global-set-key "\C-cc" 'org-capture)
      (global-set-key "\C-cb" 'org-iswitchb)
@@ -144,6 +180,21 @@
                  (file+datetree+prompt "/sync/org/work.org")
                  "* TODO %? [%]"))))
     #+END_SRC
+
+*** org drag image
+
+    拖动图片到org-mode中
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package org-download
+        :ensure)
+    #+END_SRC
+
+
+
+
+
+
 ** mode-icon
    #+BEGIN_SRC emacs-lisp
      (use-package mode-icons
@@ -270,6 +321,8 @@
 
    #+RESULTS:
    : t
+
+
 ** yasnippet
 
    文字模板, see also: https://github.com/joaotavora/yasnippet
@@ -285,11 +338,11 @@
 
      ;;; 开启 snippet-company
      (yas-global-mode t)
-     (add-to-list 'company-backends 'company-files)
 
    #+END_SRC
 
    #+RESULTS:
+   : t
 
 ** company and lsp
 
@@ -305,16 +358,21 @@
        (setq lsp-highlight-symbol-at-point nil))
    #+END_SRC
 
+   #+RESULTS:
+   : t
+
 *** flycheck
 
     #+BEGIN_SRC emacs-lisp
       (use-package flycheck
         :ensure
-        ;; :init (add-hook 'after-init-hook #'global-flycheck-mode)
+        :init (add-hook 'after-init-hook #'global-flycheck-mode)
         :config
-        ;; (flycheck-add-mode 'typescript-tslint 'web-mode))
-        )
+        (flycheck-add-mode 'typescript-tslint 'web-mode))
     #+END_SRC
+
+    #+RESULTS:
+    : t
 
 
 *** vue-language-server
@@ -322,9 +380,13 @@
     #+BEGIN_SRC emacs-lisp
       (use-package lsp-vue
         :ensure)
+    #+END_SRC
 
-      (require 'lsp-vue)
-      (add-hook 'web-mode-hook 'lsp-vue-enable)
+*** lsp-javascript
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package lsp-javascript-typescript
+        :ensure)
     #+END_SRC
 
 
@@ -343,21 +405,28 @@
      (use-package nodejs-repl
        :ensure)
 
+     (defun setup-web-mode-company-mode ()
+       (setq-local
+        company-backends
+        '(company-lsp company-files company-dabbrev company-yasnippet company-keywords company-css)))
+
      (use-package web-mode
        :ensure t
        :mode (("\\.jsx\\'" . web-mode)
               ("\\.vue\\'" . web-mode)
               ("\\.js\\'" . web-mode)
-              ("\\.ts\\'" . web-mode)
               ("\\.css\\'" . web-mode)
+              ("\\.less\\'" . css-mode)
               ("\\.json\\'" . web-mode)
               ("\\.html\\'" . web-mode))
        :config
+       (add-hook 'web-mode-hook 'lsp-javascript-typescript-enable)
+       (add-hook 'web-mode-hook 'company-mode)
+       (add-hook 'web-mode-hook 'setup-web-mode-company-mode)
        (add-hook 'web-mode-hook 'emmet-mode)
        (add-hook 'web-mode-hook 'smartparens-mode)
        (add-hook 'web-mode-hook 'flycheck-mode)
        (add-hook 'web-mode-hook 'editorconfig-mode)
-       (add-hook 'web-mode-hook 'company-mode)
        (add-hook 'web-mode-hook
          (lambda ()
            (progn
@@ -382,7 +451,8 @@
    #+END_SRC
 
    #+RESULTS:
-   : projectile-project-root
+   | web-mode | web-mode | css-mode |
+
 
 ** emacs-lisp-mode
    #+BEGIN_SRC emacs-lisp
@@ -457,8 +527,6 @@
        (setq projectile-create-missing-test-files t)
        (setq projectile-enable-caching t)
        (setq projectile-require-project-root nil))
-
-
    #+END_SRC
 
    #+RESULTS:
@@ -615,42 +683,6 @@
        :ensure t
        :defer t)
    #+END_SRC
-** layout
-   #+BEGIN_SRC emacs-lisp
-     (use-package window-purpose
-       :ensure
-       :config
-       ;;; layout
-       (add-to-list 'purpose-user-mode-purposes '(web-mode . web))
-       (add-to-list 'purpose-user-mode-purposes '(magit-mode . git))
-       (add-to-list 'purpose-user-mode-purposes '(org-mode . org))
-       (purpose-compile-user-configuration))
-   #+END_SRC
-
-   #+RESULTS:
-   : t
-
-** window jump
-   快速跳转不同的window
-
-   window move
-   #+BEGIN_SRC emacs-lisp
-     (define-key global-map (kbd "C-x C-n") '(lambda () (interactive) (other-window 1)))
-     (define-key global-map (kbd "C-x C-p") '(lambda () (interactive) (other-window -1)))
-
-   #+END_SRC
-
-   #+RESULTS:
-   | lambda | nil | (interactive) | (other-window -1) |
-
-   直接给window标记数字，使用M-1,M-2快速跳转
-   #+BEGIN_SRC emacs-lisp
-   (use-package window-numbering
-     :ensure)
-   #+END_SRC
-
-   #+RESULTS:
-
 ** comint
    #+BEGIN_SRC emacs-lisp
      (use-package comint
@@ -692,7 +724,6 @@
        (define-key typescript-mode-map (kbd "M-?") 'tide-references))
 
      (add-hook 'typescript-mode-hook #'my-ts-mode-configuration)
-     (add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
      (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
    #+END_SRC
 
@@ -707,3 +738,38 @@
    #+END_SRC
 
    #+RESULTS:
+
+** blog
+
+   #+BEGIN_SRC emacs-lisp
+     (setq org-publish-project-alist
+           '(
+             ("org-quanwei"
+              :base-directory "/app/git/blog/org"
+              :base-extension "org"
+
+              :publishing-directory "/app/git/blog/_posts/"
+              :recursive t
+              :publishing-function org-html-publish-to-html
+              :headline-levels 4
+              :body-only t)
+             ("org-quanwei-static"
+              :base-directory "/app/git/blog/org"
+              :base-extension "css|js|jpg|png|gif"
+              :publishing-directory "/app/git/blog/content/"
+              :recursive t
+              :publishing-function org-publish-attachment)
+
+             ("quanwei" :components ("org-quanwei" "org-quanwei-static"))))
+   #+END_SRC
+
+   #+RESULTS:
+   | org-quanwei        | :base-directory | /app/git/blog/org                | :base-extension | org | :publishing-directory | /app/git/blog/_posts/ | :recursive | t   | :publishing-function  | org-html-publish-to-html | :headline-levels | 4 | :body-only           | t                      |
+   | org-quanwei-static | :base-directory | /app/git/blog/org                | :base-extension | css | js                    | jpg                   | png        | gif | :publishing-directory | /app/git/blog/content/   | :recursive       | t | :publishing-function | org-publish-attachment |
+   | quanwei            | :components     | (org-quanwei org-quanwei-static) |                 |     |                       |                       |            |     |                       |                          |                  |   |                      |                        |
+** scheme
+
+** emacs-application-framework
+
+   #+BEGIN_SRC emacs-lisp
+   #+END_SRC
