@@ -3,7 +3,8 @@
 ![screenshot](screenshot.png)
 
 # emacs 最佳实践
- 很喜欢在cli中使用Emacs, 下面是使用过程中的一些实践记录下。
+ 本Emacs配置比较接近原生Emacs体验，上手成本比较低.
+ 下面是使用过程中的一些实践记录下。
 
  安装本配置过程很简单
 
