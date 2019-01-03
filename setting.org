@@ -176,7 +176,10 @@
       (use-package org-trello
         :ensure
         :init
-        (add-hook 'org-mode-hook 'org-trello-mode)
+        (add-hook 'org-mode
+                  (lambda ()
+                    (when (s-contains? "trello" (buffer-file-name))
+                      (org-trello-mode))))
         :config
         (when (file-directory-p "~/org/trello")
           (custom-set-variables
