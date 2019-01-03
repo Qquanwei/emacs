@@ -136,7 +136,7 @@
        (when (file-exists-p "~/org")
          (progn
            (setq org-directory "~/org")
-           (setq org-agenda-files '("~/org"))))
+           (setq org-agenda-files '("~/org" "~/org/trello"))))
        (setq org-crypt-key "quanwei")
        (define-key org-mode-map (kbd "C-c u d") 'org-decrypt-entry)
        (org-babel-do-load-languages
@@ -167,6 +167,28 @@
 
    #+RESULTS:
    : org-iswitchb
+
+*** OrgTrello
+    #+BEGIN_SRC emacs-lisp
+      (require 's)
+      (require 'seq)
+
+      (use-package org-trello
+        :ensure
+        :init
+        (add-hook 'org-mode-hook 'org-trello-mode)
+        :config
+        (when (file-directory-p "~/org/trello")
+          (custom-set-variables
+           '(org-trello-files
+             (seq-filter
+              (lambda (x)
+                (s-suffix? ".org" x))
+              (directory-files "~/org/trello" t))))))
+    #+END_SRC
+
+    #+RESULTS:
+    : t
 
 *** OrgCapture
     #+BEGIN_SRC emacs-lisp
