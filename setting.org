@@ -170,8 +170,8 @@
 
 *** OrgTrello
     #+BEGIN_SRC emacs-lisp
-      (require 's)
-      (require 'seq)
+      (use-package s :ensure)
+      (use-package seq :ensure)
 
       (use-package org-trello
         :ensure
