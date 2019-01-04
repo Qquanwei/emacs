@@ -14,7 +14,7 @@
 
 
 (let
-    ((__dirname (file-name-directory (buffer-file-name))))
+    ((__dirname (file-name-directory load-file-name)))
 
   ;; load setting.org
   (org-babel-load-file
