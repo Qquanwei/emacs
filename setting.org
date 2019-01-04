@@ -399,13 +399,6 @@
     : t
 
 
-*** vue-language-server
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package lsp-vue
-        :ensure)
-    #+END_SRC
-
 *** lsp-javascript
 
     #+BEGIN_SRC emacs-lisp

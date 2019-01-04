@@ -11,14 +11,17 @@
 (package-initialize)
 
 (require 'org)
-(org-babel-load-file
- (expand-file-name "setting.org" user-emacs-directory))
-
-(let ((tempname (expand-file-name "setting.el" user-emacs-directory)))
-  (when (file-exists-p tempname)
-    (delete-file tempname)))
 
 
+(let
+    ((__dirname (file-name-directory (buffer-file-name))))
+
+  ;; load setting.org
+  (org-babel-load-file
+   (expand-file-name "setting.org" __dirname))
+  ;; remove sideeffect setting.el
+  (when (file-exists-p (expand-file-name "setting.el" __dirname))
+    (delete-file (expand-file-name "setting.el" __dirname))))
 
 ;;; init.el ends here
 (custom-set-variables
