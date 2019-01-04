@@ -368,47 +368,6 @@
    #+RESULTS:
    : t
 
-** company and lsp
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package company-lsp :ensure
-       :config
-       (setq company-lsp-cache-candidates t)
-       (setq company-lsp-enable-snippet t))
-
-     (use-package lsp-mode
-       :ensure
-       :config
-       (setq lsp-highlight-symbol-at-point nil))
-   #+END_SRC
-
-   #+RESULTS:
-   : t
-
-*** flycheck
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package flycheck
-        :ensure
-        :init (add-hook 'after-init-hook #'global-flycheck-mode)
-        :config
-        (flycheck-add-mode 'typescript-tslint 'web-mode))
-    #+END_SRC
-
-    #+RESULTS:
-    : t
-
-
-*** lsp-javascript
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package lsp-javascript-typescript
-        :ensure)
-    #+END_SRC
-
-
-
-
 ** docker
    #+BEGIN_SRC emacs-lisp
      (use-package dockerfile-mode
@@ -425,7 +384,7 @@
      (defun setup-web-mode-company-mode ()
        (setq-local
         company-backends
-        '(company-lsp company-files company-dabbrev company-yasnippet company-keywords company-css)))
+        '(company-files company-dabbrev company-yasnippet company-keywords company-css)))
 
      (use-package web-mode
        :ensure t
@@ -437,7 +396,6 @@
               ("\\.json\\'" . web-mode)
               ("\\.html\\'" . web-mode))
        :config
-       (add-hook 'web-mode-hook 'lsp-javascript-typescript-enable)
        (add-hook 'web-mode-hook 'company-mode)
        (add-hook 'web-mode-hook 'setup-web-mode-company-mode)
        (add-hook 'web-mode-hook 'emmet-mode)
