@@ -164,10 +164,12 @@ make install
 | package.json                | npm          | npm build                  | npm test              | npm start     |
 ```
 ## 阅读翻译
-  同样的，我们常常在emacs中阅读英文文档或者查看代码，因为语言的差异导致只能不断的学习，有些场景会用到。所以在本配置文件中定义了有关翻译相关的配置，使用的是`youdao-dictionary`
+  同样的，我们常常在emacs中阅读英文文档或者查看代码，因为语言的差异导致只能不断的学习，有些场景会用到。所以在本配置文件中定义了有关翻译相关的配置，使用的是`youdao-dictionary`和`webster`两个词典
 
-* C-c y 翻译光标所在位置的单词
-* C-c C-y 读出光标所在位置的单词
+* C-c t y 有道翻译,翻译光标所在位置的单词
+* C-c t C-y 有道翻译,读出光标所在位置的单词
+* C-c t w 使用webster翻译
+
 
 注:  发音依赖外部命令`mplayer` or `mpg123`
 

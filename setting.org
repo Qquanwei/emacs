@@ -509,13 +509,6 @@
    #+RESULTS:
    : t
 
-** youdao
-   #+BEGIN_SRC emacs-lisp
-     (use-package youdao-dictionary
-       :ensure t
-       :bind (("C-c y" . youdao-dictionary-search-at-point+)
-              ("C-c C-y" . youdao-dictionary-play-voice-at-point)))
-   #+END_SRC
 
 ** hackernews
    #+BEGIN_SRC emacs-lisp
@@ -750,3 +743,25 @@
 
    #+BEGIN_SRC emacs-lisp
    #+END_SRC
+** dictionary
+
+*** youdao
+   #+BEGIN_SRC emacs-lisp
+     (use-package youdao-dictionary
+       :ensure t
+       :bind (("C-c t y" . youdao-dictionary-search-at-point+)
+              ("C-c t C-y" . youdao-dictionary-play-voice-at-point)))
+   #+END_SRC
+
+   #+RESULTS:
+   : youdao-dictionary-play-voice-at-point
+
+*** webster
+#+BEGIN_SRC emacs-lisp
+  (use-package mw-thesaurus
+   :ensure
+   :bind (("C-c t w" . mw-thesaurus--lookup-at-point)))
+#+END_SRC
+
+#+RESULTS:
+: mw-thesaurus--lookup-at-point
