@@ -2,7 +2,9 @@
 
 ![screenshot](screenshot.png)
 
-# emacs 最佳实践
+Emacs就像我的老朋友，其深邃的内涵和来自远古的智慧让我无法企及。
+
+# emacs 实践
  本Emacs配置比较接近原生Emacs体验，上手成本比较低.
  下面是使用过程中的一些实践记录下。
 
