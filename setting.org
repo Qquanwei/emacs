@@ -168,31 +168,6 @@
    #+RESULTS:
    : org-iswitchb
 
-*** OrgTrello
-    #+BEGIN_SRC emacs-lisp
-      (use-package s :ensure)
-      (use-package seq :ensure)
-
-      (use-package org-trello
-        :ensure
-        :init
-        (add-hook 'org-mode
-                  (lambda ()
-                    (when (s-contains? "trello" (buffer-file-name))
-                      (org-trello-mode))))
-        :config
-        (when (file-directory-p "~/org/trello")
-          (custom-set-variables
-           '(org-trello-files
-             (seq-filter
-              (lambda (x)
-                (s-suffix? ".org" x))
-              (directory-files "~/org/trello" t))))))
-    #+END_SRC
-
-    #+RESULTS:
-    : t
-
 *** OrgCapture
     #+BEGIN_SRC emacs-lisp
       (setq org-capture-templates

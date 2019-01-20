@@ -252,12 +252,6 @@ org-agenda界面是org-mode统计结果展示页，可以快速查找/查看我�
 这个功能真的是我最喜欢的org特性了，录了一段视频放在B站:
 https://www.bilibili.com/video/av9936508/index_1.html
 
-### org-trello
-
-增加和trello同步的功能，org-trello文件统一放在 `~org/trello`目录中。
-关于其介绍配置可以参考: https://emacs-china.org/t/org-trello/8110/2
-
-
 ## 密码管理
 
 经常会有各种网站需要不同的用户名&密码，人脑记起来真的很烦，所以给emacs
