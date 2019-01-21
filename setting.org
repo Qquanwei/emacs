@@ -133,9 +133,9 @@
        (require 'org-crypt)
        (org-crypt-use-before-save-magic)
        (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-       (when (file-exists-p "~/org")
-         (progn
-           (setq org-directory "~/org")))
+       (when (and (file-exists-p "~/org")
+                  (file-directory-p "~/org"))
+         (setq org-agenda-files '("~/org")))
        (setq org-crypt-key "quanwei")
        (define-key org-mode-map (kbd "C-c u d") 'org-decrypt-entry)
        (org-babel-do-load-languages
