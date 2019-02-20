@@ -34,6 +34,7 @@ make install
 ## 基础快捷键
 
 * F2 自动更新本配置文件
+* C-- 相当于执行M-x
 * C-x C-n 下一个window
 * C-x C-p 前一个window
 * C-t 交换当前位置与前一个位置的字符

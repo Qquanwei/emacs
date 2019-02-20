@@ -43,6 +43,7 @@
 
      (define-key global-map (kbd "C-x C-n") '(lambda () (interactive) (other-window 1)))
      (define-key global-map (kbd "C-x C-p") '(lambda () (interactive) (other-window -1)))
+     (define-key global-map (kbd "C--") 'execute-extended-command)
 
      (setq truncate-lines t)
 
@@ -175,9 +176,13 @@
                 (file "/sync/org/oh-my-life.org")
                 "* TODO %?")
                ("w" "for work" entry
-                 (file+datetree+prompt "/sync/org/work.org")
+                 (file+datetree "/sync/org/work.org")
                  "* TODO %? [%]"))))
     #+END_SRC
+
+    #+RESULTS:
+    | l | oh-my-life | entry | (file /sync/org/oh-my-life.org)    | * TODO %?     |
+    | w | for work   | entry | (file+datetree /sync/org/work.org) | * TODO %? [%] |
 
 *** org drag image
 
@@ -459,6 +464,9 @@
        :bind (("C-c g c" . magit-checkout)
               ("C-c g f c" . magit-file-checkout)))
    #+END_SRC
+
+   #+RESULTS:
+
 ** avy
    #+BEGIN_SRC emacs-lisp
      (use-package avy
@@ -474,14 +482,21 @@
        :config
        (setq projectile-create-missing-test-files t)
        (setq projectile-enable-caching t)
-       (setq projectile-require-project-root nil))
+       (setq projectile-require-project-root nil)
+       (projectile-register-project-type
+        'npm '("package.json")
+        :compile "npm run build"
+        :test "npm run test"
+        :run "npm run start"
+        :test-suffix ".spec"))
 
    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
 
    #+END_SRC
 
    #+RESULTS:
-   : t
+   : projectile-command-map
 
 
 ** hackernews
@@ -656,22 +671,6 @@
        :config
        (setq inferior-lisp-program "sbcl"))
    #+END_SRC
-** typescript
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package tide :ensure)
-
-     (defun my-ts-mode-configuration ()
-       (interactive)
-       (tide-setup)
-       (define-key typescript-mode-map (kbd "M-/") 'tide-jump-to-implementation)
-       (define-key typescript-mode-map (kbd "M-?") 'tide-references))
-
-     (add-hook 'typescript-mode-hook #'my-ts-mode-configuration)
-     (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-   #+END_SRC
-
-   #+RESULTS:
 ** which-key
 
    #+BEGIN_SRC emacs-lisp
