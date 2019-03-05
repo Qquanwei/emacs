@@ -57,12 +57,6 @@
 
      (set-language-environment "UTF-8")
 
-
-     (define-key global-map (kbd "S-<left>") 'windmove-left)
-     (define-key global-map (kbd "S-<right>") 'windmove-right)
-     (define-key global-map (kbd "S-<up>") 'windmove-up)
-     (define-key global-map (kbd "S-<down>") 'windmove-down)
-
      ;; select current line
      (defun highlight-current-line ()
        (interactive)
@@ -73,10 +67,6 @@
      (define-key global-map (kbd "C-c ,") 'rename-buffer)
 
 
-     ;; open truncate lines
-     (toggle-truncate-lines 1)
-
-
      (use-package exec-path-from-shell
        :ensure)
 
@@ -84,16 +74,22 @@
      (setenv "TZ" "Asia/Shanghai")
 
 
-     (if (display-graphic-p)
-         (progn
-           (setq initial-frame-alist
-                 '(
-                   (width . 106)
-                   (height . 50)
-                   ))))
+     (when (display-graphic-p)
+       (progn
+         (setq initial-frame-alist
+               '(
+                 (width . 106)
+                 (height . 50)
+                 ))))
+
+
+     (add-hook 'prog-mode-hook 'auto-fill-mode)
+
+     (set-default 'fill-column 80)
    #+END_SRC
 
    #+RESULTS:
+   : 80
 
    自动更新本配置, 按下f2后需要重新加载init.el
 
@@ -136,7 +132,7 @@
        (setq org-tags-exclude-from-inheritance (quote ("crypt")))
        (when (and (file-exists-p "~/org")
                   (file-directory-p "~/org"))
-         (setq org-agenda-files '("~/org")))
+         (setq org-agenda-files '("~/org" "~/org/trello")))
        (setq org-crypt-key "quanwei")
        (define-key org-mode-map (kbd "C-c u d") 'org-decrypt-entry)
        (org-babel-do-load-languages
@@ -166,7 +162,7 @@
    #+END_SRC
 
    #+RESULTS:
-   : org-iswitchb
+   : org-switchb
 
 *** OrgCapture
     #+BEGIN_SRC emacs-lisp
