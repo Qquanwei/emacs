@@ -30,6 +30,7 @@
    #+END_SRC
 
 ** global config
+
    #+BEGIN_SRC emacs-lisp
      (custom-set-variables
       '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/" t)))
@@ -44,8 +45,6 @@
      (define-key global-map (kbd "C-x C-n") '(lambda () (interactive) (other-window 1)))
      (define-key global-map (kbd "C-x C-p") '(lambda () (interactive) (other-window -1)))
      (define-key global-map (kbd "C--") 'execute-extended-command)
-
-     (setq truncate-lines t)
 
      (setq backup-by-copying t
            backup-directory-alist
@@ -734,3 +733,14 @@
 
 #+RESULTS:
 : mw-thesaurus--lookup-at-point
+
+** expand-region
+
+#+BEGIN_SRC emacs-lisp
+  (use-package expand-region
+    :ensure)
+  (global-set-key (kbd "C-=") 'er/expand-region)
+#+END_SRC
+
+#+RESULTS:
+: er/expand-region
