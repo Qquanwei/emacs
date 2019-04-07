@@ -43,6 +43,7 @@
 
      (define-key global-map (kbd "C-x C-n") '(lambda () (interactive) (other-window 1)))
      (define-key global-map (kbd "C-x C-p") '(lambda () (interactive) (other-window -1)))
+     (define-key global-map (kbd "C--") 'execute-extended-command)
 
      (setq truncate-lines t)
 
@@ -56,12 +57,6 @@
 
      (set-language-environment "UTF-8")
 
-
-     (define-key global-map (kbd "S-<left>") 'windmove-left)
-     (define-key global-map (kbd "S-<right>") 'windmove-right)
-     (define-key global-map (kbd "S-<up>") 'windmove-up)
-     (define-key global-map (kbd "S-<down>") 'windmove-down)
-
      ;; select current line
      (defun highlight-current-line ()
        (interactive)
@@ -72,10 +67,6 @@
      (define-key global-map (kbd "C-c ,") 'rename-buffer)
 
 
-     ;; open truncate lines
-     (toggle-truncate-lines 1)
-
-
      (use-package exec-path-from-shell
        :ensure)
 
@@ -83,16 +74,22 @@
      (setenv "TZ" "Asia/Shanghai")
 
 
-     (if (display-graphic-p)
-         (progn
-           (setq initial-frame-alist
-                 '(
-                   (width . 106)
-                   (height . 50)
-                   ))))
+     (when (display-graphic-p)
+       (progn
+         (setq initial-frame-alist
+               '(
+                 (width . 106)
+                 (height . 50)
+                 ))))
+
+
+     (add-hook 'prog-mode-hook 'auto-fill-mode)
+
+     (set-default 'fill-column 80)
    #+END_SRC
 
    #+RESULTS:
+   : 80
 
    自动更新本配置, 按下f2后需要重新加载init.el
 
@@ -133,10 +130,9 @@
        (require 'org-crypt)
        (org-crypt-use-before-save-magic)
        (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-       (when (file-exists-p "~/org")
-         (progn
-           (setq org-directory "~/org")
-           (setq org-agenda-files '("~/org"))))
+       (when (and (file-exists-p "~/org")
+                  (file-directory-p "~/org"))
+         (setq org-agenda-files '("~/org")))
        (setq org-crypt-key "quanwei")
        (define-key org-mode-map (kbd "C-c u d") 'org-decrypt-entry)
        (org-babel-do-load-languages
@@ -161,12 +157,12 @@
 
      (global-set-key "\C-ca" 'org-agenda)
      (global-set-key "\C-cc" 'org-capture)
-     (global-set-key "\C-cb" 'org-iswitchb)
+     (global-set-key "\C-cb" 'org-switchb)
 
    #+END_SRC
 
    #+RESULTS:
-   : org-iswitchb
+   : org-switchb
 
 *** OrgCapture
     #+BEGIN_SRC emacs-lisp
@@ -176,9 +172,13 @@
                 (file "/sync/org/oh-my-life.org")
                 "* TODO %?")
                ("w" "for work" entry
-                 (file+datetree+prompt "/sync/org/work.org")
+                 (file+datetree "/sync/org/work.org")
                  "* TODO %? [%]"))))
     #+END_SRC
+
+    #+RESULTS:
+    | l | oh-my-life | entry | (file /sync/org/oh-my-life.org)    | * TODO %?     |
+    | w | for work   | entry | (file+datetree /sync/org/work.org) | * TODO %? [%] |
 
 *** org drag image
 
@@ -343,54 +343,6 @@
    #+RESULTS:
    : t
 
-** company and lsp
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package company-lsp :ensure
-       :config
-       (setq company-lsp-cache-candidates t)
-       (setq company-lsp-enable-snippet t))
-
-     (use-package lsp-mode
-       :ensure
-       :config
-       (setq lsp-highlight-symbol-at-point nil))
-   #+END_SRC
-
-   #+RESULTS:
-   : t
-
-*** flycheck
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package flycheck
-        :ensure
-        :init (add-hook 'after-init-hook #'global-flycheck-mode)
-        :config
-        (flycheck-add-mode 'typescript-tslint 'web-mode))
-    #+END_SRC
-
-    #+RESULTS:
-    : t
-
-
-*** vue-language-server
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package lsp-vue
-        :ensure)
-    #+END_SRC
-
-*** lsp-javascript
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package lsp-javascript-typescript
-        :ensure)
-    #+END_SRC
-
-
-
-
 ** docker
    #+BEGIN_SRC emacs-lisp
      (use-package dockerfile-mode
@@ -407,7 +359,7 @@
      (defun setup-web-mode-company-mode ()
        (setq-local
         company-backends
-        '(company-lsp company-files company-dabbrev company-yasnippet company-keywords company-css)))
+        '(company-files company-dabbrev company-yasnippet company-keywords company-css)))
 
      (use-package web-mode
        :ensure t
@@ -419,7 +371,6 @@
               ("\\.json\\'" . web-mode)
               ("\\.html\\'" . web-mode))
        :config
-       (add-hook 'web-mode-hook 'lsp-javascript-typescript-enable)
        (add-hook 'web-mode-hook 'company-mode)
        (add-hook 'web-mode-hook 'setup-web-mode-company-mode)
        (add-hook 'web-mode-hook 'emmet-mode)
@@ -509,6 +460,9 @@
        :bind (("C-c g c" . magit-checkout)
               ("C-c g f c" . magit-file-checkout)))
    #+END_SRC
+
+   #+RESULTS:
+
 ** avy
    #+BEGIN_SRC emacs-lisp
      (use-package avy
@@ -522,22 +476,24 @@
      (use-package projectile
        :ensure t
        :config
-       (setq projectile-completion-system 'grizzl)
        (setq projectile-create-missing-test-files t)
        (setq projectile-enable-caching t)
-       (setq projectile-require-project-root nil))
+       (setq projectile-require-project-root nil)
+       (projectile-register-project-type
+        'npm '("package.json")
+        :compile "npm run build"
+        :test "npm run test"
+        :run "npm run start"
+        :test-suffix ".spec"))
+
+   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+
    #+END_SRC
 
    #+RESULTS:
-   : t
+   : projectile-command-map
 
-** youdao
-   #+BEGIN_SRC emacs-lisp
-     (use-package youdao-dictionary
-       :ensure t
-       :bind (("C-c y" . youdao-dictionary-search-at-point+)
-              ("C-c C-y" . youdao-dictionary-play-voice-at-point)))
-   #+END_SRC
 
 ** hackernews
    #+BEGIN_SRC emacs-lisp
@@ -711,22 +667,6 @@
        :config
        (setq inferior-lisp-program "sbcl"))
    #+END_SRC
-** typescript
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package tide :ensure)
-
-     (defun my-ts-mode-configuration ()
-       (interactive)
-       (tide-setup)
-       (define-key typescript-mode-map (kbd "M-/") 'tide-jump-to-implementation)
-       (define-key typescript-mode-map (kbd "M-?") 'tide-references))
-
-     (add-hook 'typescript-mode-hook #'my-ts-mode-configuration)
-     (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-   #+END_SRC
-
-   #+RESULTS:
 ** which-key
 
    #+BEGIN_SRC emacs-lisp
@@ -772,3 +712,25 @@
 
    #+BEGIN_SRC emacs-lisp
    #+END_SRC
+** dictionary
+
+*** youdao
+   #+BEGIN_SRC emacs-lisp
+     (use-package youdao-dictionary
+       :ensure t
+       :bind (("C-c t y" . youdao-dictionary-search-at-point+)
+              ("C-c t C-y" . youdao-dictionary-play-voice-at-point)))
+   #+END_SRC
+
+   #+RESULTS:
+   : youdao-dictionary-play-voice-at-point
+
+*** webster
+#+BEGIN_SRC emacs-lisp
+  (use-package mw-thesaurus
+   :ensure
+   :bind (("C-c t w" . mw-thesaurus--lookup-at-point)))
+#+END_SRC
+
+#+RESULTS:
+: mw-thesaurus--lookup-at-point

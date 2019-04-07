@@ -2,8 +2,11 @@
 
 ![screenshot](screenshot.png)
 
-# emacs 最佳实践
- 很喜欢在cli中使用Emacs, 下面是使用过程中的一些实践记录下。
+Emacs就像我的老朋友，其深邃的内涵和来自远古的智慧让我无法企及。
+
+# emacs 实践
+ 本Emacs配置比较接近原生Emacs体验，上手成本比较低.
+ 下面是使用过程中的一些实践记录下。
 
  安装本配置过程很简单
 
@@ -31,6 +34,7 @@ make install
 ## 基础快捷键
 
 * F2 自动更新本配置文件
+* C-- 相当于执行M-x
 * C-x C-n 下一个window
 * C-x C-p 前一个window
 * C-t 交换当前位置与前一个位置的字符
@@ -163,10 +167,12 @@ make install
 | package.json                | npm          | npm build                  | npm test              | npm start     |
 ```
 ## 阅读翻译
-  同样的，我们常常在emacs中阅读英文文档或者查看代码，因为语言的差异导致只能不断的学习，有些场景会用到。所以在本配置文件中定义了有关翻译相关的配置，使用的是`youdao-dictionary`
+  同样的，我们常常在emacs中阅读英文文档或者查看代码，因为语言的差异导致只能不断的学习，有些场景会用到。所以在本配置文件中定义了有关翻译相关的配置，使用的是`youdao-dictionary`和`webster`两个词典
 
-* C-c y 翻译光标所在位置的单词
-* C-c C-y 读出光标所在位置的单词
+* C-c t y 有道翻译,翻译光标所在位置的单词
+* C-c t C-y 有道翻译,读出光标所在位置的单词
+* C-c t w 使用webster翻译
+
 
 注:  发音依赖外部命令`mplayer` or `mpg123`
 
@@ -196,6 +202,8 @@ make install
 这个重量级生活方式将非常影响一个人的思维方式，下面是我的一些个人体会。
 
 使用`org-refile` `org-capture`  [可以参考这个链接](http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/)
+
+> 一个约定，org文件统一放在~/org 目录下，方便统一调度所有任务
 
 * C-c c t 快速创建任务使用`org-capture template`. 在此可以使用org-refile移动到指定的headline上 (全局)
 * C-c c n 快速创建note,使用`org-capture template` (全局)
@@ -244,7 +252,6 @@ org-agenda界面是org-mode统计结果展示页，可以快速查找/查看我�
 
 这个功能真的是我最喜欢的org特性了，录了一段视频放在B站:
 https://www.bilibili.com/video/av9936508/index_1.html
-
 
 ## 密码管理
 

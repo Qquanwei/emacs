@@ -14,6 +14,8 @@
 (org-babel-load-file
  (expand-file-name "setting.org" user-emacs-directory))
 
+(add-to-list 'load-path (expand-file-name "./lisp/mu4e" user-emacs-directory))
+
 (let ((tempname (expand-file-name "setting.el" user-emacs-directory)))
   (when (file-exists-p tempname)
     (delete-file tempname)))
@@ -28,7 +30,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-quickhelp company-tern window-purpose markdown-preview-mode markdown-mode python-mode editorconfig helpful pass diminish dashboard snazzy-theme base16-theme dante grizzl hackernews youdao-dictionary counsel-projectile projectile avy magit whitespace-cleanup-mode counsel-dash haskell-mode web-mode nodejs-repl emmet-mode dumb-jump dockerfile-mode company-jedi company pyim eshell-git-prompt smartparens mode-icons org-download s use-package))))
+    (company-quickhelp company-tern window-purpose markdown-preview-mode markdown-mode python-mode editorconfig helpful pass diminish dashboard snazzy-theme base16-theme dante grizzl hackernews youdao-dictionary counsel-projectile projectile avy magit whitespace-cleanup-mode counsel-dash haskell-mode web-mode nodejs-repl emmet-mode dumb-jump dockerfile-mode company-jedi company pyim eshell-git-prompt smartparens mode-icons org-download s))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
