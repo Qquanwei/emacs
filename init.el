@@ -14,15 +14,14 @@
 (org-babel-load-file
  (expand-file-name "setting.org" user-emacs-directory))
 
-(when (f-exists-p "/usr/share/emacs/site-lisp/mu4e/mu4e.el")
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-  (require 'mu4e))
-
 (let ((tempname (expand-file-name "setting.el" user-emacs-directory)))
   (when (file-exists-p tempname)
     (delete-file tempname)))
 
-
+(require 'f)
+(when (f-exists-p "/usr/share/emacs/site-lisp/mu4e/mu4e.el")
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+  (require 'mu4e))
 
 ;;; init.el ends here
 (custom-set-variables
