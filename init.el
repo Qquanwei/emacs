@@ -15,6 +15,7 @@
  (expand-file-name "setting.org" user-emacs-directory))
 
 (add-to-list 'load-path (expand-file-name "./lisp/mu4e" user-emacs-directory))
+(require 'mu4e)
 
 (let ((tempname (expand-file-name "setting.el" user-emacs-directory)))
   (when (file-exists-p tempname)
