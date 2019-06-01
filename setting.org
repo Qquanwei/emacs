@@ -4,10 +4,7 @@
 ** set sources
   #+BEGIN_SRC emacs-lisp
     (setq package-archives
-          '(
-            ("gnu"   . "http://elpa.zilongshanren.com/gnu/")
-            ("melpa" . "http://elpa.zilongshanren.com/melpa/")
-            ("org"   . "http://elpa.zilongshanren.com/org/")))
+          '(("melpa-stable" . "https://stable.melpa.org/packages/")))
 
     (package-initialize)
 
@@ -30,6 +27,13 @@
    #+END_SRC
 
 ** global config
+
+   #+BEGIN_SRC emacs-lisp
+     (setq-default browse-url-browser-function 'eww-browse-url)
+   #+END_SRC
+
+   #+RESULTS:
+   : eww-browse-url
 
    #+BEGIN_SRC emacs-lisp
      (custom-set-variables
@@ -505,17 +509,6 @@
    #+END_SRC
 ** theme
    #+BEGIN_SRC emacs-lisp
-     (use-package grizzl
-       :ensure)
-     (use-package dante
-       :ensure)
-
-     (use-package base16-theme
-       :ensure)
-     (use-package snazzy-theme
-       :ensure)
-
-
      (custom-set-faces
       ;; custom-set-faces was added by Custom.
       ;; If you edit it by hand, you could mess it up, so be careful.
