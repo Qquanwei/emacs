@@ -2,7 +2,6 @@ url/
 ~*
 elpa/
 auto-save-list/
-eshell/
 projectile*
 session*
 recentf

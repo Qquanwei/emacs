@@ -84,11 +84,6 @@
                  (width . 106)
                  (height . 50)
                  ))))
-
-
-     (add-hook 'prog-mode-hook 'auto-fill-mode)
-
-     (set-default 'fill-column 80)
    #+END_SRC
 
    #+RESULTS:
