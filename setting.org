@@ -192,13 +192,6 @@
 
 
 
-** mode-icon
-   #+BEGIN_SRC emacs-lisp
-     (use-package mode-icons
-       :ensure
-       :config
-       (mode-icons-mode))
-   #+END_SRC
 ** smartparens
 
    #+BEGIN_SRC emacs-lisp
