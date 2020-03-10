@@ -4,7 +4,8 @@
 ** set sources
   #+BEGIN_SRC emacs-lisp
     (setq package-archives
-          '(("melpa-stable" . "https://stable.melpa.org/packages/")))
+          '(("melpa" . "http://elpa.emacs-china.org/melpa/")
+            ("melpa-stable" . "http://stable.melpa.org/packages/")))
 
     (package-initialize)
 
