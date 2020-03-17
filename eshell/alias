@@ -1,1 +1,1 @@
-alias nenpm npm --registry=http://rnpm.hz.netease.com/ --registryweb=http://npm.hz.netease.com/ --cache=/root/.nenpm/.cache --userconfig=/root/.nenpmrc $*
+alias nenpm npm --registry=http://rnpm.hz.netease.com/ --registryweb=http://npm.hz.netease.com/ $*
