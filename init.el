@@ -10,6 +10,9 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(setq org-enforce-todo-checkbox-dependencies t)
+(setq org-enforce-todo-dependencies t)
+
 (require 'org)
 (org-babel-load-file
  (expand-file-name "setting.org" user-emacs-directory))
