@@ -123,42 +123,44 @@
 
 ** org-mode
    #+BEGIN_SRC emacs-lisp
-     (use-package org
-       :ensure
-       :config
-       (auto-save-mode)
-       (require 'org-crypt)
-       (org-crypt-use-before-save-magic)
-       (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-       (when (and (file-exists-p "~/Dropbox/org")
-                  (file-directory-p "~/Dropbox/org"))
-         (setq org-agenda-files '("~/Dropbox/org")))
+          (use-package org
+            :ensure
+            :config
+            (auto-save-mode)
+            (setq org-enforce-todo-checkbox-dependencies t)
+            (setq org-enforce-todo-dependencies t)
+            (require 'org-crypt)
+            (org-crypt-use-before-save-magic)
+            (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+            (when (and (file-exists-p "~/org")
+                       (file-directory-p "~/org"))
+              (setq org-agenda-files '("~/org")))
 
-       (setq org-crypt-key "quanwei")
-       (define-key org-mode-map (kbd "C-c u d") 'org-decrypt-entry)
-       (org-babel-do-load-languages
-        'org-babel-load-languages
-        '((dot . t)
-          (emacs-lisp . t)
-          (C . t)
-          (js . t)
-          (calc . t)
-          (octave . t)
-          (python . t))))
+            (setq org-crypt-key "quanwei")
+            (define-key org-mode-map (kbd "C-c u d") 'org-decrypt-entry)
+            (org-babel-do-load-languages
+             'org-babel-load-languages
+             '((dot . t)
+               (emacs-lisp . t)
+               (C . t)
+               (js . t)
+               (calc . t)
+               (octave . t)
+               (python . t))))
 
 
-     ;;; org-mode custom config
-     (setq org-clock-into-drawer t)
-     (setq org-agenda-include-diary t)
-     (setq org-src-fontify-natively t)
-     (setq org-confirm-babel-evaluate nil)
-     (setq org-image-actual-width 400)
-     (setq org-log-done 'time)
-     (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+          ;;; org-mode custom config
+          (setq org-clock-into-drawer t)
+          (setq org-agenda-include-diary t)
+          (setq org-src-fontify-natively t)
+          (setq org-confirm-babel-evaluate nil)
+          (setq org-image-actual-width 400)
+          (setq org-log-done 'time)
+          (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 
-     (global-set-key "\C-ca" 'org-agenda)
-     (global-set-key "\C-cc" 'org-capture)
-     (global-set-key "\C-cb" 'org-switchb)
+          (global-set-key "\C-ca" 'org-agenda)
+          (global-set-key "\C-cc" 'org-capture)
+          (global-set-key "\C-cb" 'org-switchb)
 
    #+END_SRC
 
@@ -310,6 +312,7 @@
        (define-key company-active-map (kbd "<tab>") 'company-select-next)
        (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
+     (global-company-mode t)
    #+END_SRC
 
    #+RESULTS:
@@ -551,6 +554,11 @@
 
 ** MacOs
    #+BEGIN_SRC emacs-lisp
+     (setq mac-option-key-is-meta nil)
+     (setq mac-command-key-is-meta t)
+     (setq mac-command-modifier 'meta)
+     (setq mac-option-modifier nil)
+
      (defun copy-from-osx ()
        (shell-command-to-string "pbpaste"))
 
