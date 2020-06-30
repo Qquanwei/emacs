@@ -41,6 +41,8 @@
      (custom-set-variables
       '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/" t)))
       '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
+
+     (setq create-lockfiles nil)
    #+END_SRC
 
    #+RESULTS:
@@ -78,14 +80,9 @@
      (exec-path-from-shell-copy-env "PATH")
      (setenv "TZ" "Asia/Shanghai")
 
-
-     (when (display-graphic-p)
-       (progn
-         (setq initial-frame-alist
-               '(
-                 (width . 106)
-                 (height . 50)
-                 ))))
+     (use-package hl-line
+       :ensure
+       :hook (after-init . global-hl-line-mode))
    #+END_SRC
 
    #+RESULTS:
@@ -166,22 +163,6 @@
 
    #+RESULTS:
    : org-switchb
-
-*** OrgCapture
-    #+BEGIN_SRC emacs-lisp
-      (setq org-capture-templates
-            (quote
-             (("l" "oh-my-life" entry
-                (file "/sync/org/oh-my-life.org")
-                "* TODO %?")
-               ("w" "for work" entry
-                 (file+datetree "/sync/org/work.org")
-                 "* TODO %? [%]"))))
-    #+END_SRC
-
-    #+RESULTS:
-    | l | oh-my-life | entry | (file /sync/org/oh-my-life.org)    | * TODO %?     |
-    | w | for work   | entry | (file+datetree /sync/org/work.org) | * TODO %? [%] |
 
 *** org drag image
 
