@@ -86,7 +86,7 @@
    #+END_SRC
 
    #+RESULTS:
-   : 80
+   | global-hl-line-mode | #[0 \300 \207 [dashboard-insert-startupify-lists] 1] | x-wm-set-size-hint | magit-auto-revert-mode--init-kludge | magit-startup-asserts | magit-version |
 
    自动更新本配置, 按下f2后需要重新加载init.el
 
@@ -120,50 +120,103 @@
 
 ** org-mode
    #+BEGIN_SRC emacs-lisp
-          (use-package org
-            :ensure
-            :config
-            (auto-save-mode)
-            (setq org-enforce-todo-checkbox-dependencies t)
-            (setq org-enforce-todo-dependencies t)
-            (require 'org-crypt)
-            (org-crypt-use-before-save-magic)
-            (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-            (when (and (file-exists-p "~/org")
-                       (file-directory-p "~/org"))
-              (setq org-agenda-files '("~/org")))
+     (use-package org
+       :ensure
+       :config
+       (auto-save-mode)
+       (setq org-enforce-todo-checkbox-dependencies t)
+       (setq org-enforce-todo-dependencies t)
+       (require 'org-crypt)
+       (org-crypt-use-before-save-magic)
+       (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+       (when (and (file-exists-p "~/org")
+                  (file-directory-p "~/org"))
+         (setq org-agenda-files '("~/org")))
 
-            (setq org-crypt-key "quanwei")
-            (define-key org-mode-map (kbd "C-c u d") 'org-decrypt-entry)
-            (org-babel-do-load-languages
-             'org-babel-load-languages
-             '((dot . t)
-               (emacs-lisp . t)
-               (C . t)
-               (js . t)
-               (calc . t)
-               (octave . t)
-               (python . t))))
+       (setq org-crypt-key "quanwei")
+       (define-key org-mode-map (kbd "C-c u d") 'org-decrypt-entry)
+       (org-babel-do-load-languages
+        'org-babel-load-languages
+        '((dot . t)
+          (emacs-lisp . t)
+          (C . t)
+          (js . t)
+          (calc . t)
+          (octave . t)
+          (python . t))))
 
 
-          ;;; org-mode custom config
-          (setq org-clock-into-drawer t)
-          (setq org-agenda-include-diary t)
-          (setq org-src-fontify-natively t)
-          (setq org-confirm-babel-evaluate nil)
-          (setq org-image-actual-width 400)
-          (setq org-log-done 'time)
-          (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+     ;;; org-mode custom config
+     (setq org-clock-into-drawer t)
+     (setq org-agenda-include-diary t)
+     (setq org-src-fontify-natively t)
+     (setq org-confirm-babel-evaluate nil)
+     (setq org-image-actual-width 400)
+     (setq org-log-done 'time)
+     (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 
-          (global-set-key "\C-ca" 'org-agenda)
-          (global-set-key "\C-cc" 'org-capture)
-          (global-set-key "\C-cb" 'org-switchb)
+
+     (global-set-key "\C-ca" 'org-agenda)
+     (global-set-key "\C-cc" 'org-capture)
+     (global-set-key "\C-cb" 'org-switchb)
+
+
+
+     (defun skip-item-by-closed-in-two-weeks ()
+       "Skip tree when out two weeks"
+       (let ((closed (org-entry-get (point) "CLOSED" nil)))
+         (if (and
+                closed
+                (< (- (float-time)
+                 (org-time-string-to-seconds closed))
+                   (* 14 24 60 60)))
+                   nil
+                   (save-excursion (org-end-of-subtree)))))
+
+     (setq org-agenda-custom-commands
+           '(
+             ("a" "Agenda for work"
+              (
+               (agenda "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("TODO" "DONE")))))
+               (todo "NOTE" ((org-agenda-skip-function 'skip-item-by-closed-in-two-weeks)))
+               (todo "LATER")
+               (alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled))))
+               ))
+              ("n" todo "NOTE")))
 
    #+END_SRC
 
    #+RESULTS:
-   : org-switchb
+   | a | Agenda for work | ((agenda  ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote nottodo) (quote (TODO DONE))))))) (todo NOTE ((org-agenda-skip-function (quote skip-item-by-closed-in-two-weeks)))) (todo LATER) (alltodo  ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled))))))) |
+   | n | todo            | NOTE                                                                                                                                                                                                                                                                                                        |
 
+   there is my personal org-mode workflow
+
+   #+BEGIN_SRC emacs-lisp
+     (setq org-todo-keyword-faces
+           '(("TODO" . org-warning) ("LATER" . "purple")
+             ("NOTE" . (:foreground "blue" :weight bold))
+             ("CANCELED" . "gray")))
+
+     (setq org-todo-keywords
+           '((sequence "TODO(t)" "|" "DONE(d)")
+             (sequence "TODO" "LATER(l)" "|" "DONE")
+             (sequence "|" "NOTE(n)")
+             (sequence "|" "CANCELED(c)")
+             ))
+   #+END_SRC
+
+   #+RESULTS:
+   | sequence | TODO(t) |          |             | DONE(d) |      |
+   | sequence | TODO    | LATER(l) |             |         | DONE |
+   | sequence |         |          | NOTE(n)     |         |      |
+   | sequence |         |          | CANCELED(c) |         |      |
+
+   #+BEGIN_SRC emacs-lisp
+     ;; custom function
+
+
+   #+END_SRC
 *** org drag image
 
     拖动图片到org-mode中
@@ -206,17 +259,17 @@
 
    #+BEGIN_SRC emacs-lisp
 
-     (use-package nvm
-       :ensure)
+     ;; (use-package nvm
+     ;;   :ensure)
 
 
-     ;; if install [nvm](https://github.com/creationix/nvm)
-     (when (file-exists-p "~/.nvm")
-       (let ((versions (nvm--installed-versions)))
-         (when versions
-           (nvm-use (car (car versions)))
-           (when (memq window-system '(mac ns x))
-             (exec-path-from-shell-copy-env "NVM_BIN")))))
+     ;; ;; if install [nvm](https://github.com/creationix/nvm)
+     ;; (when (file-exists-p "~/.nvm")
+     ;;   (let ((versions (nvm--installed-versions)))
+     ;;     (when versions
+     ;;       (nvm-use (car (car versions)))
+     ;;       (when (memq window-system '(mac ns x))
+     ;;         (exec-path-from-shell-copy-env "NVM_BIN")))))
    #+END_SRC
 
    #+RESULTS:
@@ -278,6 +331,8 @@
    #+BEGIN_SRC emacs-lisp
      (use-package company-quickhelp
        :ensure)
+
+     (use-package company-tabnine :ensure t)
      (use-package company
        :ensure t
        :config
@@ -337,7 +392,7 @@
      (defun setup-web-mode-company-mode ()
        (setq-local
         company-backends
-        '(company-files company-dabbrev company-yasnippet company-keywords company-css)))
+        '(company-files company-dabbrev company-yasnippet company-keywords company-css company-tabnine)))
 
      (use-package web-mode
        :ensure t
@@ -381,6 +436,40 @@
    #+RESULTS:
    | web-mode | web-mode | css-mode |
 
+** typescript-mode
+   #+BEGIN_SRC emacs-lisp
+     (defun setup--mode ()
+       (interactive)
+       (tide-setup)
+       (flycheck-mode +1)
+       (setq flycheck-check-syntax-automatically '(save mode-enabled))
+       (eldoc-mode +1)
+       (tide-hl-identifier-mode +1)
+       ;; company is an optional dependency. You have to
+       ;; install it separately via package-install
+       ;; `M-x package-install [ret] company`
+       (company-mode +1))
+
+     ;; aligns annotation to the right hand side
+     (setq company-tooltip-align-annotations t)
+
+     ;; formats the buffer before saving
+     (add-hook 'before-save-hook 'tide-format-before-save)
+
+     (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+     (require 'web-mode)
+     (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+     (add-hook 'web-mode-hook
+               (lambda ()
+                 (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                   (setup-tide-mode))))
+     ;; enable typescript-tslint checker
+     ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
+   #+END_SRC
+
+   #+RESULTS:
+   | web-mode | typescript-mode |
 
 ** emacs-lisp-mode
    #+BEGIN_SRC emacs-lisp
@@ -557,8 +646,8 @@
 ** 显示设置
    #+BEGIN_SRC emacs-lisp
      (setq-default indent-tabs-mode nil)
-     (menu-bar-mode 0)
      (tool-bar-mode 0)
+     (menu-bar-mode 0)
 
      (setq frame-title-format
            (list (format "%s %%S: %%j" (system-name))
