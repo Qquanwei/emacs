@@ -1,5 +1,4 @@
-(use-package s
-  :ensure)
+(use-package s)
 (use-package eshell)
 
 (defun eshell/wpwd ()
