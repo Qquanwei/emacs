@@ -10,7 +10,14 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 (setq package-archives
-      '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+      '(
+	("gnu"   . "https://elpa.gnu.org/packages/")	
+        ("melpa" . "https://melpa.org/packages/")
+        ("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+        ("org-cn"   . "http://elpa.emacs-china.org/org/")
+        ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
+        ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+        ("nongnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 (require 'use-package)
 
@@ -156,6 +163,8 @@
 
 ;;; projectile
 (use-package projectile
+  :init
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   :config
   (setq projectile-create-missing-test-files t)
   (setq projectile-enable-caching t)
@@ -185,7 +194,7 @@
         (message "Could not find git project root."))))
   (global-set-key [f8] 'neotree-project-dir))
 
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
 (projectile-global-mode)
 
 
@@ -534,6 +543,7 @@
 (define-key global-map (kbd "C-c ,") 'rename-buffer)
 
 (use-package exec-path-from-shell
+  :load-path "./site-lisp/exec-path-from-shell"
   :ensure)
 
 (exec-path-from-shell-copy-env "PATH")
